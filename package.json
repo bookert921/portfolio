@@ -1,31 +1,44 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "bts3-portfolio",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
-  "version": "0.1.0",
+  "description": "Booker T. Showers III Portfolio",
+  "author": "Booker T Showers III <bookert921@gmail.com",
+  "version": "1.0.0",
   "license": "0BSD",
+  "keywords": ["gatsby", "typescript", "portfolio"],
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "clean": "gatsby clean"
   },
   "dependencies": {
+    "@fontsource/bitter": "^4.5.0",
+    "@fontsource/cabin-condensed": "^4.5.0",
+    "@fontsource/condiment": "^4.5.1",
+    "@mui/material": "^5.2.8",
+    "@mui/styled-engine-sc": "^5.1.0",
     "gatsby": "^4.4.0",
+    "gatsby-plugin-image": "^2.5.1",
+    "gatsby-plugin-react-helmet": "^5.5.0",
+    "gatsby-plugin-sharp": "^4.5.1",
+    "gatsby-plugin-styled-components": "^5.5.0",
+    "gatsby-source-filesystem": "^4.5.1",
+    "gatsby-transformer-sharp": "^4.5.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-spring": "^9.4.1",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.20",
     "prettier": "^2.5.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/bookert921/portfolio"
   }
 }
