@@ -5,7 +5,11 @@
   "author": "Booker T Showers III <bookert921@gmail.com",
   "version": "1.0.0",
   "license": "0BSD",
-  "keywords": ["gatsby", "typescript", "portfolio"],
+  "keywords": [
+    "gatsby",
+    "typescript",
+    "portfolio"
+  ],
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -21,6 +25,7 @@
     "@mui/material": "^5.2.8",
     "@mui/styled-engine-sc": "^5.1.0",
     "gatsby": "^4.4.0",
+    "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-image": "^2.5.1",
     "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-plugin-sharp": "^4.5.1",
