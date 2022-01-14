@@ -30,23 +30,30 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        name: "src",
+        path: `${__dirname}/src`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: "documents",
-        path: `${__dirname}/src/assets/documents`
-      }
+        path: `${__dirname}/src/assets/documents`,
+      },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "svg",
-        path: `${__dirname}/src/assets/svg`
-      }
+        path: `${__dirname}/src/assets/svg`,
+      },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",
-        path: `${__dirname}/src/assets/images`
-      }
+        path: `${__dirname}/src/assets/images`,
+      },
     },
   ],
   jsxRuntime: "automatic",
