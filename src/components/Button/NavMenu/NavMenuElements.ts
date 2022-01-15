@@ -1,4 +1,4 @@
-import { styled } from "@mui/system";
+import { styled } from "@mui/material/styles";
 
 export const MenuWrapper = styled("div")`
   width: 1.5rem;
