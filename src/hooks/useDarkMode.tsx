@@ -1,14 +1,11 @@
 import { PaletteMode } from "@mui/material";
-import {
-  useState,
-  useEffect,
-  useLayoutEffect,
-} from "react";
+import { DarkModeReturn } from "@types";
+import { useEffect, useState } from "react";
 
 const useDarkMode = () => {
   const [theme, setTheme] = useState("light");
 
-  const setMode = (mode: PaletteMode) => {
+  const setMode = (mode: string) => {
     window.localStorage.setItem("theme", mode);
     setTheme(mode);
   };
@@ -20,22 +17,17 @@ const useDarkMode = () => {
           return setMode("light");
         case "dark":
           return setMode("dark");
-        default:
-          return setMode("light");
       }
     }
     theme === "light" ? setMode("dark") : setMode("light");
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
-    !!localTheme && setTheme(localTheme);
+    !!localTheme && setMode(localTheme);
   }, []);
 
-  return [theme, toggleTheme] as [
-    PaletteMode,
-    (value?: PaletteMode | undefined) => void
-  ];
+  return [theme, toggleTheme] as DarkModeReturn;
 };
 
 export default useDarkMode;

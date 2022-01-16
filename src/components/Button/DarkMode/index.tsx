@@ -5,8 +5,8 @@ import {
 import { IconButton, PaletteMode } from "@mui/material";
 
 const DarkMode: React.FC<{
-  theme: PaletteMode;
-  toggleTheme: () => void;
+  theme?: PaletteMode;
+  toggleTheme: (value?: PaletteMode) => void;
 }> = ({ theme, toggleTheme }) => {
   const themeButton =
     theme === "light" ? (

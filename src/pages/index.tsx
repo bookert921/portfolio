@@ -5,8 +5,6 @@ export default function Home() {
   return (
     <Container>
       <LandingPage />
-      <LandingPage />
-      <LandingPage />
     </Container>
   );
 }

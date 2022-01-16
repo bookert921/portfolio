@@ -1,24 +1,39 @@
 import {
   AppBar,
-  PaletteMode,
   Toolbar,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import NavMenu from "@components/Button/NavMenu";
 import DarkMode from "@components/Button/DarkMode";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { NavbarProps } from "types/interfaces";
+import NavLinks from "./NavLinks";
 
-const Navbar: React.FC<{
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  theme: PaletteMode;
-  toggleTheme: () => void;
-}> = ({ open, setOpen, theme, toggleTheme }) => {
+const links = [
+  { url: "/", name: "home" },
+  { url: "/about", name: "about" },
+  { url: "/work", name: "work" },
+  { url: "/projects", name: "projects" },
+  { url: "/contact", name: "contact" },
+];
+
+const Navbar: React.FC<NavbarProps> = ({
+  open,
+  setOpen,
+  theme,
+  toggleTheme,
+}) => {
+  const navRef = useRef<HTMLElement | null>(null);
+  const [navHeight, setNavHeight] = useState(0);
   const [fixedNav, setFixedNav] = useState(false);
-  const smallerScreen = useMediaQuery("(max-width: 600px)");
+  const muiTheme = useTheme();
+  const smallerScreen = useMediaQuery(
+    muiTheme.breakpoints.down("sm")
+  );
 
   const navPosition = () => {
-    if (window.scrollY <= window.innerHeight) {
+    if (window.scrollY <= window.innerHeight - navHeight) {
       setFixedNav(false);
     } else {
       setFixedNav(true);
@@ -26,9 +41,12 @@ const Navbar: React.FC<{
   };
 
   useEffect(() => {
+    if (navRef.current != null) {
+      setNavHeight(navRef.current.clientHeight);
+    }
     window.addEventListener("scroll", navPosition);
     return () => removeEventListener("scroll", navPosition);
-  }, []);
+  }, [navRef.current]);
 
   return (
     <AppBar
@@ -36,11 +54,14 @@ const Navbar: React.FC<{
       sx={{
         top: fixedNav ? "" : "auto",
         bottom: fixedNav ? "" : "0",
-        backgroundColor: fixedNav ? "transparent" : "",
-        transition: "all 0.5s ease-in-out",
       }}
     >
-      <Toolbar sx={{ justifyContent: "flex-end" }}>
+      <Toolbar
+        ref={navRef}
+        component="nav"
+        sx={{ justifyContent: "flex-end" }}
+      >
+        {!smallerScreen && <NavLinks>{links}</NavLinks>}
         {smallerScreen && (
           <NavMenu open={open} toggleNav={setOpen} />
         )}

@@ -16,6 +16,7 @@ const LandingPage = () => {
   const tabletsLess = useMediaQuery(
     theme.breakpoints.between("xs", "sm")
   );
+  const smallerScreen = useMediaQuery("(max-width: 400px)");
 
   return (
     <LandingContainer>
@@ -44,7 +45,9 @@ const LandingPage = () => {
               : "primary.main"
           }
           fontWeight="bold"
-          sx={{ textAlign: "left" }}
+          sx={{
+            textAlign: smallerScreen ? "center" : "left",
+          }}
           lineHeight={tabletsLess ? "1.25em" : "1em"}
         >
           Let's{" "}
@@ -59,16 +62,6 @@ const LandingPage = () => {
           Your Dream App
         </Typography>
       </ContentWrapper>
-
-      <Typography>
-        I'm baby marfa kogi cred taxidermy banjo, sriracha
-        cliche heirloom snackwave unicorn tacos iPhone +1
-        squid. Try-hard pork belly migas af actually
-        bitters. Copper mug etsy semiotics coloring book
-        shoreditch tilde. Sustainable unicorn keytar hella
-        authentic sriracha wayfarers pitchfork celiac tilde
-        flexitarian.
-      </Typography>
     </LandingContainer>
   );
 };
