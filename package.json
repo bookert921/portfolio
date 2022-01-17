@@ -22,13 +22,10 @@
     "@fontsource/bitter": "^4.5.0",
     "@fontsource/cabin-condensed": "^4.5.0",
     "@fontsource/condiment": "^4.5.1",
-<<<<<<< HEAD
-=======
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.8",
     "@mui/styled-engine-sc": "^5.1.0",
     "babel-plugin-styled-components": "^2.0.2",
->>>>>>> a62b4b34df3792495c95c9e810a337c27867764e
     "gatsby": "^4.4.0",
     "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-image": "^2.5.1",
@@ -39,10 +36,7 @@
     "gatsby-transformer-sharp": "^4.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-<<<<<<< HEAD
-=======
     "react-helmet": "^6.1.0",
->>>>>>> a62b4b34df3792495c95c9e810a337c27867764e
     "styled-components": "^5.3.3"
   },
   "devDependencies": {

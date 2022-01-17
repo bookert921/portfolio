@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import { StaticImage } from "gatsby-plugin-image";
 import { styled } from "@mui/material/styles";
 import { useContext } from "react";
 import { NavbarContext } from "@components/Navbar/NavbarContext";
@@ -19,7 +18,7 @@ const AboutSection = styled(Box)<{
   },
 }));
 
-const AboutContent = styled("article")(({ theme }) => ({
+const AboutContent = styled("article")(() => ({
   display: "grid",
   height: "100%",
   width: "100%",
