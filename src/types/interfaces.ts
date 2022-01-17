@@ -6,6 +6,7 @@ export interface NavbarProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   theme: PaletteMode;
   toggleTheme: (value?: PaletteMode) => void;
+  mainHeight: number;
 }
 
 export interface NavLink {

@@ -1,11 +1,4 @@
 import {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import {
   AppBar,
   Toolbar,
   useMediaQuery,
@@ -18,58 +11,63 @@ import NavLinks from "./NavLinks";
 import { links } from "./navConfig";
 
 import { NavbarProps } from "types/interfaces";
-import { NavbarContext } from "./NavbarContext";
+import React, {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 
 const Navbar: React.FC<NavbarProps> = ({
   open,
   setOpen,
   theme,
   toggleTheme,
+  mainHeight,
 }) => {
-  const [isMounted, setIsMounted] = useState(false);
-  const [fixedNav, setFixedNav] = useState(false);
-
-  const { navHeight, setNavHeight } =
-    useContext(NavbarContext);
-  const navRef = useRef<HTMLElement | null>(null);
-
+  const [navHeight, setNavHeight] = useState(0);
+  const [fixed, setFixed] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
   const muiTheme = useTheme();
-  const smallerScreen = useMediaQuery(
+  const mobile = useMediaQuery(
     muiTheme.breakpoints.down("sm")
   );
 
-  const positionNav = useCallback(() => {
-    if (window.scrollY <= window.innerHeight - navHeight) {
-      setFixedNav(false);
-    } else {
-      setFixedNav(true);
-    }
-  }, [navHeight]);
+  const fixNav = useCallback(() => {
+    const offset = mainHeight - navHeight;
 
-  useEffect(() => {
-    if (navRef.current != null && isMounted) {
-      setNavHeight(navRef.current.clientHeight);
+    console.log("I too am being called");
+    if (window.scrollY > offset) {
+      setFixed(true);
+    } else {
+      setFixed(false);
     }
-    setIsMounted(true);
-    window.addEventListener("scroll", positionNav);
-    return () => removeEventListener("scroll", positionNav);
-  }, [navRef.current, isMounted, positionNav]);
+  }, [navHeight, mainHeight]);
+
+  useLayoutEffect(() => {
+    if (navRef.current != undefined) {
+      setNavHeight(navRef.current.offsetHeight);
+    }
+    console.log("I am being called");
+    window.addEventListener("scroll", fixNav);
+    () => window.removeEventListener("scroll", fixNav);
+  }, [navRef.current?.offsetHeight, fixNav]);
 
   return (
     <AppBar
-      position={fixedNav ? "fixed" : "absolute"}
+      ref={navRef}
+      position={fixed ? "fixed" : "absolute"}
       sx={{
-        top: fixedNav ? "" : "auto",
-        bottom: fixedNav ? "" : "0",
+        bottom: fixed ? "auto" : 0,
+        top: fixed ? 0 : "auto",
       }}
     >
       <Toolbar
-        ref={navRef}
         component="nav"
         sx={{ justifyContent: "flex-end", paddingLeft: 0 }}
       >
-        {!smallerScreen && <NavLinks>{links}</NavLinks>}
-        {smallerScreen && (
+        {!mobile && <NavLinks>{links}</NavLinks>}
+        {mobile && (
           <NavMenu open={open} toggleNav={setOpen} />
         )}
         <DarkMode theme={theme} toggleTheme={toggleTheme} />

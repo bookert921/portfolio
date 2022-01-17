@@ -6,7 +6,7 @@
  * gatsby-browser.js file.
  * */
 
-import Layout from "@components/Layout";
+// import Layout from "@components/Layout";
 import "@fontsource/bitter";
 import "@fontsource/cabin-condensed";
 import "@fontsource/condiment";
@@ -21,6 +21,6 @@ import "@fontsource/condiment";
 // };
 
 // // Wraps every page in a component
-export function wrapPageElement({ element, props }) {
-  return <Layout {...props}>{element}</Layout>;
-}
+// export function wrapPageElement({ element, props }) {
+//   return <Layout {...props}>{element}</Layout>;
+// }
