@@ -1,4 +1,5 @@
 import { PaletteMode } from "@mui/material";
+import React from "react";
 
 export interface NavbarProps {
   open: boolean;
