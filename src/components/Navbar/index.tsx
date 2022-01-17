@@ -16,6 +16,7 @@ import React, {
   useRef,
   useLayoutEffect,
   useCallback,
+  useEffect,
 } from "react";
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -23,7 +24,6 @@ const Navbar: React.FC<NavbarProps> = ({
   setOpen,
   theme,
   toggleTheme,
-  mainHeight,
 }) => {
   const [navHeight, setNavHeight] = useState(0);
   const [fixed, setFixed] = useState(false);
@@ -34,24 +34,25 @@ const Navbar: React.FC<NavbarProps> = ({
   );
 
   const fixNav = useCallback(() => {
-    const offset = mainHeight - navHeight;
-
-    console.log("I too am being called");
-    if (window.scrollY > offset) {
+    const offset = window.innerHeight - navHeight;
+    console.log("fix Nav is being called");
+    if (window.scrollY >= offset) {
       setFixed(true);
     } else {
       setFixed(false);
     }
-  }, [navHeight, mainHeight]);
+  }, [navHeight, window.innerHeight]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (navRef.current != undefined) {
       setNavHeight(navRef.current.offsetHeight);
     }
-    console.log("I am being called");
+    console.log("use effect if being called");
+
     window.addEventListener("scroll", fixNav);
-    () => window.removeEventListener("scroll", fixNav);
-  }, [navRef.current?.offsetHeight, fixNav]);
+    return () =>
+      window.removeEventListener("scroll", fixNav);
+  }, [navRef.current, navHeight, window.innerHeight]);
 
   return (
     <AppBar

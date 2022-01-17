@@ -9,7 +9,7 @@ export const LandingContainer = styled(Box, {
   display: "flex",
   width: "100%",
   flexDirection: "column",
-  height: "100%",
+  height: "100vh",
 }));
 
 export const HeroWrapper = styled(Box, {

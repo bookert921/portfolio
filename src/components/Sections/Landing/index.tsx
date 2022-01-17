@@ -30,7 +30,7 @@ const LandingPage = () => {
           <HeroImage>
             <StaticImage
               alt="profile view of self"
-              src="../../../../assets/images/self.png"
+              src="../../../assets/images/self.png"
               style={{
                 borderRadius: "50%",
               }}
