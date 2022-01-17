@@ -3,13 +3,16 @@
     "module": "commonjs",
     "target": "es6",
     "jsx": "preserve",
-    "lib": ["dom", "es2015", "es2017"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "strict": true,
     "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": false,
@@ -18,7 +21,10 @@
       "@components/*": ["components/*"],
       "@hooks": ["hooks"],
       "@styles": ["styles"],
-      "@types": ["types"]
+      "@types": ["types"],
+      "@mui/styled-engine": [
+        "./node_modules/@mui/styled-engine-sc"
+      ]
     }
   },
   "include": ["./src/**/*"],
