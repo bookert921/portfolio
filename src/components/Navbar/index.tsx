@@ -11,12 +11,7 @@ import NavLinks from "./NavLinks";
 import { links } from "./navConfig";
 
 import { NavbarProps } from "types/interfaces";
-import React, {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-} from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const Navbar: React.FC<NavbarProps> = ({
   open,
@@ -25,7 +20,9 @@ const Navbar: React.FC<NavbarProps> = ({
   toggleTheme,
 }) => {
   const [navHeight, setNavHeight] = useState(0);
-  const [orientation, setOrientation] = useState("");
+  const [windowSize, setWindowSize] = useState(
+    window.innerHeight
+  );
   const [fixed, setFixed] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const muiTheme = useTheme();
@@ -33,26 +30,27 @@ const Navbar: React.FC<NavbarProps> = ({
     muiTheme.breakpoints.down("sm")
   );
 
-  const fixNav = useCallback(() => {
-    setOrientation(window.screen.orientation.type);
-    const offset = window.innerHeight - navHeight;
+  const fixNav = () => {
+    const hasChanged = window.innerHeight !== windowSize;
+    if (hasChanged) setWindowSize(window.innerHeight);
+    const offset = windowSize - navHeight;
     if (window.scrollY > offset) {
       setFixed(true);
     } else {
       setFixed(false);
     }
-  }, [navHeight, orientation]);
+  };
 
   useEffect(() => {
     if (navRef.current != undefined) {
       setNavHeight(navRef.current.offsetHeight);
     }
-    console.log("use effect if being called");
+    console.log("use effect is being called");
 
     window.addEventListener("scroll", fixNav);
     return () =>
       window.removeEventListener("scroll", fixNav);
-  }, [navRef.current, navHeight, orientation]);
+  }, [navRef.current, windowSize]);
 
   return (
     <AppBar
