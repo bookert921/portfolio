@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 const initialState = {
   navHeight: 0,
@@ -11,3 +11,16 @@ export const NavbarContext = createContext<{
     React.SetStateAction<number>
   >;
 }>(initialState);
+
+const NavbarContextProvider: React.FC = ({ children }) => {
+  const [navHeight, setNavHeight] = useState(0);
+  return (
+    <NavbarContext.Provider
+      value={{ navHeight, setNavHeight }}
+    >
+      {children}
+    </NavbarContext.Provider>
+  );
+};
+
+export default NavbarContextProvider;

@@ -3,9 +3,7 @@ import { styled } from "@mui/material/styles";
 
 export const LandingContainer = styled(Box, {
   name: "LandingContainer",
-})<{
-  navHeight: number;
-}>(() => ({
+})(() => ({
   display: "flex",
   width: "100%",
   flexDirection: "column",
@@ -14,16 +12,25 @@ export const LandingContainer = styled(Box, {
 
 export const HeroWrapper = styled(Box, {
   name: "HeroWrapper",
-})(({ theme }) => ({
+})<{
+  navHeight: number;
+}>(({ navHeight, theme }) => ({
   display: "flex",
-  width: "100%",
+  width: "90%",
+  margin: "0 auto",
   justifyContent: "center",
   alignItems: "center",
-  paddingTop: theme.spacing(5),
-  [theme.breakpoints.up("sm")]: {
-    height: "100%",
-    paddingTop: 0,
+  height: `calc(100vh - ${navHeight}px)`,
+
+  [theme.breakpoints.up("md")]: {
+    alignItems: "center",
   },
+  ["@media screen and (orientation: landscape, max-width: 600px)"]:
+    {
+      alignItems: "flex-start",
+      width: "80%",
+      margin: "0 auto",
+    },
 }));
 
 export const HeroContent = styled(Box, {
@@ -32,7 +39,7 @@ export const HeroContent = styled(Box, {
   display: "flow-root",
 
   ["@media (max-width: 400px)"]: {
-    display: "flex",
+    display: "grid",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",

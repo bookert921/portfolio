@@ -11,7 +11,13 @@ import NavLinks from "./NavLinks";
 import { links } from "./navConfig";
 
 import { NavbarProps } from "types/interfaces";
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+} from "react";
+import { NavbarContext } from "./NavbarContext";
 
 const Navbar: React.FC<NavbarProps> = ({
   open,
@@ -19,7 +25,8 @@ const Navbar: React.FC<NavbarProps> = ({
   theme,
   toggleTheme,
 }) => {
-  const [navHeight, setNavHeight] = useState(0);
+  const { navHeight, setNavHeight } =
+    useContext(NavbarContext);
   const [windowSize, setWindowSize] = useState(0);
   const [fixed, setFixed] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
@@ -32,6 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({
     const hasChanged = window.innerHeight !== windowSize;
     if (hasChanged) setWindowSize(window.innerHeight);
     const offset = windowSize - navHeight;
+    console.log(navHeight);
     if (window.scrollY > offset) {
       setFixed(true);
     } else {
@@ -45,11 +53,10 @@ const Navbar: React.FC<NavbarProps> = ({
       setWindowSize(window.innerHeight);
     }
     console.log("use effect is being called");
-
     window.addEventListener("scroll", fixNav);
     return () =>
       window.removeEventListener("scroll", fixNav);
-  }, [navRef.current, windowSize]);
+  }, [navRef.current, navHeight, windowSize]);
 
   return (
     <AppBar

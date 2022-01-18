@@ -24,8 +24,8 @@ const LandingPage = () => {
   );
   const smallerScreen = useMediaQuery("(max-width: 400px)");
   return (
-    <LandingContainer navHeight={navHeight}>
-      <HeroWrapper>
+    <LandingContainer>
+      <HeroWrapper navHeight={navHeight}>
         <HeroContent>
           <HeroImage>
             <StaticImage
@@ -51,9 +51,7 @@ const LandingPage = () => {
                 : "primary.main"
             }
             fontWeight="bold"
-            sx={{
-              textAlign: smallerScreen ? "center" : "left",
-            }}
+            textAlign={smallerScreen ? "center" : "left"}
             lineHeight={tabletsLess ? "1.25em" : "1em"}
           >
             Let's{" "}
