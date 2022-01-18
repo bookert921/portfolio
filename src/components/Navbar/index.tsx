@@ -14,7 +14,6 @@ import { NavbarProps } from "types/interfaces";
 import React, {
   useState,
   useRef,
-  useLayoutEffect,
   useCallback,
   useEffect,
 } from "react";
@@ -26,6 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({
   toggleTheme,
 }) => {
   const [navHeight, setNavHeight] = useState(0);
+  const [orientation, setOrientation] = useState("");
   const [fixed, setFixed] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const muiTheme = useTheme();
@@ -34,14 +34,14 @@ const Navbar: React.FC<NavbarProps> = ({
   );
 
   const fixNav = useCallback(() => {
+    setOrientation(window.screen.orientation.type);
     const offset = window.innerHeight - navHeight;
-    console.log("fix Nav is being called");
-    if (window.scrollY >= offset) {
+    if (window.scrollY > offset) {
       setFixed(true);
     } else {
       setFixed(false);
     }
-  }, [navHeight, window.innerHeight]);
+  }, [navHeight, orientation]);
 
   useEffect(() => {
     if (navRef.current != undefined) {
@@ -52,7 +52,7 @@ const Navbar: React.FC<NavbarProps> = ({
     window.addEventListener("scroll", fixNav);
     return () =>
       window.removeEventListener("scroll", fixNav);
-  }, [navRef.current, navHeight, window.innerHeight]);
+  }, [navRef.current, navHeight, orientation]);
 
   return (
     <AppBar

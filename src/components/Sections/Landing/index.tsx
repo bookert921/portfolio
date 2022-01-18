@@ -12,13 +12,13 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import About from "../About";
+// import About from "../About";
 import { StaticImage } from "gatsby-plugin-image";
 
 const LandingPage = () => {
   const { navHeight } = useContext(NavbarContext);
   const theme = useTheme();
-  const media = useMediaQuery(theme.breakpoints.down("sm"));
+  // const media = useMediaQuery(theme.breakpoints.down("sm"));
   const tabletsLess = useMediaQuery(
     theme.breakpoints.between("xs", "sm")
   );
@@ -69,8 +69,6 @@ const LandingPage = () => {
           </Typography>
         </HeroContent>
       </HeroWrapper>
-
-      {media ? <About /> : null}
     </LandingContainer>
   );
 };
