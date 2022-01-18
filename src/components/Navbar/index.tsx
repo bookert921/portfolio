@@ -20,9 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({
   toggleTheme,
 }) => {
   const [navHeight, setNavHeight] = useState(0);
-  const [windowSize, setWindowSize] = useState(
-    window.innerHeight
-  );
+  const [windowSize, setWindowSize] = useState(0);
   const [fixed, setFixed] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const muiTheme = useTheme();
@@ -44,6 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({
   useEffect(() => {
     if (navRef.current != undefined) {
       setNavHeight(navRef.current.offsetHeight);
+      setWindowSize(window.innerHeight);
     }
     console.log("use effect is being called");
 
