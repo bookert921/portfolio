@@ -1,8 +1,4 @@
-import {
-  styled,
-  ThemeProvider,
-  useTheme,
-} from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import Navbar from "@components/Navbar";
 import { useDarkMode } from "@hooks";

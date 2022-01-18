@@ -6,6 +6,7 @@ import {
 } from "./LandingElements";
 import {
   Box,
+  Toolbar,
   Typography,
   useMediaQuery,
   useTheme,
@@ -61,6 +62,12 @@ const LandingPage = () => {
           Your Dream App
         </Typography>
       </HeroContent>
+      <Toolbar
+        sx={{
+          width: "100%",
+          padding: 0,
+        }}
+      />
     </LandingContainer>
   );
 };
