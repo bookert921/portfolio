@@ -1,46 +1,40 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-export const LandingContainer = styled(Box, {
+export const LandingContainer = styled(Container, {
   name: "LandingContainer",
-})(() => ({
-  position: "relative",
+})<{ navHeight: number }>(({ navHeight }) => ({
   display: "flex",
-  width: "80%",
   flexDirection: "column",
-  height: "100vh",
-  justifyContent: "center",
+  height: `calc(100vh - ${navHeight}px)`,
   alignItems: "center",
-  margin: "0 auto",
-  ["@media screen and (orientation: landscape)"]: {
-    width: "100%",
-  },
+  justifyContent: "center",
+}));
+
+export const ContentWrapper = styled(Box, {
+  name: "HeroContentWrapper",
+})(() => ({
+  display: "flex",
+  justifyContent: "center",
 }));
 
 export const HeroContent = styled(Box, {
-  name: "HeroContent",
+  name: "ContentGrid",
 })(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "1fr",
-  gridTemplateRows: "auto auto",
+  gridTemplateRows:
+    "minmax(200px, max-content) max-content",
   gridTemplateAreas: `"image"
   "text"`,
-  height: "100%",
   textAlign: "center",
+  gap: "1em",
   [theme.breakpoints.up("tablet")]: {
-    gridTemplateColumns: "auto 1fr",
+    gridTemplateColumns:
+      "minmax(200px, max-content) max-content",
     gridTemplateRows: "1fr",
     gridTemplateAreas: `"image text"`,
-    alignItems: "flex-end",
-    textAlign: "left",
-  },
-  ["@media screen and (orientation: landscape)"]: {
-    gridTemplateColumns: "auto 1fr",
-    gridTemplateRows: "1fr",
-    gridTemplateAreas: `"image text"`,
-    alignItems: "center",
-    textAlign: "left",
-    gap: "1em",
+    gap: 0,
   },
 }));
 
@@ -51,6 +45,17 @@ export const ImageContainer = styled(Box)(() => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+}));
+
+export const TextContainer = styled(Box)(() => ({
+  gridArea: "text",
+  height: "100%",
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "flex-end",
+  flex: "1 1 50px",
+  flexWrap: "wrap",
 }));
 
 export const HeroImage = styled(Box)(() => ({
