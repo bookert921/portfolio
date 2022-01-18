@@ -11,11 +11,6 @@ const AboutSection = styled(Box)<{
   justifyContent: "center",
   alignItems: "center",
   paddingTop: theme.spacing(3),
-
-  [theme.breakpoints.up("sm")]: {
-    height: "100vh",
-    paddingTop: `${navHeight}px`,
-  },
 }));
 
 const AboutContent = styled("article")(() => ({

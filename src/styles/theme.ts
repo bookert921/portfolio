@@ -1,8 +1,5 @@
-import {
-  PaletteMode,
-  Theme,
-  createTheme,
-} from "@mui/material";
+import { Theme, createTheme } from "@mui/material/styles";
+import { PaletteMode } from "@mui/material";
 
 const theme = (mode: PaletteMode): Theme =>
   createTheme({
@@ -41,6 +38,17 @@ const theme = (mode: PaletteMode): Theme =>
               secondary: "#FAB169",
             },
           }),
+    },
+    breakpoints: {
+      values: {
+        mobileS: 320,
+        mobile: 375,
+        mobileL: 425,
+        tablet: 768,
+        laptop: 1024,
+        laptopL: 1440,
+        FourK: 2560,
+      },
     },
     typography: {
       fontFamily: "Cabin Condensed",

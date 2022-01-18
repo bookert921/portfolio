@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const navRef = useRef<HTMLDivElement>(null);
   const muiTheme = useTheme();
   const mobile = useMediaQuery(
-    muiTheme.breakpoints.down("sm")
+    muiTheme.breakpoints.down("tablet")
   );
 
   const fixNav = () => {

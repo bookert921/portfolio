@@ -1,11 +1,9 @@
 import {
   HeroContent,
   HeroImage,
-  HeroWrapper,
+  ImageContainer,
   LandingContainer,
 } from "./LandingElements";
-import { useContext } from "react";
-import { NavbarContext } from "@components/Navbar/NavbarContext";
 import {
   Box,
   Typography,
@@ -16,17 +14,14 @@ import {
 import { StaticImage } from "gatsby-plugin-image";
 
 const LandingPage = () => {
-  const { navHeight } = useContext(NavbarContext);
   const theme = useTheme();
-  // const media = useMediaQuery(theme.breakpoints.down("sm"));
   const tabletsLess = useMediaQuery(
-    theme.breakpoints.between("xs", "sm")
+    theme.breakpoints.down("tablet")
   );
-  const smallerScreen = useMediaQuery("(max-width: 400px)");
   return (
     <LandingContainer>
-      <HeroWrapper navHeight={navHeight}>
-        <HeroContent>
+      <HeroContent>
+        <ImageContainer>
           <HeroImage>
             <StaticImage
               alt="profile view of self"
@@ -42,31 +37,30 @@ const LandingPage = () => {
               width={250}
             />
           </HeroImage>
+        </ImageContainer>
 
-          <Typography
-            variant={tabletsLess ? "h5" : "h3"}
-            color={
-              theme.palette.mode === "dark"
-                ? "white"
-                : "primary.main"
-            }
-            fontWeight="bold"
-            textAlign={smallerScreen ? "center" : "left"}
-            lineHeight={tabletsLess ? "1.25em" : "1em"}
+        <Typography
+          variant={tabletsLess ? "h5" : "h3"}
+          color={
+            theme.palette.mode === "dark"
+              ? "white"
+              : "primary.main"
+          }
+          fontWeight="bold"
+          gridArea={"text"}
+        >
+          Let's{" "}
+          <Box
+            component="span"
+            sx={{
+              color: theme.palette.secondary.main,
+            }}
           >
-            Let's{" "}
-            <Box
-              component="span"
-              sx={{
-                color: theme.palette.secondary.main,
-              }}
-            >
-              Build
-            </Box>{" "}
-            Your Dream App
-          </Typography>
-        </HeroContent>
-      </HeroWrapper>
+            Build
+          </Box>{" "}
+          Your Dream App
+        </Typography>
+      </HeroContent>
     </LandingContainer>
   );
 };
