@@ -36,6 +36,14 @@ export const HeroContent = styled(Box, {
     gridTemplateAreas: `"image text"`,
     gap: 0,
   },
+  ["@media screen and (max-width: 768px, orientation: landscape)"]:
+    {
+      gridTemplateColumns:
+        "minmax(200px, max-content) max-content",
+      gridTemplateRows: "1fr",
+      gridTemplateAreas: `"image text"`,
+      gap: 0,
+    },
 }));
 
 export const ImageContainer = styled(Box)(() => ({
