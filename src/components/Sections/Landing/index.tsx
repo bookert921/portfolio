@@ -14,17 +14,14 @@ import {
 } from "@mui/material";
 // import About from "../About";
 import { StaticImage } from "gatsby-plugin-image";
-import { useContext } from "react";
-import { NavbarContext } from "@components/Navbar/NavbarContext";
 
 const LandingPage = () => {
   const theme = useTheme();
   const tabletsLess = useMediaQuery(
     theme.breakpoints.down("tablet")
   );
-  const { navHeight } = useContext(NavbarContext);
   return (
-    <LandingContainer navHeight={navHeight}>
+    <LandingContainer>
       <ContentWrapper>
         <HeroContent>
           <ImageContainer>

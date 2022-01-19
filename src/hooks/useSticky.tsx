@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
+import { StickyProps } from "types/interfaces";
 
-const useSticky = ({
-  navEl,
-  mainEl,
-}: {
-  navEl: HTMLDivElement;
-  mainEl: HTMLDivElement;
-}) => {
+const useSticky = ({ navEl, mainEl }: StickyProps) => {
   const [fixed, setFixed] = useState(false);
-
-  const nav = navEl;
-  if (!nav) throw new Error("Didn't find a nav");
-  const main = mainEl;
-  if (!main) throw new Error("Didn't find a main");
-  const offset = main.offsetHeight - nav.offsetHeight;
 
   //   let previousY = 9999;
   const updateNav = () => {
+    const offset = mainEl.offsetHeight - navEl.offsetHeight;
+    console.log(offset);
     // iOS scrolls to make sure the viewport fits, don't hide the input then
     const hasKeyboardFocus =
       document.activeElement &&
@@ -55,16 +46,18 @@ const useSticky = ({
   };
 
   useEffect(() => {
+    if (!navEl || !mainEl) return;
     document.addEventListener("scroll", updateNav, {
       capture: true,
       passive: true,
     });
+
     return () =>
       document.removeEventListener("scroll", updateNav, {
         capture: true,
         passive: true,
       } as any);
-  }, [updateNav]);
+  }, [navEl, mainEl]);
 
   return fixed;
 };

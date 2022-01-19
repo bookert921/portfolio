@@ -11,56 +11,24 @@ import NavLinks from "./NavLinks";
 import { links } from "./navConfig";
 
 import { NavbarProps } from "types/interfaces";
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useContext,
-} from "react";
-import { NavbarContext } from "./NavbarContext";
 
 const Navbar: React.FC<NavbarProps> = ({
   open,
   setOpen,
   theme,
   toggleTheme,
+  fixed,
+  setRef,
 }) => {
-  const { navHeight, setNavHeight } =
-    useContext(NavbarContext);
-  const [windowSize, setWindowSize] = useState(0);
-  const [fixed, setFixed] = useState(false);
-  const navRef = useRef<HTMLDivElement>(null);
   const muiTheme = useTheme();
   const mobile = useMediaQuery(
     muiTheme.breakpoints.down("tablet")
   );
 
-  const fixNav = () => {
-    const hasChanged = window.innerHeight !== windowSize;
-    if (hasChanged) setWindowSize(window.innerHeight);
-    const offset = windowSize - navHeight;
-    console.log(navHeight);
-    if (window.scrollY > offset) {
-      setFixed(true);
-    } else {
-      setFixed(false);
-    }
-  };
-
-  useEffect(() => {
-    if (navRef.current != undefined) {
-      setNavHeight(navRef.current.offsetHeight);
-      setWindowSize(window.innerHeight);
-    }
-    console.log("use effect is being called");
-    window.addEventListener("scroll", fixNav);
-    return () =>
-      window.removeEventListener("scroll", fixNav);
-  }, [navRef.current, navHeight, windowSize]);
-
   return (
     <AppBar
-      ref={navRef}
+      ref={setRef}
+      data-refkey="navEl"
       position={fixed ? "fixed" : "absolute"}
       sx={{
         bottom: fixed ? "auto" : 0,

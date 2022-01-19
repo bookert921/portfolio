@@ -3,10 +3,10 @@ import { styled } from "@mui/material/styles";
 
 export const LandingContainer = styled(Container, {
   name: "LandingContainer",
-})<{ navHeight: number }>(({ navHeight }) => ({
+})(() => ({
   display: "flex",
   flexDirection: "column",
-  height: `calc(100vh - ${navHeight}px)`,
+  height: `100vh`,
   alignItems: "center",
   justifyContent: "center",
 }));
