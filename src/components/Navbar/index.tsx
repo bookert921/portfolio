@@ -8,11 +8,11 @@ import {
 import NavMenu from "@components/Button/NavMenu";
 import DarkMode from "@components/Button/DarkMode";
 import NavLinks from "./NavLinks";
-import { links } from "./navConfig";
 
 import { NavbarProps } from "types/interfaces";
 
 const Navbar: React.FC<NavbarProps> = ({
+  links,
   open,
   setOpen,
   theme,
@@ -31,8 +31,10 @@ const Navbar: React.FC<NavbarProps> = ({
       data-refkey="navEl"
       position={fixed ? "fixed" : "absolute"}
       sx={{
-        bottom: fixed ? "auto" : 0,
         top: fixed ? 0 : "auto",
+        left: 0,
+        right: 0,
+        bottom: fixed ? "auto" : 0,
       }}
     >
       <Toolbar

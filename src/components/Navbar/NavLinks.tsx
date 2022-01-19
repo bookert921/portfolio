@@ -4,7 +4,7 @@ import {
   NavList,
   NavListElement,
   StyledLink,
-} from "./NavbarElements";
+} from "./NavLinkElements";
 
 const NavLinks: React.FC = ({ children }) => {
   const links = (children as NavLink[]).map(
