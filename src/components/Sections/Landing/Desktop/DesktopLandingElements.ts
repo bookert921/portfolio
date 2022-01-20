@@ -18,7 +18,7 @@ export const DesktopCenterContent = styled(Box, {
 })(({ theme }) => ({
   display: "flex",
   alignItems: "flex-end",
-  [theme.breakpoints.down("tablet")]: {
+  [theme.breakpoints.down("laptop")]: {
     textAlign: "center",
     alignItems: "center",
   },

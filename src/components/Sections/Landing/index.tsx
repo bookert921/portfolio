@@ -1,9 +1,4 @@
-import {
-  Box,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 // import About from "../About";
 import DesktopLanding from "./Desktop/DesktopLanding";
 import { LandingWrapper } from "./LandingElements";
