@@ -7,10 +7,8 @@ import {
 } from "@mui/material";
 // import About from "../About";
 import { StaticImage } from "gatsby-plugin-image";
-import { useOrientation } from "@hooks";
 
 const LandingPage = () => {
-  const { landscape } = useOrientation();
   const theme = useTheme();
   const mobile = useMediaQuery(
     theme.breakpoints.down("tablet")
@@ -22,7 +20,7 @@ const LandingPage = () => {
         height: "calc(100vh - 4em)",
         width: "100%",
         flexGrow: 1,
-        paddingTop: landscape ? 0 : "2em",
+        paddingTop: "2em",
       }}
     >
       <Grid container component="article">
@@ -30,7 +28,7 @@ const LandingPage = () => {
           <Box
             sx={{
               position: "relative",
-              width: landscape ? "350px" : "300px",
+              width: "300px",
               margin: "0 auto",
               height: "300px",
             }}
