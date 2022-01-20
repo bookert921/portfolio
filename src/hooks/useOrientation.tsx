@@ -58,13 +58,13 @@ const useOrientation = () => {
   }, [orientation]);
 
   useEffect(() => {
-    window.addEventListener(
-      "orientationchange",
+    screen.orientation.addEventListener(
+      "change",
       updateOrientation
     );
     return () =>
-      window.removeEventListener(
-        "orientationchange",
+      screen.orientation.removeEventListener(
+        "change",
         updateOrientation
       );
   }, [orientation]);
