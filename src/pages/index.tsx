@@ -4,10 +4,10 @@ import { NavLink } from "types/interfaces";
 
 export const siteMenu: NavLink[] = [
   { url: "/", name: "home" },
-  { url: "/about", name: "about" },
-  { url: "/work", name: "work" },
-  { url: "/projects", name: "projects" },
-  { url: "/contact", name: "contact" },
+  { url: "#about", name: "about" },
+  { url: "#work", name: "work" },
+  { url: "#projects", name: "projects" },
+  { url: "#contact", name: "contact" },
 ];
 
 export default function Home() {

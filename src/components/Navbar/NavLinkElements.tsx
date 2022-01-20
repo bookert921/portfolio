@@ -34,7 +34,4 @@ export const StyledLink = styled(Link)(({ theme }) => ({
         : theme.palette.secondary.contrastText
     }`,
   },
-  [theme.breakpoints.only("tablet")]: {
-    fontSize: `calc(${theme.typography.h6.fontSize} - .75rem)`,
-  },
 }));
