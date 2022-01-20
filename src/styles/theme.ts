@@ -41,6 +41,11 @@ const theme = (mode: PaletteMode): Theme =>
     },
     breakpoints: {
       values: {
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
         mobileS: 320,
         mobile: 375,
         mobileL: 425,
