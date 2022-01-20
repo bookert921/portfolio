@@ -25,7 +25,6 @@ const LandingPage = () => {
         paddingTop: landscape ? 0 : "2em",
       }}
     >
-      <Box>{landscape && "landscape"}</Box>
       <Grid container component="article">
         <Grid component="div" item xs={12}>
           <Box
