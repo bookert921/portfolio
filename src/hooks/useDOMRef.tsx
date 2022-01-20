@@ -5,6 +5,7 @@ const useDOMRef = () => {
   const [DOMRef, setDOMRef] = useState<DOMRef<any>>({});
   const setRef = useCallback((node) => {
     if (node != null) {
+      console.log("Setting DOM Refs");
       setDOMRef((prevDOMRefs) => ({
         ...prevDOMRefs,
         [node.dataset.refkey]: node,

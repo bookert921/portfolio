@@ -4,7 +4,7 @@ import Navbar from "@components/Navbar";
 import { useDarkMode, useDOMRef, useFixed } from "@hooks";
 import { useState } from "react";
 import { theme } from "@styles";
-import { FixedProps, NavLink } from "types/interfaces";
+import { FixedNavProps, NavLink } from "types/interfaces";
 import { Main } from "./LayoutElements";
 
 const Layout: React.FC<{ siteMap: NavLink[] }> = ({
@@ -14,7 +14,7 @@ const Layout: React.FC<{ siteMap: NavLink[] }> = ({
   const [currentTheme, setCurrentTheme] = useDarkMode();
   const [open, setOpen] = useState(false);
   const [DOMRef, setRef] = useDOMRef();
-  const fixed = useFixed(DOMRef as FixedProps);
+  const fixed = useFixed(DOMRef as FixedNavProps);
 
   return (
     <ThemeProvider theme={theme(currentTheme)}>

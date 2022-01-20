@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { FixedProps } from "types/interfaces";
+import { useLayoutEffect, useState } from "react";
+import { FixedNavProps } from "types/interfaces";
 
-const useFixed = ({ fixedEl, containerEl }: FixedProps) => {
+const useFixed = ({ navEl, mainEl }: FixedNavProps) => {
   const [fixed, setFixed] = useState(false);
-
   const fixItem = () => {
-    const offset =
-      containerEl.offsetHeight - fixedEl.offsetHeight;
+    const offset = mainEl.offsetHeight - navEl.offsetHeight;
     if (window.scrollY > offset) {
       setFixed(true);
     } else {
@@ -14,8 +12,8 @@ const useFixed = ({ fixedEl, containerEl }: FixedProps) => {
     }
   };
 
-  useEffect(() => {
-    if (!fixedEl || !containerEl) return;
+  useLayoutEffect(() => {
+    if (!navEl || !mainEl) return;
     document.addEventListener("scroll", fixItem, {
       capture: true,
       passive: true,
@@ -26,7 +24,7 @@ const useFixed = ({ fixedEl, containerEl }: FixedProps) => {
         capture: true,
         passive: true,
       } as any);
-  }, [fixedEl, containerEl]);
+  }, [navEl, mainEl]);
 
   return fixed;
 };

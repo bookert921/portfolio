@@ -20,7 +20,7 @@ export interface DOMRef<T> {
   [key: string]: T;
 }
 
-export interface FixedProps {
-  fixedEl: HTMLDivElement;
-  containerEl: HTMLDivElement;
+export interface FixedNavProps {
+  navEl: HTMLElement;
+  mainEl: HTMLElement;
 }

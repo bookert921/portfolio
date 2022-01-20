@@ -11,6 +11,8 @@ export const NavList = styled("ul")(({ theme }) => ({
   justifyContent: "space-around",
   flexDirection: "column",
   alignItems: "center",
+  margin: 0,
+  padding: 0,
   [theme.breakpoints.up("mobileL")]: {
     flexDirection: "row",
   },

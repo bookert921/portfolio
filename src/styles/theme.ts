@@ -82,6 +82,7 @@ const theme = (mode: PaletteMode): Theme =>
         styleOverrides: {
           root: {
             backgroundImage: "none",
+            height: "4rem",
           },
         },
       },
