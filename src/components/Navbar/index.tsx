@@ -10,6 +10,7 @@ import DarkMode from "@components/Button/DarkMode";
 import NavLinks from "./NavLinks";
 
 import { NavbarProps } from "types/interfaces";
+import Sidebar from "@components/Sidebar";
 
 const Navbar: React.FC<NavbarProps> = ({
   links,
@@ -35,6 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({
         left: 0,
         right: 0,
         bottom: fixed ? "auto" : 0,
+        zIndex: muiTheme.zIndex.tooltip,
       }}
     >
       <Toolbar
@@ -46,6 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({
           <NavMenu open={open} toggleNav={setOpen} />
         )}
         <DarkMode theme={theme} toggleTheme={toggleTheme} />
+        <Sidebar open={open} />
       </Toolbar>
     </AppBar>
   );
