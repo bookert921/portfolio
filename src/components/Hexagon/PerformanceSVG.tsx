@@ -1,21 +1,88 @@
-const PerformanceSVG = ({ color }: { color: string }) => {
+import { useTheme } from "@mui/material/styles";
+
+const PerformanceSVG = () => {
+  const theme = useTheme();
   return (
     <svg
-      className="inner"
+      width="108"
+      height="108"
+      viewBox="0 0 108 108"
       fill="none"
-      height="48"
-      viewBox="0 0 48 48"
-      width="48"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g fill={color}>
-        <path d="m6.10881 24c.44797-4.0697 2.25433-7.7309 4.95619-10.5207l3.0564 3.0562 1.4142-1.4142-3.0008-3.0006c2.8738-2.37568 6.4984-3.87633 10.4652-4.09341v4.97271h2v-4.97271c3.9668.21707 7.5915 1.71776 10.4653 4.09351l-2.8795 2.8791 1.4141 1.4143 2.9352-2.9348c2.7018 2.7898 4.5081 6.4509 4.9561 10.5206h-4.2069v2h4.3157c-.0025 4.3403-1.5421 8.3201-4.106 11.4269l-3.4204-3.4202-1.4142 1.4142 3.4772 3.4771-.0127.0123 1.3913 1.4368c3.7511-3.6323 6.0848-8.7235 6.0848-14.3579 0-11.0402-8.9548-19.9892-20-19.9892s-20 8.949-20 19.9892c0 5.4849 2.21161 10.4554 5.78969 14.0661l1.42061-1.4078c-.0063-.0063-.0125-.0126-.0188-.019l3.0052-3.0053-1.4142-1.4142-2.91834 2.9184c-2.41851-3.0612-3.8617-6.9252-3.86416-11.1274h4.0527v-2z" />
+      <g filter="url(#filter0_d_684_2859)">
         <path
-          clip-rule="evenodd"
-          d="m35.4815 28.6212-13.9628 1.2881c-.3861.0741-.7319.2867-.9724.5977l-1.6385 2.4293c-.1824 1.2141-.053 1.6971.6647 2.4806l2.6336 1.2845c.3638.1492.7695.1603 1.141.0315l12.7156-5.8723c1.8915-.6562 1.3849-2.6169-.5812-2.2394zm-12.6639 6.1533 8.054-3.7195-8.832.8147-1.202 1.7822c-.0051.0812-.0044.1295-.003.1548zm-1.9981-.9935c.0002.0001.0019.0029.0042.0082-.0033-.0057-.0045-.0083-.0042-.0082zm15.1436-3.2076c.0001-.0001 0 0 0 0zm-.4588-1.6442.0027-.0018c.0001 0-.0008.0007-.0027.0018z"
-          fill-rule="evenodd"
+          d="M78.5763 0L104 50L78.5763 100H29L4 50L29 0H78.5763Z"
+          fill={theme.palette.primary.main}
         />
       </g>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M54.0002 75C58.1388 75 65.215 70 65.215 50C65.215 30 58.1388 25 54.0002 25C49.8618 25 42.7854 30.3369 42.7854 50C42.7854 69.6631 49.8618 75 54.0002 75Z"
+        stroke={theme.palette.secondary.main}
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M29.7193 63.0952C31.7886 66.4432 40.1829 69.5488 59.6075 59.0726C79.032 48.5964 80.3501 40.2528 78.2808 36.9048C76.2115 33.5568 67.49 30.6277 48.3927 40.9274C29.2953 51.227 27.6501 59.7473 29.7193 63.0952V63.0952Z"
+        stroke={theme.palette.secondary.main}
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M29.7192 36.9048C27.6499 40.2528 28.9679 48.5964 48.3926 59.0726C67.8172 69.5488 76.2114 66.4432 78.2807 63.0952C80.35 59.7473 78.7047 51.227 59.6073 40.9274C40.51 30.6277 31.7885 33.5568 29.7192 36.9048V36.9048Z"
+        stroke={theme.palette.secondary.main}
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <defs>
+        <filter
+          id="filter0_d_684_2859"
+          x="0"
+          y="0"
+          width="108"
+          height="108"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood
+            flood-opacity="0"
+            result="BackgroundImageFix"
+          />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="4" />
+          <feGaussianBlur stdDeviation="2" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_684_2859"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_684_2859"
+            result="shape"
+          />
+        </filter>
+      </defs>
     </svg>
   );
 };

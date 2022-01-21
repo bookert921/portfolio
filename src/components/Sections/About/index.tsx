@@ -23,7 +23,7 @@ const AboutPage = () => {
   const theme = useTheme();
   return (
     <AboutSection id="about" component="section">
-      <Grid container flexGrow={1} justifyContent="center">
+      <Grid container spacing={2} justifyContent="center">
         <Grid item sm={12} component="article">
           <Typography>
             I'm baby marfa kogi cred taxidermy banjo,
@@ -40,11 +40,7 @@ const AboutPage = () => {
             title="Optimize"
             text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
           >
-            <Hexagon>
-              <OptimizationSVG
-                color={theme.palette.secondary.main}
-              />
-            </Hexagon>
+            <OptimizationSVG />
           </FeatureCard>
         </Grid>
         <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
@@ -52,11 +48,7 @@ const AboutPage = () => {
             title="Secure"
             text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
           >
-            <Hexagon>
-              <SecureSVG
-                color={theme.palette.secondary.main}
-              />
-            </Hexagon>
+            <SecureSVG />
           </FeatureCard>
         </Grid>
         <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
@@ -64,11 +56,7 @@ const AboutPage = () => {
             title="Perform"
             text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
           >
-            <Hexagon>
-              <PerformanceSVG
-                color={theme.palette.secondary.main}
-              />
-            </Hexagon>
+            <PerformanceSVG />
           </FeatureCard>
         </Grid>
         <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
@@ -76,11 +64,7 @@ const AboutPage = () => {
             title="Reach"
             text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
           >
-            <Hexagon>
-              <MobileSVG
-                color={theme.palette.secondary.main}
-              />
-            </Hexagon>
+            <MobileSVG />
           </FeatureCard>
         </Grid>
       </Grid>
