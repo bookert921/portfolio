@@ -1,53 +1,30 @@
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  useTheme,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useContext } from "react";
-import { NavbarContext } from "@components/Navbar/NavbarContext";
+import Hexagon from "@components/Hexagon";
+import OptimizationSVG from "@components/Hexagon/OptimizationSVG";
+import MobileSVG from "@components/Hexagon/MobileSVG";
+import PerformanceSVG from "@components/Hexagon/PerformanceSVG";
+import SecureSVG from "@components/Hexagon/SecureSVG";
+import FeatureCard from "@components/Card/Feature";
 
-const AboutSection = styled(Box)<{
-  navHeight: number;
-}>(({ theme, navHeight }) => ({
-  width: "100%",
+const AboutSection = styled(Box)(({ theme }) => ({
+  width: "90%",
+  margin: "0 auto",
   display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  paddingTop: theme.spacing(3),
+  paddingTop: theme.spacing(5),
 }));
 
-const AboutContent = styled("article")(() => ({
-  display: "grid",
-  height: "100%",
-  width: "100%",
-  gridTemplateColumns: "1fr",
-  gridTemplateRows: "1fr 1fr",
-  gridTemplateAreas: `"text"
-        "cards"`,
-}));
-
-const AboutTextContainer = styled("section")(() => ({
-  gridArea: "text",
-  height: "100%",
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}));
-const AboutCardContainer = styled("section")(() => ({
-  gridArea: "cards",
-  height: "100%",
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}));
-
-const About = () => {
-  const { navHeight } = useContext(NavbarContext);
-  console.log("navHeight from About", navHeight);
+const AboutPage = () => {
+  const theme = useTheme();
   return (
-    <AboutSection navHeight={navHeight}>
-      <AboutContent>
-        <AboutCardContainer></AboutCardContainer>
-        <AboutTextContainer>
+    <AboutSection id="about" component="section">
+      <Grid container flexGrow={1} justifyContent="center">
+        <Grid item sm={12} component="article">
           <Typography>
             I'm baby marfa kogi cred taxidermy banjo,
             sriracha cliche heirloom snackwave unicorn tacos
@@ -57,10 +34,58 @@ const About = () => {
             unicorn keytar hella authentic sriracha
             wayfarers pitchfork celiac tilde flexitarian.
           </Typography>
-        </AboutTextContainer>
-      </AboutContent>
+        </Grid>
+        <Grid item sx={{ minWidth: "150px" }} md={6} lg={3}>
+          <FeatureCard
+            title="Optimize"
+            text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
+          >
+            <Hexagon>
+              <OptimizationSVG
+                color={theme.palette.secondary.main}
+              />
+            </Hexagon>
+          </FeatureCard>
+        </Grid>
+        <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
+          <FeatureCard
+            title="Secure"
+            text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
+          >
+            <Hexagon>
+              <SecureSVG
+                color={theme.palette.secondary.main}
+              />
+            </Hexagon>
+          </FeatureCard>
+        </Grid>
+        <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
+          <FeatureCard
+            title="Perform"
+            text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
+          >
+            <Hexagon>
+              <PerformanceSVG
+                color={theme.palette.secondary.main}
+              />
+            </Hexagon>
+          </FeatureCard>
+        </Grid>
+        <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
+          <FeatureCard
+            title="Reach"
+            text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
+          >
+            <Hexagon>
+              <MobileSVG
+                color={theme.palette.secondary.main}
+              />
+            </Hexagon>
+          </FeatureCard>
+        </Grid>
+      </Grid>
     </AboutSection>
   );
 };
 
-export default About;
+export default AboutPage;

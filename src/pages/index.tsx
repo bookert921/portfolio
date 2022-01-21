@@ -1,4 +1,5 @@
 import Layout from "@components/Layout";
+import AboutPage from "@components/Sections/About";
 import LandingPage from "@components/Sections/Landing";
 import { NavLink } from "types/interfaces";
 
@@ -14,8 +15,7 @@ export default function Home() {
   return (
     <Layout siteMap={siteMenu}>
       <LandingPage />
-      <LandingPage />
-      <LandingPage />
+      <AboutPage />
     </Layout>
   );
 }
