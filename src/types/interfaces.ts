@@ -1,10 +1,9 @@
 import { PaletteMode } from "@mui/material";
-import React from "react";
 
 export interface NavbarProps {
   links: NavLink[];
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: (specificValue?: boolean) => void;
   theme: PaletteMode;
   toggleTheme: (value?: PaletteMode) => void;
   fixed: boolean;

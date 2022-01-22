@@ -1,3 +1,4 @@
+import { ToggleReturn } from "@types";
 import { useState } from "react";
 
 const useToggle = (initialState: boolean = false) => {
@@ -12,7 +13,7 @@ const useToggle = (initialState: boolean = false) => {
     });
   };
 
-  return [value, toggleValue];
+  return [value, toggleValue] as ToggleReturn;
 };
 
 export default useToggle;

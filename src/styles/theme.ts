@@ -83,6 +83,17 @@ const theme = (mode: PaletteMode): Theme =>
       },
     },
     components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            scrollBehavior: "smooth",
+          },
+          body: {
+            width: "100%",
+            minHeight: "100%",
+          },
+        },
+      },
       MuiAppBar: {
         styleOverrides: {
           root: {

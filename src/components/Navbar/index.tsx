@@ -11,6 +11,7 @@ import NavLinks from "./NavLinks";
 
 import { NavbarProps } from "types/interfaces";
 import Sidebar from "@components/Sidebar";
+import React from "react";
 
 const Navbar: React.FC<NavbarProps> = ({
   links,
@@ -41,15 +42,23 @@ const Navbar: React.FC<NavbarProps> = ({
     >
       <Toolbar
         component="nav"
-        sx={{ justifyContent: "flex-end", paddingLeft: 0 }}
+        sx={{
+          justifyContent: "flex-end",
+          paddingLeft: 0,
+        }}
       >
         {!mobile && <NavLinks>{links}</NavLinks>}
         {mobile && (
           <NavMenu open={open} toggleNav={setOpen} />
         )}
         <DarkMode theme={theme} toggleTheme={toggleTheme} />
-        <Sidebar open={open} />
       </Toolbar>
+      <Sidebar
+        open={open}
+        setOpen={setOpen}
+        links={links}
+        orientation={fixed}
+      />
     </AppBar>
   );
 };
