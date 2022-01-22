@@ -3,22 +3,23 @@ import {
   NavListElement,
   StyledLink,
 } from "@components/Navbar/NavLinkElements";
+import { PageContext } from "@contexts";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "types/interfaces";
 
 const Sidebar: React.FC<{
   open: boolean;
   links: NavLink[];
-  setOpen: (open?: boolean) => void;
   orientation: boolean;
-}> = ({ open, links, setOpen, orientation }) => {
+}> = ({ open, links, orientation }) => {
+  const { setSideOpen } = useContext(PageContext);
   const theme = useTheme();
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
-    setOpen(false);
+    setSideOpen(false);
   };
 
   const sideLinks = (

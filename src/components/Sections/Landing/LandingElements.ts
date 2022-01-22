@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 export const LandingWrapper = styled(Box, {
   name: "LandingWrapper",
 })(() => ({
-  height: "100%",
+  height: "100vh",
   width: "100%",
   flexGrow: 1,
   paddingTop: "2em",

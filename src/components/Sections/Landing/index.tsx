@@ -1,4 +1,6 @@
+import { PageContext } from "@contexts";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { useContext } from "react";
 // import About from "../About";
 import DesktopLanding from "./Desktop/DesktopLanding";
 import { LandingWrapper } from "./LandingElements";
@@ -9,7 +11,8 @@ const components = {
   mobile: MobileLanding,
 };
 
-const LandingPage = () => {
+const LandingPage: React.FC = () => {
+  const { setRef } = useContext(PageContext);
   const theme = useTheme();
   const mobile = useMediaQuery(
     theme.breakpoints.down("tablet")
@@ -20,7 +23,11 @@ const LandingPage = () => {
     : components["desktop"];
 
   return (
-    <LandingWrapper component="section">
+    <LandingWrapper
+      component="section"
+      ref={setRef}
+      data-refkey="landingEl"
+    >
       <LandingComponent />
     </LandingWrapper>
   );

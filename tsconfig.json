@@ -21,6 +21,7 @@
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@hooks": ["hooks"],
+      "@contexts": ["contexts"],
       "@styles": ["styles"],
       "@types": ["types"],
       "@mui/styled-engine": [

@@ -23,6 +23,7 @@ module.exports = {
           "@assets": "src/assets",
           "@styles": "src/styles",
           "@types": "src/types",
+          "@contexts": "src/contexts",
         },
         extensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
       },

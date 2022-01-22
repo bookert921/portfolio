@@ -2,12 +2,8 @@ import { PaletteMode } from "@mui/material";
 
 export interface NavbarProps {
   links: NavLink[];
-  open: boolean;
-  setOpen: (specificValue?: boolean) => void;
   theme: PaletteMode;
   toggleTheme: (value?: PaletteMode) => void;
-  fixed: boolean;
-  setRef: (node: any) => void;
 }
 
 export interface NavLink {
@@ -20,6 +16,13 @@ export interface DOMRef<T> {
 }
 
 export interface FixedNavProps {
-  navEl: HTMLElement;
-  mainEl: HTMLElement;
+  landingEl: HTMLElement;
+  navbarEl: HTMLElement;
+}
+
+export interface PageContextProps {
+  sideOpen: boolean;
+  setSideOpen: (specificValue?: boolean) => void;
+  fixed: boolean;
+  setRef: (node: any) => void;
 }

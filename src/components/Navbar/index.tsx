@@ -11,17 +11,16 @@ import NavLinks from "./NavLinks";
 
 import { NavbarProps } from "types/interfaces";
 import Sidebar from "@components/Sidebar";
-import React from "react";
+import React, { useContext } from "react";
+import { PageContext } from "@contexts";
 
 const Navbar: React.FC<NavbarProps> = ({
   links,
-  open,
-  setOpen,
   theme,
   toggleTheme,
-  fixed,
-  setRef,
 }) => {
+  const { setRef, sideOpen, fixed } =
+    useContext(PageContext);
   const muiTheme = useTheme();
   const mobile = useMediaQuery(
     muiTheme.breakpoints.down("tablet")
@@ -30,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <AppBar
       ref={setRef}
-      data-refkey="navEl"
+      data-refkey="navbarEl"
       position={fixed ? "fixed" : "absolute"}
       sx={{
         top: fixed ? 0 : "auto",
@@ -48,14 +47,11 @@ const Navbar: React.FC<NavbarProps> = ({
         }}
       >
         {!mobile && <NavLinks>{links}</NavLinks>}
-        {mobile && (
-          <NavMenu open={open} toggleNav={setOpen} />
-        )}
+        {mobile && <NavMenu open={sideOpen} />}
         <DarkMode theme={theme} toggleTheme={toggleTheme} />
       </Toolbar>
       <Sidebar
-        open={open}
-        setOpen={setOpen}
+        open={sideOpen}
         links={links}
         orientation={fixed}
       />

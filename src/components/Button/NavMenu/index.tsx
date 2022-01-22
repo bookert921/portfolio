@@ -1,15 +1,16 @@
+import { PageContext } from "@contexts";
 import { IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useContext } from "react";
 import { MenuIcon, MenuWrapper } from "./NavMenuElements";
 
 const NavMenu: React.FC<{
   open: boolean;
-  toggleNav: (open: boolean) => void;
-}> = ({ open, toggleNav }) => {
+}> = ({ open }) => {
+  const { setSideOpen } = useContext(PageContext);
   const theme = useTheme();
   const handleClick = () => {
-    toggleNav(!open);
+    setSideOpen(!open);
   };
 
   return (
