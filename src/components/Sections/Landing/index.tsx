@@ -1,6 +1,7 @@
 import { PageContext } from "@contexts";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useContext } from "react";
+import Section from "..";
 // import About from "../About";
 import DesktopLanding from "./Desktop/DesktopLanding";
 import { LandingWrapper } from "./LandingElements";

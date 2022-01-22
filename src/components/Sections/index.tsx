@@ -1,14 +1,14 @@
 import { PageContext } from "@contexts";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useContext } from "react";
 
-const Content = styled(Box, {
+const Content = styled(Container, {
   name: "ContentWrapper",
 })(() => ({
   position: "relative",
-  minHeight: "100vh",
   "&.blur": {
+    height: "100%",
     overflow: "hidden",
     filter: "blur(5px) brightness(0.7)",
     transition: "all 0.5s ease",
@@ -19,6 +19,7 @@ const Content = styled(Box, {
 
 const Section: React.FC = ({ children }) => {
   const { sideOpen } = useContext(PageContext);
+
   return (
     <Content className={sideOpen ? "blur" : ""}>
       {children}

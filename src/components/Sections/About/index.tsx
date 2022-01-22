@@ -1,11 +1,5 @@
-import {
-  Box,
-  Typography,
-  Grid,
-  useTheme,
-} from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Hexagon from "@components/Hexagon";
 import OptimizationSVG from "@components/Hexagon/OptimizationSVG";
 import MobileSVG from "@components/Hexagon/MobileSVG";
 import PerformanceSVG from "@components/Hexagon/PerformanceSVG";
@@ -20,7 +14,6 @@ const AboutSection = styled(Box)(({ theme }) => ({
 }));
 
 const AboutPage = () => {
-  const theme = useTheme();
   return (
     <AboutSection id="about" component="section">
       <Grid container spacing={2} justifyContent="center">
