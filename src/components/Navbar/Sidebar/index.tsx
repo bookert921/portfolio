@@ -1,20 +1,29 @@
 import {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import {
   NavList,
   NavListElement,
   StyledLink,
 } from "@components/Navbar/NavLinkElements";
-import { PageContext } from "@contexts";
 import { Box } from "@mui/material";
+
+import { PageContext } from "@contexts";
 import { useTheme } from "@mui/material/styles";
-import { useContext, useEffect, useState } from "react";
+
 import { NavLink } from "types/interfaces";
 
 const Sidebar: React.FC<{
   open: boolean;
   links: NavLink[];
-  orientation: boolean;
-}> = ({ open, links, orientation }) => {
+  fixedNav: boolean;
+}> = ({ open, links, fixedNav }) => {
   const { setSideOpen } = useContext(PageContext);
+  const menuRef = useRef(null);
   const theme = useTheme();
   const [show, setShow] = useState(false);
 
@@ -62,11 +71,12 @@ const Sidebar: React.FC<{
 
   return (
     <Box
+      ref={menuRef}
       sx={{
         [theme.breakpoints.down("tablet")]: {
           height: "100vh",
           position: "absolute",
-          top: orientation ? 0 : "unset",
+          top: fixedNav ? 0 : "unset",
           bottom: 0,
           right: 0,
           zIndex: theme.zIndex.appBar,

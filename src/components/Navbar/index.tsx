@@ -9,26 +9,43 @@ import NavMenu from "@components/Navbar/NavMenu";
 import DarkMode from "@components/Navbar/DarkMode";
 import NavLinks from "./NavLinks";
 
-import { NavbarProps } from "types/interfaces";
+import {
+  FixedNavProps,
+  NavbarProps,
+} from "types/interfaces";
 import Sidebar from "@components/Navbar/Sidebar";
 import React, { useContext, useEffect } from "react";
 import { PageContext } from "@contexts";
 
 import Helmet from "react-helmet";
+import { useOnClickOutside } from "@hooks";
 
 const Navbar: React.FC<NavbarProps> = ({
   links,
   theme,
   toggleTheme,
 }) => {
-  const { setRef, sideOpen, fixed } =
-    useContext(PageContext);
+  const {
+    DOMRef,
+    setRef,
+    sideOpen,
+    setSideOpen,
+    fixedNav,
+  } = useContext(PageContext);
   const muiTheme = useTheme();
   const mobile = useMediaQuery(
     muiTheme.breakpoints.down("tablet")
   );
 
+  const onResize = (e: Event) => {
+    const target = e.target as Window;
+    if (target.innerWidth > 768) {
+      setSideOpen(false);
+    }
+  };
+
   useEffect(() => {
+    window.addEventListener("resize", onResize);
     if (sideOpen) {
       const el = document.getElementById("about");
       if (
@@ -48,6 +65,11 @@ const Navbar: React.FC<NavbarProps> = ({
     }
   }, [sideOpen]);
 
+  useOnClickOutside(
+    (DOMRef as FixedNavProps).navbarEl,
+    () => setSideOpen(false)
+  );
+
   return (
     <React.Fragment>
       <Helmet>
@@ -56,12 +78,12 @@ const Navbar: React.FC<NavbarProps> = ({
       <AppBar
         ref={setRef}
         data-refkey="navbarEl"
-        position={fixed ? "fixed" : "absolute"}
+        position={fixedNav ? "fixed" : "absolute"}
         sx={{
-          top: fixed ? 0 : "auto",
+          top: fixedNav ? 0 : "auto",
           left: 0,
           right: 0,
-          bottom: fixed ? "auto" : 0,
+          bottom: fixedNav ? "auto" : 0,
           zIndex: muiTheme.zIndex.tooltip,
         }}
       >
@@ -82,7 +104,7 @@ const Navbar: React.FC<NavbarProps> = ({
         <Sidebar
           open={sideOpen}
           links={links}
-          orientation={fixed}
+          fixedNav={fixedNav}
         />
       </AppBar>
     </React.Fragment>

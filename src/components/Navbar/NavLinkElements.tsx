@@ -13,11 +13,8 @@ export const NavList = styled("ul")(({ theme }) => ({
   alignItems: "center",
   margin: 0,
   padding: 0,
-  [theme.breakpoints.up("mobileL")]: {
+  [theme.breakpoints.up("tablet")]: {
     flexDirection: "row",
-  },
-  ["@media (orientation: landscape)"]: {
-    flexDirection: "column",
   },
 }));
 

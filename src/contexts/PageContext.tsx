@@ -7,9 +7,10 @@ import React, { createContext } from "react";
 
 const initialContext: PageContextProps = {
   sideOpen: false,
-  fixed: false,
+  fixedNav: false,
   setRef: () => {},
   setSideOpen: () => {},
+  DOMRef: null,
 };
 
 export const PageContext =
@@ -18,15 +19,16 @@ export const PageContext =
 const PageContextProvider: React.FC = ({ children }) => {
   const [sideOpen, setSideOpen] = useToggle();
   const [DOMRef, setRef] = useDOMRef();
-  const fixed = useFixed(DOMRef as FixedNavProps);
+  const fixedNav = useFixed(DOMRef as FixedNavProps);
 
   return (
     <PageContext.Provider
       value={{
-        sideOpen,
+        DOMRef,
         setRef,
+        sideOpen,
         setSideOpen,
-        fixed,
+        fixedNav,
       }}
     >
       {children}
