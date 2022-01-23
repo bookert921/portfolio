@@ -22,13 +22,24 @@ const Sidebar: React.FC<{
     setSideOpen(false);
   };
 
+  const activeLink = (url: string) => {
+    if (location.hash === url) {
+      return "active";
+    } else if (
+      !location.hash &&
+      location.pathname === url
+    ) {
+      return "active";
+    }
+  };
+
   const sideLinks = (
     <NavList>
       {links.map((link, index) => (
         <NavListElement key={index}>
           <StyledLink
             to={link.url}
-            activeClassName="active"
+            className={activeLink(link.url)}
             onClick={handleClose}
           >
             {link.name.slice(0, 1).toUpperCase() +

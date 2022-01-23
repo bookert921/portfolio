@@ -46,17 +46,6 @@ const Navbar: React.FC<NavbarProps> = ({
         document.documentElement.scrollTop = 0;
       }
     }
-
-    if (location.hash) {
-      const id = location.hash.substring(1);
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView();
-          el.focus();
-        }
-      }, 0);
-    }
   }, [sideOpen]);
 
   return (

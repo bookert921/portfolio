@@ -16,6 +16,9 @@ export const NavList = styled("ul")(({ theme }) => ({
   [theme.breakpoints.up("mobileL")]: {
     flexDirection: "row",
   },
+  ["@media (orientation: landscape)"]: {
+    flexDirection: "column",
+  },
 }));
 
 export const NavListElement = styled("li")`
