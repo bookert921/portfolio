@@ -5,13 +5,13 @@ import {
   useTheme,
 } from "@mui/material";
 
-import NavMenu from "@components/Button/NavMenu";
-import DarkMode from "@components/Button/DarkMode";
+import NavMenu from "@components/Navbar/NavMenu";
+import DarkMode from "@components/Navbar/DarkMode";
 import NavLinks from "./NavLinks";
 
 import { NavbarProps } from "types/interfaces";
-import Sidebar from "@components/Sidebar";
-import React, { useContext } from "react";
+import Sidebar from "@components/Navbar/Sidebar";
+import React, { useContext, useEffect } from "react";
 import { PageContext } from "@contexts";
 
 import Helmet from "react-helmet";
@@ -27,6 +27,37 @@ const Navbar: React.FC<NavbarProps> = ({
   const mobile = useMediaQuery(
     muiTheme.breakpoints.down("tablet")
   );
+
+  useEffect(() => {
+    if (sideOpen) {
+      const el = document.getElementById("about");
+      if (
+        el &&
+        window.scrollY > window.innerHeight * 0.5 &&
+        window.scrollY <
+          window.innerHeight + window.innerHeight * 0.1
+      ) {
+        el.scrollIntoView();
+      } else if (
+        window.scrollY <=
+        window.innerHeight * 0.5
+      ) {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    }
+
+    if (location.hash) {
+      const id = location.hash.substring(1);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView();
+          el.focus();
+        }
+      }, 0);
+    }
+  }, [sideOpen]);
 
   return (
     <React.Fragment>
