@@ -90,7 +90,16 @@ const theme = (mode: PaletteMode): Theme =>
           },
           body: {
             width: "100%",
-            minHeight: "100%",
+            minHeight: "100vh",
+            "&.blur": {
+              overflow: "hidden",
+              "main > *": {
+                filter: "blur(5px) brightness(0.7)",
+                transition: "all 0.5s ease",
+                pointerEvents: "none",
+                userSelect: "none",
+              },
+            },
           },
         },
       },

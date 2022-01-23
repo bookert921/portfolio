@@ -1,10 +1,19 @@
 import { ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import Navbar from "@components/Navbar";
 import { useDarkMode } from "@hooks";
 import { theme } from "@styles";
 import { NavLink } from "types/interfaces";
 import { PageContextProvider } from "@contexts";
+
+const StyledSiteWrapper = styled(Box, {
+  name: "SiteWrapper",
+})(() => ({
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+}));
 
 const Layout: React.FC<{ siteMap: NavLink[] }> = ({
   children,
@@ -16,12 +25,14 @@ const Layout: React.FC<{ siteMap: NavLink[] }> = ({
     <ThemeProvider theme={theme(currentTheme)}>
       <CssBaseline />
       <PageContextProvider>
-        <Navbar
-          theme={currentTheme}
-          toggleTheme={setCurrentTheme}
-          links={siteMap}
-        />
-        {children}
+        <StyledSiteWrapper>
+          <Navbar
+            theme={currentTheme}
+            toggleTheme={setCurrentTheme}
+            links={siteMap}
+          />
+          {children}
+        </StyledSiteWrapper>
       </PageContextProvider>
     </ThemeProvider>
   );

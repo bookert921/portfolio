@@ -3,7 +3,7 @@ import {
   FixedNavProps,
   PageContextProps,
 } from "types/interfaces";
-import React, { createContext, useEffect } from "react";
+import React, { createContext } from "react";
 
 const initialContext: PageContextProps = {
   sideOpen: false,

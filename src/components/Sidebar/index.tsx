@@ -53,7 +53,7 @@ const Sidebar: React.FC<{
     <Box
       sx={{
         [theme.breakpoints.down("tablet")]: {
-          minHeight: "100vh",
+          height: "100vh",
           position: "absolute",
           top: orientation ? 0 : "unset",
           bottom: 0,
