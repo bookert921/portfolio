@@ -1,0 +1,14 @@
+[
+  {
+    "company": "US BioTek Labs",
+    "subtitle": "Constructing A Payment Processing System",
+    "description": "BioTek Labs is a testing lab in the Health industry now providing patients and doctors to more easily fill out forms, order test kits, and receive results. Need a Covid test kit?",
+    "url": "https://www.usbiotek.com/"
+  },
+  {
+    "company": "Datafi Labs",
+    "subtitle": "Designing and Building A Big Data Dashboard",
+    "description": "Datafi Labs is a data enablement platform meant to bridge the current gap between data visualization and data management. The dashboard allows for data providers and data consumers to quickly access the data they need through quick actions, recommendations and a search bar, much like google search but for company specific data shared by data owners. Looking for a better way to share and set permissions on your data in a variety of formats?",
+    "url": "https://datafilabs.com/"
+  }
+]

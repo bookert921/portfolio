@@ -12,12 +12,12 @@ export interface NavLink {
   name: string;
 }
 
-export interface DOMRef<T> {
+export interface DOMRef<T extends HTMLElement> {
   [key: string]: T;
 }
 
 export interface RefContextProps {
-  refs: DOMRef<unknown>;
+  refs: DOMRef<any>;
   setRef: (node: any) => void;
 }
 

@@ -83,6 +83,13 @@ const theme = (mode: PaletteMode): Theme =>
       },
     },
     components: {
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundImage: "unset",
+          },
+        },
+      },
       MuiCssBaseline: {
         styleOverrides: {
           html: {

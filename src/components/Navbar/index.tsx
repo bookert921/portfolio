@@ -29,9 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const { refs, setRef } = useContext(RefContext);
   const [sideOpen, setSideOpen] = useToggle();
-  const fixedNav = useFixedNav(
-    refs as DOMRef<HTMLDivElement>
-  );
+  const fixedNav = useFixedNav(refs);
   const muiTheme = useTheme();
   const mobile = useMediaQuery(
     muiTheme.breakpoints.down("tablet")

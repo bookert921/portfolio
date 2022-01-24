@@ -9,6 +9,6 @@ export type ToggleReturn = [boolean, OpenSide];
 
 export type SetRef = (node?: any) => void;
 
-export type DOMRefReturn = [DOMRef<any>, SetRef];
+export type DOMRefReturn = [DOMRef, SetRef];
 
 export type OpenSide = (specificValue?: boolean) => void;
