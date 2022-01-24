@@ -1,16 +1,16 @@
-import { PageContext } from "@contexts";
 import { IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React, { useContext } from "react";
+import React from "react";
+import { NavMenuProps } from "types/interfaces";
 import { MenuIcon, MenuWrapper } from "./NavMenuElements";
 
-const NavMenu: React.FC<{
-  open: boolean;
-}> = ({ open }) => {
-  const { setSideOpen } = useContext(PageContext);
+const NavMenu: React.FC<NavMenuProps> = ({
+  sideOpen,
+  setSideOpen,
+}) => {
   const theme = useTheme();
   const handleClick = () => {
-    setSideOpen(!open);
+    setSideOpen(!sideOpen);
   };
 
   return (
@@ -20,7 +20,7 @@ const NavMenu: React.FC<{
         sx={{ zIndex: theme.zIndex.tooltip }}
       >
         <MenuWrapper>
-          <MenuIcon open={open}>
+          <MenuIcon open={sideOpen}>
             <div className="clickable-area" />
             <div className="animated-nav" />
           </MenuIcon>

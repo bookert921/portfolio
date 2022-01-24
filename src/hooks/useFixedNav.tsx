@@ -1,10 +1,10 @@
 import { useLayoutEffect, useState } from "react";
-import { FixedNavProps } from "types/interfaces";
+import { DOMRef } from "types/interfaces";
 
 const useFixedNav = ({
   navbarEl,
   landingEl,
-}: FixedNavProps) => {
+}: DOMRef<HTMLElement>) => {
   const [fixedNav, setFixedNav] = useState(false);
   const fixItem = () => {
     const offset =

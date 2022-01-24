@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { DOMRef } from "types/interfaces";
 
 const useDOMRef = () => {
-  const [DOMRef, setDOMRef] = useState<DOMRef<any>>({});
+  const [DOMRef, setDOMRef] = useState<DOMRef<unknown>>({});
   const setRef = useCallback((node) => {
     if (node != null) {
       setDOMRef((prevDOMRefs) => ({

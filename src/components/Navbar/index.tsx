@@ -9,43 +9,35 @@ import NavMenu from "@components/Navbar/NavMenu";
 import DarkMode from "@components/Navbar/DarkMode";
 import NavLinks from "./NavLinks";
 
-import {
-  FixedNavProps,
-  NavbarProps,
-} from "types/interfaces";
+import { DOMRef, NavbarProps } from "types/interfaces";
 import Sidebar from "@components/Navbar/Sidebar";
 import React, { useContext, useEffect } from "react";
-import { PageContext } from "@contexts";
+import { RefContext } from "@contexts";
 
 import Helmet from "react-helmet";
-import { useOnClickOutside } from "@hooks";
+import {
+  useFixedNav,
+  useOnClickOutside,
+  useOnWidthResize,
+  useToggle,
+} from "@hooks";
 
 const Navbar: React.FC<NavbarProps> = ({
   links,
   theme,
   toggleTheme,
 }) => {
-  const {
-    DOMRef,
-    setRef,
-    sideOpen,
-    setSideOpen,
-    fixedNav,
-  } = useContext(PageContext);
+  const { refs, setRef } = useContext(RefContext);
+  const [sideOpen, setSideOpen] = useToggle();
+  const fixedNav = useFixedNav(
+    refs as DOMRef<HTMLDivElement>
+  );
   const muiTheme = useTheme();
   const mobile = useMediaQuery(
     muiTheme.breakpoints.down("tablet")
   );
 
-  const onResize = (e: Event) => {
-    const target = e.target as Window;
-    if (target.innerWidth > 768) {
-      setSideOpen(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener("resize", onResize);
     if (sideOpen) {
       const el = document.getElementById("about");
       if (
@@ -65,9 +57,10 @@ const Navbar: React.FC<NavbarProps> = ({
     }
   }, [sideOpen]);
 
-  useOnClickOutside(
-    (DOMRef as FixedNavProps).navbarEl,
-    () => setSideOpen(false)
+  useOnWidthResize(() => setSideOpen(false));
+
+  useOnClickOutside(refs.navbarEl, () =>
+    setSideOpen(false)
   );
 
   return (
@@ -95,16 +88,22 @@ const Navbar: React.FC<NavbarProps> = ({
           }}
         >
           {!mobile && <NavLinks>{links}</NavLinks>}
-          {mobile && <NavMenu open={sideOpen} />}
+          {mobile && (
+            <NavMenu
+              sideOpen={sideOpen}
+              setSideOpen={setSideOpen}
+            />
+          )}
           <DarkMode
             theme={theme}
             toggleTheme={toggleTheme}
           />
         </Toolbar>
         <Sidebar
-          open={sideOpen}
+          sideOpen={sideOpen}
           links={links}
           fixedNav={fixedNav}
+          setSideOpen={setSideOpen}
         />
       </AppBar>
     </React.Fragment>

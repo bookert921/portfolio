@@ -22,6 +22,5 @@ import "@fontsource/condiment";
 
 // Wraps every page in a component
 export function wrapPageElement({ element, props }) {
-  console.log(props);
   return <Layout {...props}>{element}</Layout>;
 }

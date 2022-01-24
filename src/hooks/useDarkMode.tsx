@@ -1,5 +1,4 @@
-import { PaletteMode } from "@mui/material";
-import { DarkModeReturn } from "@types";
+import { ChangeTheme, DarkModeReturn } from "@types";
 import { useEffect, useState } from "react";
 
 const useDarkMode = () => {
@@ -10,7 +9,7 @@ const useDarkMode = () => {
     setTheme(mode);
   };
 
-  const toggleTheme = (value?: PaletteMode) => {
+  const toggleTheme: ChangeTheme = (value) => {
     if (value != undefined) {
       switch (value) {
         case "light":

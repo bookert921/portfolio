@@ -1,17 +1,14 @@
 import { PaletteMode } from "@mui/material";
 import { DOMRef } from "./interfaces";
 
-export type DarkModeReturn = [
-  PaletteMode,
-  (value?: PaletteMode) => void
-];
+export type ChangeTheme = (value?: PaletteMode) => void;
 
-export type ToggleReturn = [
-  boolean,
-  (specificValue?: boolean) => void
-];
+export type DarkModeReturn = [PaletteMode, ChangeTheme];
 
-export type DOMRefReturn = [
-  DOMRef<any>,
-  (node?: any) => void
-];
+export type ToggleReturn = [boolean, OpenSide];
+
+export type SetRef = (node?: any) => void;
+
+export type DOMRefReturn = [DOMRef<any>, SetRef];
+
+export type OpenSide = (specificValue?: boolean) => void;

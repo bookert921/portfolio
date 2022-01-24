@@ -1,9 +1,4 @@
-import {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   NavList,
@@ -12,44 +7,29 @@ import {
 } from "@components/Navbar/NavLinkElements";
 import { Box } from "@mui/material";
 
-import { PageContext } from "@contexts";
 import { useTheme } from "@mui/material/styles";
 
-import { NavLink } from "types/interfaces";
+import { SidebarProps } from "types/interfaces";
 
-const Sidebar: React.FC<{
-  open: boolean;
-  links: NavLink[];
-  fixedNav: boolean;
-}> = ({ open, links, fixedNav }) => {
-  const { setSideOpen } = useContext(PageContext);
-  const menuRef = useRef(null);
-  const theme = useTheme();
+const Sidebar: React.FC<SidebarProps> = ({
+  sideOpen,
+  setSideOpen,
+  links,
+  fixedNav,
+}) => {
   const [show, setShow] = useState(false);
+  const theme = useTheme();
 
-  const handleClose = () => {
-    setSideOpen(false);
-  };
-
-  const activeLink = (url: string) => {
-    if (location.hash === url) {
-      return "active";
-    } else if (
-      !location.hash &&
-      location.pathname === url
-    ) {
-      return "active";
-    }
-  };
-
-  const sideLinks = (
+  const sideLinks = show ? (
     <NavList>
       {links.map((link, index) => (
         <NavListElement key={index}>
           <StyledLink
             to={link.url}
-            className={activeLink(link.url)}
-            onClick={handleClose}
+            id={link.name}
+            onClick={() => {
+              setSideOpen(false);
+            }}
           >
             {link.name.slice(0, 1).toUpperCase() +
               link.name.slice(1)}
@@ -57,21 +37,18 @@ const Sidebar: React.FC<{
         </NavListElement>
       ))}
     </NavList>
-  );
-
-  const showLinks = show ? sideLinks : null;
+  ) : null;
 
   useEffect(() => {
-    if (open) {
+    if (sideOpen) {
       const timer = setTimeout(() => setShow(true), 500);
       return () => clearTimeout(timer);
     }
     setShow(false);
-  }, [open, show]);
+  }, [sideOpen, show]);
 
   return (
     <Box
-      ref={menuRef}
       sx={{
         [theme.breakpoints.down("tablet")]: {
           height: "100vh",
@@ -81,7 +58,7 @@ const Sidebar: React.FC<{
           right: 0,
           zIndex: theme.zIndex.appBar,
           backgroundColor: theme.palette.primary.main,
-          width: open ? "50%" : "0",
+          width: sideOpen ? "50%" : "0",
           transition: "all 0.5s ease",
           display: "flex",
           justifyContent: "space-around",
@@ -89,7 +66,7 @@ const Sidebar: React.FC<{
         },
       }}
     >
-      {showLinks}
+      {sideLinks}
     </Box>
   );
 };
