@@ -24,6 +24,6 @@ export interface PageContextProps {
   sideOpen: boolean;
   setSideOpen: (specificValue?: boolean) => void;
   fixedNav: boolean;
-  DOMRef: unknown;
+  DOMRef: DOMRef<unknown>;
   setRef: (node: any) => void;
 }

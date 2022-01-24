@@ -22,8 +22,8 @@ const OptimizationSVG = () => {
         fill={theme.palette.secondary.main}
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M68.3518 57.9303L50.8983 59.8054C50.4157 59.9133 49.9835 60.2228 49.6828 60.6755L47.6347 64.2119C47.4067 65.9793 47.5685 66.6824 48.4656 67.823L51.7576 69.6929C52.2123 69.91 52.7195 69.9262 53.1838 69.7387L69.0783 61.1902C71.4427 60.235 70.8095 57.3808 68.3518 57.9303ZM52.522 66.8878L62.5895 61.4732L51.5495 62.6592L50.047 65.2536C50.0406 65.3718 50.0415 65.4421 50.0432 65.479L52.522 66.8878ZM50.0243 65.4415C50.0246 65.4417 50.0267 65.4458 50.0296 65.4535C50.0255 65.4452 50.024 65.4414 50.0243 65.4415ZM68.9538 60.7722C68.954 60.772 68.9538 60.7722 68.9538 60.7722V60.7722ZM68.3803 58.3787L68.3837 58.376C68.3838 58.376 68.3827 58.3771 68.3803 58.3787Z"
         fill={theme.palette.secondary.main}
       />
@@ -35,10 +35,10 @@ const OptimizationSVG = () => {
           width="108"
           height="108"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feFlood
-            flood-opacity="0"
+            floodOpacity="0"
             result="BackgroundImageFix"
           />
           <feColorMatrix

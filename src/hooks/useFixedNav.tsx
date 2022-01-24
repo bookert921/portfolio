@@ -1,18 +1,18 @@
 import { useLayoutEffect, useState } from "react";
 import { FixedNavProps } from "types/interfaces";
 
-const useFixed = ({
+const useFixedNav = ({
   navbarEl,
   landingEl,
 }: FixedNavProps) => {
-  const [fixed, setFixed] = useState(false);
+  const [fixedNav, setFixedNav] = useState(false);
   const fixItem = () => {
     const offset =
       landingEl.offsetHeight - navbarEl.offsetHeight;
     if (window.scrollY > offset) {
-      setFixed(true);
+      setFixedNav(true);
     } else {
-      setFixed(false);
+      setFixedNav(false);
     }
   };
 
@@ -31,7 +31,7 @@ const useFixed = ({
       } as any);
   }, [navbarEl, landingEl]);
 
-  return fixed;
+  return fixedNav;
 };
 
-export default useFixed;
+export default useFixedNav;

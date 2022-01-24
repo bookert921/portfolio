@@ -1,4 +1,5 @@
 import { PageContext } from "@contexts";
+import { useDOMRef } from "@hooks";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useContext } from "react";
 import Section from "..";
@@ -13,11 +14,16 @@ const components = {
 };
 
 const LandingPage: React.FC = () => {
-  const { setRef } = useContext(PageContext);
+  const { DOMRef, setRef } = useContext(PageContext);
   const theme = useTheme();
   const mobile = useMediaQuery(
     theme.breakpoints.down("tablet")
   );
+
+  const [refs] = useDOMRef();
+
+  console.log(refs);
+  console.log(DOMRef);
 
   const LandingComponent = mobile
     ? components["mobile"]

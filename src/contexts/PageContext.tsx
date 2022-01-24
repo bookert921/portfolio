@@ -1,4 +1,4 @@
-import { useDOMRef, useFixed, useToggle } from "@hooks";
+import { useDOMRef, useFixedNav, useToggle } from "@hooks";
 import {
   FixedNavProps,
   PageContextProps,
@@ -10,7 +10,7 @@ const initialContext: PageContextProps = {
   fixedNav: false,
   setRef: () => {},
   setSideOpen: () => {},
-  DOMRef: null,
+  DOMRef: {},
 };
 
 export const PageContext =
@@ -19,7 +19,7 @@ export const PageContext =
 const PageContextProvider: React.FC = ({ children }) => {
   const [sideOpen, setSideOpen] = useToggle();
   const [DOMRef, setRef] = useDOMRef();
-  const fixedNav = useFixed(DOMRef as FixedNavProps);
+  const fixedNav = useFixedNav(DOMRef as FixedNavProps);
 
   return (
     <PageContext.Provider
