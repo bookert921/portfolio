@@ -1,13 +1,15 @@
-import { Grid, Container } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-export const WorkWrapper = styled(Container, {
+export const WorkSection = styled(Box, {
   name: "WorkSection",
-})`
-  width: 90%;
-  margin: 0 auto;
-  padding: 5em 0;
-`;
+})(({ theme }) => ({
+  width: "90%",
+  margin: "0 auto",
+  display: "flex",
+  paddingTop: theme.spacing(5),
+  flexDirection: "column",
+}));
 
 export const WorkList = styled(Grid, {
   name: "WorkGrid-container",

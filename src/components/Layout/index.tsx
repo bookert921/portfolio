@@ -7,6 +7,7 @@ import { NavLink } from "types/interfaces";
 import { RefContextProvider } from "@contexts";
 import { Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import Footer from "@components/Footer";
 
 const siteMenu: NavLink[] = [
   { url: "/", name: "home" },
@@ -36,6 +37,7 @@ const Layout: React.FC = ({ children }) => {
         />
         <StyledMainWrapper as="main">
           {children}
+          <Footer />
         </StyledMainWrapper>
       </RefContextProvider>
     </ThemeProvider>

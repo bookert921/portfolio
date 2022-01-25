@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
-import workHistory from "@assets/documents/data/experience.json";
+import workHistory from "@assets/documents/data/work-history.json";
 import WorkCard from "@components/Card/WorkCard";
 import WorkText from "./WorkText";
-import { WorkList, WorkWrapper } from "./WorkElements";
+import { WorkList, WorkSection } from "./WorkElements";
 
 const Work: React.FC = () => {
   const workCards = workHistory.map((job, index) => {
@@ -21,12 +21,12 @@ const Work: React.FC = () => {
   });
 
   return (
-    <WorkWrapper id="work" as="section" maxWidth={"sm"}>
+    <WorkSection id="work" component="section">
       <WorkText />
       <WorkList container spacing={2}>
         {workCards}
       </WorkList>
-    </WorkWrapper>
+    </WorkSection>
   );
 };
 

@@ -1,17 +1,10 @@
-import { Box, Typography, Grid } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Typography, Grid } from "@mui/material";
 import OptimizationSVG from "@components/Hexagon/OptimizationSVG";
 import MobileSVG from "@components/Hexagon/MobileSVG";
 import PerformanceSVG from "@components/Hexagon/PerformanceSVG";
 import SecureSVG from "@components/Hexagon/SecureSVG";
 import FeatureCard from "@components/Card/Feature";
-
-const AboutSection = styled(Box)(({ theme }) => ({
-  width: "90%",
-  margin: "0 auto",
-  display: "flex",
-  paddingTop: theme.spacing(5),
-}));
+import { AboutSection } from "./AboutElements";
 
 const AboutPage = () => {
   return (

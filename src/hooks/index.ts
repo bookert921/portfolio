@@ -5,3 +5,4 @@ export { default as useToggle } from "./useToggle";
 export { default as useOnClickOutside } from "./useOnClickOutside";
 export { default as useOnWidthResize } from "./useOnWidthResize";
 export { default as useTimeout } from "./useTimeout";
+export { default as useSidebarOpen } from "./useSidebarOpen";

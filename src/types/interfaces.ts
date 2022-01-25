@@ -32,8 +32,15 @@ export interface DarkModeButtonProps {
 }
 
 export interface SidebarProps {
+  show: boolean;
   sideOpen: boolean;
   setSideOpen: OpenSide;
   links: NavLink[];
   fixedNav: boolean;
+}
+
+export interface FormHandlerState {
+  name: string;
+  email: string;
+  message: string;
 }
