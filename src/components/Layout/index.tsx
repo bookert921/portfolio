@@ -8,6 +8,7 @@ import { RefContextProvider } from "@contexts";
 import { Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Footer from "@components/Footer";
+import { DarkModeContextProvider } from "@contexts";
 
 const siteMenu: NavLink[] = [
   { url: "/", name: "home" },
@@ -27,7 +28,7 @@ const StyledMainWrapper = styled(Container, {
 const Layout: React.FC = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useDarkMode();
   return (
-    <ThemeProvider theme={theme(currentTheme)}>
+    <DarkModeContextProvider>
       <CssBaseline />
       <RefContextProvider>
         <Navbar
@@ -40,7 +41,7 @@ const Layout: React.FC = ({ children }) => {
           <Footer />
         </StyledMainWrapper>
       </RefContextProvider>
-    </ThemeProvider>
+    </DarkModeContextProvider>
   );
 };
 

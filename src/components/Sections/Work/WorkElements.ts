@@ -7,7 +7,7 @@ export const WorkSection = styled(Box, {
   width: "90%",
   margin: "0 auto",
   display: "flex",
-  paddingTop: theme.spacing(5),
+  paddingBottom: theme.spacing(5),
   flexDirection: "column",
 }));
 
@@ -16,5 +16,6 @@ export const WorkList = styled(Grid, {
 })(({ theme }) => ({
   [theme.breakpoints.down("tablet")]: {
     justifyContent: "center",
+    marginTop: theme.spacing(5),
   },
 }));

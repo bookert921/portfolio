@@ -24,7 +24,9 @@ const Input: React.FC<TextFieldProps> = (props) => {
   const theme = useTheme();
   return (
     <TextField
+      {...props}
       variant="filled"
+      color="secondary"
       size="small"
       margin="dense"
       sx={{
@@ -32,7 +34,6 @@ const Input: React.FC<TextFieldProps> = (props) => {
           color: theme.palette.secondary.main,
         },
       }}
-      {...props}
     />
   );
 };

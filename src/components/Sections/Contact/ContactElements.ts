@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const ContactSection = styled(Box, {
@@ -7,7 +7,7 @@ export const ContactSection = styled(Box, {
   width: "90%",
   margin: "0 auto",
   display: "flex",
-  paddingTop: theme.spacing(5),
+  paddingBottom: theme.spacing(5),
   flexDirection: "column",
 }));
 
@@ -20,7 +20,6 @@ export const FormWrapper = styled(Box, {
   width: "100%",
   height: "100%",
   marginTop: theme.spacing(5),
-  marginBottom: theme.spacing(5),
 }));
 
 export const Form = styled(Box, {

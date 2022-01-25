@@ -1,4 +1,5 @@
 import { Typography, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import OptimizationSVG from "@components/Hexagon/OptimizationSVG";
 import MobileSVG from "@components/Hexagon/MobileSVG";
 import PerformanceSVG from "@components/Hexagon/PerformanceSVG";
@@ -7,10 +8,16 @@ import FeatureCard from "@components/Card/Feature";
 import { AboutSection } from "./AboutElements";
 
 const AboutPage = () => {
+  const theme = useTheme();
   return (
     <AboutSection id="about" component="section">
       <Grid container spacing={2} justifyContent="center">
-        <Grid item sm={12} component="article">
+        <Grid
+          item
+          sm={12}
+          component="article"
+          sx={{ marginTop: theme.spacing(5) }}
+        >
           <Typography>
             I'm baby marfa kogi cred taxidermy banjo,
             sriracha cliche heirloom snackwave unicorn tacos
@@ -21,6 +28,13 @@ const AboutPage = () => {
             wayfarers pitchfork celiac tilde flexitarian.
           </Typography>
         </Grid>
+      </Grid>
+      <Grid
+        container
+        component="article"
+        spacing={2}
+        sx={{ marginTop: theme.spacing(5) }}
+      >
         <Grid item sx={{ minWidth: "150px" }} md={6} lg={3}>
           <FeatureCard
             title="Optimize"

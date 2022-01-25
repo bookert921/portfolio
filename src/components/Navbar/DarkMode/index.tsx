@@ -1,16 +1,17 @@
+import { DarkModeContext } from "@contexts";
 import {
   Brightness4,
   Brightness7,
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { DarkModeButtonProps } from "types/interfaces";
+import { useContext } from "react";
 
-const DarkMode: React.FC<DarkModeButtonProps> = ({
-  theme,
-  toggleTheme,
-}) => {
+const DarkMode: React.FC = () => {
+  const { theme, toggleTheme } =
+    useContext(DarkModeContext);
   const muiTheme = useTheme();
+  console.log(theme);
   const themeButton =
     theme === "light" ? (
       <Brightness4

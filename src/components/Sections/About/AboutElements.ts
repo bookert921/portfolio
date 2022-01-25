@@ -8,4 +8,6 @@ export const AboutSection = styled(Box, {
   margin: "0 auto",
   display: "flex",
   paddingTop: theme.spacing(5),
+  paddingBottom: theme.spacing(5),
+  flexDirection: "column",
 }));
