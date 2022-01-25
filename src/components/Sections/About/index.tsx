@@ -33,6 +33,7 @@ const AboutPage = () => {
         container
         component="article"
         spacing={2}
+        justifyContent="center"
         sx={{ marginTop: theme.spacing(5) }}
       >
         <Grid item sx={{ minWidth: "150px" }} md={6} lg={3}>

@@ -165,13 +165,13 @@ const DarkModeContextProvider: React.FC = ({
               color: "secondary",
             },
           },
-          // MuiInputBase: {
-          //   styleOverrides: {
-          //     input: {
-          //       color: "#FFFFFF",
-          //     },
-          //   },
-          // },
+          MuiInputBase: {
+            styleOverrides: {
+              input: {
+                color: "#FFFFFF",
+              },
+            },
+          },
         },
       }),
     [theme]
