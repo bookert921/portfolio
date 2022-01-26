@@ -3,8 +3,6 @@ import { ChangeTheme, OpenSide } from "@types";
 
 export interface NavbarProps {
   links: NavLink[];
-  theme: PaletteMode;
-  toggleTheme: ChangeTheme;
 }
 
 export interface NavLink {
@@ -26,9 +24,9 @@ export interface NavMenuProps {
   setSideOpen: OpenSide;
 }
 
-export interface DarkModeButtonProps {
-  theme?: PaletteMode;
-  toggleTheme: ChangeTheme;
+export interface DarkModeState {
+  mode: PaletteMode;
+  toggleTheme: (mode?: PaletteMode) => void;
 }
 
 export interface SidebarProps {
@@ -43,4 +41,10 @@ export interface FormHandlerState {
   name: string;
   email: string;
   message: string;
+}
+
+export interface StorageProps {
+  key: string;
+  item: any;
+  storageObject: Storage;
 }

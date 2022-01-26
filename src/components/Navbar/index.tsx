@@ -12,16 +12,12 @@ import NavLinks from "./NavLink/NavLinks";
 
 import { NavbarProps } from "types/interfaces";
 import Sidebar from "@components/Navbar/Sidebar";
-import { RefContext } from "@contexts";
+import { DarkModeContext, RefContext } from "@contexts";
 import { useFixedNav, useSidebarOpen } from "@hooks";
 
 import Helmet from "react-helmet";
 
-const Navbar: React.FC<NavbarProps> = ({
-  links,
-  theme,
-  toggleTheme,
-}) => {
+const Navbar: React.FC<NavbarProps> = ({ links }) => {
   const { refs, setRef } = useContext(RefContext);
   const fixedNav = useFixedNav(refs);
   const { show, sideOpen, setSideOpen } =
@@ -74,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({
         }}
       >
         {navigation}
-        <DarkMode theme={theme} toggleTheme={toggleTheme} />
+        <DarkMode />
       </Toolbar>
     </AppBar>
   );

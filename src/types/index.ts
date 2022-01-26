@@ -17,3 +17,9 @@ export type OpenSide = (specificValue?: boolean) => void;
 export type HandleChangeEvent = ChangeEvent<
   HTMLInputElement | HTMLTextAreaElement
 >;
+
+export type StorageReturn = [
+  any,
+  React.Dispatch<any>,
+  () => void
+];

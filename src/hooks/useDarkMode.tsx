@@ -1,32 +1,48 @@
+import { PaletteMode } from "@mui/material";
 import { ChangeTheme, DarkModeReturn } from "@types";
 import { useEffect, useState } from "react";
+import { useLocalStorage } from "./useStorage";
 
 const useDarkMode = () => {
-  const [theme, setTheme] = useState("light");
-
-  const setMode = (mode: string) => {
-    window.localStorage.setItem("theme", mode);
-    setTheme(mode);
-  };
+  const [mode, setTheme] = useState<PaletteMode>("light");
+  // Local storage takes in the default theme to start from mode.
+  const [value, setValue] = useLocalStorage("theme", mode);
 
   const toggleTheme: ChangeTheme = (value) => {
+    // Provides flexibility to provide a value for button groups.
     if (value != undefined) {
       switch (value) {
         case "light":
-          return setMode("light");
+          setValue(value);
+          return setTheme(value);
         case "dark":
-          return setMode("dark");
+          setValue(value);
+          return setTheme(value);
       }
     }
-    theme === "light" ? setMode("dark") : setMode("light");
+
+    // If mode changes, first the value is set to local storage
+    // Then the value is made a theme
+    if (mode === "light") {
+      setValue("dark");
+      setTheme("dark");
+    } else {
+      setValue("light");
+      setTheme("light");
+    }
   };
 
+  // useEffect(() => { // Caused additional rerenders.
+  //   console.log("local storage value being changed");
+  //   setValue(mode);
+  // }, [mode]);
+
+  // Used to update theme from storage value every page visit
   useEffect(() => {
-    const localTheme = window.localStorage.getItem("theme");
-    !!localTheme && setMode(localTheme);
+    value && setTheme(value);
   }, []);
 
-  return [theme, toggleTheme] as DarkModeReturn;
+  return [mode, toggleTheme] as DarkModeReturn;
 };
 
 export default useDarkMode;

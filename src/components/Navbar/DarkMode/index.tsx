@@ -8,12 +8,11 @@ import { useTheme } from "@mui/material/styles";
 import { useContext } from "react";
 
 const DarkMode: React.FC = () => {
-  const { theme, toggleTheme } =
-    useContext(DarkModeContext);
   const muiTheme = useTheme();
-  console.log(theme);
+  const { mode, toggleTheme } = useContext(DarkModeContext);
+
   const themeButton =
-    theme === "light" ? (
+    mode === "light" ? (
       <Brightness4
         color="secondary"
         sx={{ zIndex: muiTheme.zIndex.tooltip }}
@@ -24,6 +23,7 @@ const DarkMode: React.FC = () => {
         sx={{ zIndex: muiTheme.zIndex.tooltip }}
       />
     );
+
   return (
     <IconButton onClick={() => toggleTheme()}>
       {themeButton}
