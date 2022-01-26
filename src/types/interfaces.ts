@@ -26,7 +26,7 @@ export interface NavMenuProps {
 
 export interface DarkModeState {
   mode: PaletteMode;
-  toggleTheme: (mode?: PaletteMode) => void;
+  toggleTheme: ChangeTheme;
 }
 
 export interface SidebarProps {

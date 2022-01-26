@@ -2,7 +2,7 @@ import { PaletteMode } from "@mui/material";
 import { ChangeEvent } from "react";
 import { DOMRef } from "./interfaces";
 
-export type ChangeTheme = (value?: PaletteMode) => void;
+export type ChangeTheme = (mode?: PaletteMode) => void;
 
 export type DarkModeReturn = [PaletteMode, ChangeTheme];
 

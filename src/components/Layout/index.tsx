@@ -1,12 +1,10 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import Navbar from "@components/Navbar";
-import { useDarkMode } from "@hooks";
 import { NavLink } from "types/interfaces";
 import { RefContextProvider } from "@contexts";
 import Footer from "@components/Footer";
 import { DarkModeContextProvider } from "@contexts";
 import { StyledMainWrapper } from "./LayoutElements";
-import { theme } from "@styles";
 
 const siteMenu: NavLink[] = [
   { url: "/", name: "home" },

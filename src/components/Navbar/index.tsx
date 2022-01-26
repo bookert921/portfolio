@@ -12,7 +12,7 @@ import NavLinks from "./NavLink/NavLinks";
 
 import { NavbarProps } from "types/interfaces";
 import Sidebar from "@components/Navbar/Sidebar";
-import { DarkModeContext, RefContext } from "@contexts";
+import { RefContext } from "@contexts";
 import { useFixedNav, useSidebarOpen } from "@hooks";
 
 import Helmet from "react-helmet";

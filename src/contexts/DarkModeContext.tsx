@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import { PaletteMode } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@styles";
 
