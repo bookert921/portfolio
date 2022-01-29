@@ -87,6 +87,7 @@ const theme = (mode: PaletteMode): Theme =>
         styleOverrides: {
           root: {
             color: "white",
+            backgroundColor: "unset",
           },
         },
       },

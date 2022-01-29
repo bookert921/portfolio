@@ -1,16 +1,21 @@
-import { Button, useTheme } from "@mui/material";
+import {
+  Button,
+  useTheme,
+  Snackbar,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import {
   ContactSection,
   FormWrapper,
   Input,
 } from "./ContactElements";
-import emailjs, { init } from "@emailjs/browser";
-init(process.env.EMAILJS_ID as string);
 import ContactText from "./ContactText";
 import { useForm } from "@hooks";
-import React from "react";
+import React, { useState } from "react";
 import { Validations } from "hooks/useForm";
-import {} from "@emailjs/browser";
+import { Close as CloseIcon } from "@mui/icons-material";
+import emailjs from "@emailjs/browser";
 
 interface FormState {
   name: string;
@@ -58,31 +63,69 @@ const Contact = () => {
     errors,
     handleChange,
     handleSubmit,
+    messageSent,
+    setData,
+    setMessageSent,
   } = useForm<FormState>({
     validations: validation,
     initialValues: initialState,
     onSubmit: async () => {
-      const messageFromViewer = {
-        email: email,
+      const data = {
         name: name,
         message: message,
-        subject: message.slice(0, 10),
+        email: email,
+        subject: message,
       };
       try {
-        await emailjs.send(
+        emailjs.init(process.env.EMAILJS_ID as string);
+        const response = await emailjs.send(
           process.env.EMAILJS_SERVICE as string,
           process.env.EMAILJS_TEMPLATE as string,
-          messageFromViewer
+          data
         );
+        setData({
+          email: "",
+          message: "",
+          name: "",
+        });
+        !!response && setMessageSent(true);
       } catch (error) {
         let errMsg = "";
         if (error instanceof Error) {
           errMsg = error.message;
         }
         console.log(errMsg);
+        return {
+          message: "There was an error",
+          error: errMsg,
+        };
       }
     },
   });
+
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setMessageSent(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <ContactSection id="contact">
@@ -100,8 +143,6 @@ const Contact = () => {
             minWidth: "300px",
             width: "100%",
           }}
-          method="POST"
-          action="/api/email"
           onSubmit={handleSubmit}
         >
           <Input
@@ -109,7 +150,7 @@ const Contact = () => {
             type="text"
             name="name"
             value={name}
-            helperText={errors.name ? errors.name : ""}
+            helperText={errors.name}
             onChange={handleChange}
           />
           <Input
@@ -135,6 +176,20 @@ const Contact = () => {
           </Button>
         </form>
       </FormWrapper>
+      <Snackbar
+        sx={{
+          ".MuiPaper-root": {
+            minWidth: "100px",
+            backgroundColor: "secondary.main",
+            color: "primary.contrastText",
+          },
+        }}
+        open={messageSent}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="Thank for your for message"
+        action={action}
+      />
     </ContactSection>
   );
 };

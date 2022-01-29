@@ -36,6 +36,7 @@ export const useForm = <
     (options?.initialValues || {}) as T
   );
   const [errors, setErrors] = useState<ErrorRecord<T>>({});
+  const [messageSent, setMessageSent] = useState(false);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -105,8 +106,6 @@ export const useForm = <
 
     if (options?.onSubmit) {
       options.onSubmit();
-    } else {
-      return;
     }
   };
 
@@ -114,6 +113,9 @@ export const useForm = <
     data,
     handleChange,
     handleSubmit,
+    setData,
+    setMessageSent,
+    messageSent,
     errors,
   };
 };
