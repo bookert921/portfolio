@@ -83,6 +83,13 @@ const theme = (mode: PaletteMode): Theme =>
       },
     },
     components: {
+      MuiInputBase: {
+        styleOverrides: {
+          root: {
+            color: "white",
+          },
+        },
+      },
       MuiPaper: {
         styleOverrides: {
           root: {

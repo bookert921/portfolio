@@ -1,9 +1,9 @@
-import { DOMRefReturn } from "@types";
 import { useCallback, useState } from "react";
-import { DOMRef } from "types/interfaces";
 
-const useDOMRef = () => {
-  const [DOMRef, setDOMRef] = useState<DOMRef<any>>({});
+const useDOMRef = <
+  T extends Record<keyof T, HTMLElement>
+>() => {
+  const [DOMRef, setDOMRef] = useState<T>({} as T);
   const setRef = useCallback((node) => {
     if (node != null) {
       setDOMRef((prevDOMRefs) => ({
@@ -13,7 +13,7 @@ const useDOMRef = () => {
     }
   }, []);
 
-  return [DOMRef, setRef] as DOMRefReturn;
+  return [DOMRef, setRef] as const;
 };
 
 export default useDOMRef;

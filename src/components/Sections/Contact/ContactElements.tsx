@@ -1,5 +1,9 @@
-import { Box } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import {
+  Box,
+  TextFieldProps,
+  TextField,
+} from "@mui/material";
+import { styled, useTheme } from "@mui/material/styles";
 
 export const ContactSection = styled(Box, {
   name: "ContactSection",
@@ -35,3 +39,21 @@ export const Form = styled(Box, {
   minWidth: "300px",
   width: "100%",
 }));
+
+export const Input: React.FC<TextFieldProps> = (props) => {
+  const theme = useTheme();
+  return (
+    <TextField
+      variant="filled"
+      color="secondary"
+      size="small"
+      margin="dense"
+      sx={{
+        ".MuiInputLabel-shrink": {
+          color: theme.palette.secondary.main,
+        },
+      }}
+      {...props}
+    />
+  );
+};
