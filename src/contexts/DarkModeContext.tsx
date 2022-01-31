@@ -3,25 +3,23 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@styles";
 
 import { useDarkMode } from "@hooks";
-import { DarkModeState } from "types/interfaces";
+import { PaletteMode } from "@mui/material";
 
-const initialState: DarkModeState = {
+const initialState: {
+  mode: PaletteMode;
+  toggleTheme: () => void;
+} = {
   mode: "light",
   toggleTheme: () => {},
 };
 
-export const DarkModeContext =
-  createContext<DarkModeState>(initialState);
+export const DarkModeContext = createContext(initialState);
 
-const DarkModeContextProvider: React.FC = ({
-  children,
-}) => {
-  const [mode, toggleTheme] = useDarkMode();
+const DarkModeContextProvider: React.FC = ({ children }) => {
+  const { mode, toggleTheme } = useDarkMode();
   return (
     <DarkModeContext.Provider value={{ mode, toggleTheme }}>
-      <ThemeProvider theme={theme(mode)}>
-        {children}
-      </ThemeProvider>
+      <ThemeProvider theme={theme(mode)}>{children}</ThemeProvider>
     </DarkModeContext.Provider>
   );
 };

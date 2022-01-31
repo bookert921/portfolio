@@ -1,8 +1,10 @@
 import { ChangeEvent } from "react";
 import { useForm } from "@hooks";
 import { renderHook } from "@testing-library/react-hooks";
-import { act } from "react-dom/test-utils";
+// import { act } from "react-dom/test-utils";
+import TestRenderer from "react-test-renderer";
 
+const { act } = TestRenderer;
 interface TestData {
   name: string;
   bool: boolean;
@@ -12,10 +14,7 @@ interface TestData {
 describe("useForm", () => {
   // Creates a fake change event that takes in values to be passed as "target"
   // The function returns a preventDefault mock, and the target
-  const getFakeTestEvent = (
-    name: any = "",
-    value: any = ""
-  ) =>
+  const getFakeTestEvent = (name: any = "", value: any = "") =>
     ({
       preventDefault: jest.fn(),
       target: { name, value },
@@ -29,15 +28,11 @@ describe("useForm", () => {
 
   describe("data can be updated", () => {
     it("should update the data", () => {
-      const { result } = renderHook(() =>
-        useForm<TestData>()
-      );
+      const { result } = renderHook(() => useForm<TestData>());
       // Because there is no initial data being passed it should be undefined
       expect(result.current.data.name).toBeUndefined();
       act(() => {
-        result.current.handleChange(
-          getFakeTestEvent("name", "test")
-        );
+        result.current.handleChange(getFakeTestEvent("name", "test"));
       });
 
       // Name get's transformed to uppercase and therefore Test is expected from test

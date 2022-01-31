@@ -1,8 +1,34 @@
 import { PaletteMode } from "@mui/material";
-import { ChangeTheme, DarkModeReturn } from "@types";
-import { useEffect, useState } from "react";
+import { DarkModeReturn } from "index";
+import { useEffect } from "react";
 import { useLocalStorage } from "./useStorage";
+import useToggle from "./useToggle";
 
+const useDarkMode = () => {
+  const { value: mode, toggleValue: toggleTheme } = useToggle({
+    initialValue: "light",
+    alternateValue: "dark",
+  });
+  const { value, setValue } = useLocalStorage("theme", mode);
+
+  const updateStorage = (theme: PaletteMode) => {
+    setValue(theme);
+  };
+
+  useEffect(() => {
+    updateStorage(mode as PaletteMode);
+  }, [mode]);
+
+  useEffect(() => {
+    value && toggleTheme(value);
+  }, []);
+
+  return { mode, toggleTheme } as DarkModeReturn;
+};
+
+export default useDarkMode;
+
+/*
 const useDarkMode = () => {
   const [mode, setTheme] = useState<PaletteMode>("light");
   // Local storage takes in the default theme to start from mode.
@@ -46,3 +72,4 @@ const useDarkMode = () => {
 };
 
 export default useDarkMode;
+ */

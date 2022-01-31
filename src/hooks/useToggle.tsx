@@ -1,6 +1,5 @@
+import { ToggleReturn, ToggleValue } from "index";
 import { useState } from "react";
-
-type ToggleValue = boolean | string;
 
 const useToggle = (options?: {
   initialValue?: ToggleValue;
@@ -27,22 +26,29 @@ const useToggle = (options?: {
 
       if (options) {
         const { initialValue, alternateValue } = options;
-        const isBoolean = typeof initialValue !== "boolean";
-        if (initialValue && isBoolean && !alternateValue) {
+        const isBoolean = typeof initialValue === "boolean";
+        if (initialValue && !isBoolean && !alternateValue) {
           throw new Error(
             "An alternate value must be provided to toggle non-boolean values"
           );
-        } else if (initialValue && alternateValue) {
+        } else if (initialValue != undefined && alternateValue != undefined) {
+          if (
+            typeof prevValue === "string" &&
+            typeof initialValue === "string" &&
+            typeof alternateValue === "string"
+          ) {
+            return prevValue === initialValue ? alternateValue : initialValue;
+          }
           return prevValue === initialValue ? alternateValue : initialValue;
         }
       }
 
       // Otherwise, the default behavior toggles a boolean
-      return !prevValue;
+      return !prevValue as boolean;
     });
   };
 
-  return { value, toggleValue };
+  return { value, toggleValue } as ToggleReturn<ToggleValue>;
 };
 
 export default useToggle;

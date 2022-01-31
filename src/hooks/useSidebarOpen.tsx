@@ -5,7 +5,7 @@ import useOnWidthResize from "./useOnWidthResize";
 import useToggle from "./useToggle";
 
 const useSidebarOpen = (refs: DOMRef<any>) => {
-  const [sideOpen, setSideOpen] = useToggle();
+  const { value: sideOpen, toggleValue: setSideOpen } = useToggle();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -18,24 +18,20 @@ const useSidebarOpen = (refs: DOMRef<any>) => {
 
   useOnWidthResize(() => setSideOpen(false));
 
-  useOnClickOutside(refs.navbarEl, () =>
-    setSideOpen(false)
-  );
+  useOnClickOutside(refs.navbarEl, () => setSideOpen(false));
 
+  // Scrolls to nearest section to ensure full menu
+  // is visible when halfway between landing and about section.
   useEffect(() => {
     if (sideOpen) {
       const el = document.getElementById("about");
       if (
         el &&
         window.scrollY > window.innerHeight * 0.5 &&
-        window.scrollY <
-          window.innerHeight + window.innerHeight * 0.1
+        window.scrollY < window.innerHeight * 2 * 0.1
       ) {
         el.scrollIntoView();
-      } else if (
-        window.scrollY <=
-        window.innerHeight * 0.5
-      ) {
+      } else if (window.scrollY <= window.innerHeight * 0.5) {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
       }

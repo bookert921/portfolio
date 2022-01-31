@@ -6,8 +6,6 @@ export type ChangeTheme = (mode?: PaletteMode) => void;
 
 export type DarkModeReturn = [PaletteMode, ChangeTheme];
 
-export type ToggleReturn = [boolean, OpenSide];
-
 export type SetRef = (node?: any) => void;
 
 export type DOMRefReturn = [DOMRef<any>, SetRef];
@@ -18,8 +16,6 @@ export type HandleChangeEvent = ChangeEvent<
   HTMLInputElement | HTMLTextAreaElement
 >;
 
-export type StorageReturn = [
-  any,
-  React.Dispatch<any>,
-  () => void
-];
+export type StorageReturn = [any, React.Dispatch<any>, () => void];
+
+// -------------------------------------------------------------------------------
