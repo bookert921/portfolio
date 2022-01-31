@@ -1,37 +1,26 @@
 // Modified from https://github.com/fgerschau/react-custom-form-validation-example/blob/master/src/useForm.ts
-
 import { ChangeEvent, FormEvent, useState } from "react";
+import { ErrorRecord, FormOptions } from "types/interfaces";
 
-export interface Validation {
-  required?: {
-    value: boolean;
-    message: string;
-  };
-  pattern?: {
-    value: string;
-    message: string;
-  };
-  custom?: {
-    isValid: (value: string) => boolean;
-    message: string;
-  };
-}
+/**
+ * Usage:
+ * const {data, handleChange, handleSubmit, errors, ...otherValues} = useForm({
+ *  // Takes form name/id as key and associates a Validation object
+ *  validation: {
+ *    name: Validation,
+ *    email: Validation
+ *  },
+ *  initialValues: {
+ *    name: string
+ *  },
+ *  onSubmit: () => {},
+ * })
+ *
+ */
 
-export type ErrorRecord<T> = Partial<
-  Record<keyof T, string>
->;
-
-export type Validations<T extends {}> = Partial<
-  Record<keyof T, Validation>
->;
-
-export const useForm = <
-  T extends Record<keyof T, any> = {}
->(options?: {
-  validations?: Validations<T>;
-  initialValues?: Partial<T>;
-  onSubmit?: () => void;
-}) => {
+const useForm = <T extends Record<keyof T, any> = {}>(
+  options?: FormOptions<T>
+) => {
   const [data, setData] = useState<T>(
     (options?.initialValues || {}) as T
   );
@@ -102,10 +91,9 @@ export const useForm = <
       }
     }
 
-    setErrors({});
-
     if (options?.onSubmit) {
       options.onSubmit();
+      setErrors({});
     }
   };
 

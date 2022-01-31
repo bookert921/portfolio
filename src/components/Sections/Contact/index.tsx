@@ -1,9 +1,9 @@
+import React from "react";
 import {
   Button,
   useTheme,
   Snackbar,
   IconButton,
-  Typography,
 } from "@mui/material";
 import {
   ContactSection,
@@ -12,10 +12,9 @@ import {
 } from "./ContactElements";
 import ContactText from "./ContactText";
 import { useForm } from "@hooks";
-import React, { useState } from "react";
-import { Validations } from "hooks/useForm";
 import { Close as CloseIcon } from "@mui/icons-material";
 import emailjs from "@emailjs/browser";
+import { Validations } from "types/interfaces";
 
 interface FormState {
   name: string;
@@ -104,7 +103,7 @@ const Contact = () => {
   });
 
   const handleClose = (
-    event: React.SyntheticEvent | Event,
+    _event: React.SyntheticEvent | Event,
     reason?: string
   ) => {
     if (reason === "clickaway") {

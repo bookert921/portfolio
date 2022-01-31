@@ -48,3 +48,33 @@ export interface StorageProps {
   item: any;
   storageObject: Storage;
 }
+
+export interface Validation {
+  required?: {
+    value: boolean;
+    message: string;
+  };
+  pattern?: {
+    value: string;
+    message: string;
+  };
+  custom?: {
+    isValid: (value: string) => boolean;
+    message: string;
+  };
+}
+
+export type ErrorRecord<T> = Partial<
+  Record<keyof T, string>
+>;
+
+// Partial used to make all properties optional for more flexible usage
+export type Validations<T extends {}> = Partial<
+  Record<keyof T, Validation>
+>;
+
+export interface FormOptions<T> {
+  validations?: Validations<T>;
+  initialValues?: Partial<T>;
+  onSubmit?: () => void;
+}
