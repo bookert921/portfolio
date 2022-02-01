@@ -1,4 +1,5 @@
 import { NavLink } from "types/interfaces";
+import ResumeButton from "../ResumeButton";
 import {
   LinksWrapper,
   NavList,
@@ -22,26 +23,26 @@ const NavLinks: React.FC<{
     return "";
   };
 
-  const links = (children as NavLink[]).map(
-    (link, index) => {
-      const { url, name } = link;
-      return (
-        <NavListElement key={index}>
-          <StyledLink
-            to={url}
-            className={isBrowser ? showActive(url) : ""}
-            onClick={onClickCloseSide}
-          >
-            {name.slice(0, 1).toUpperCase() + name.slice(1)}
-          </StyledLink>
-        </NavListElement>
-      );
-    }
-  );
+  const links = (children as NavLink[]).map((link, index) => {
+    const { url, name } = link;
+    return (
+      <NavListElement key={index}>
+        <StyledLink
+          to={url}
+          className={isBrowser ? showActive(url) : ""}
+          onClick={onClickCloseSide}
+        >
+          {name.slice(0, 1).toUpperCase() + name.slice(1)}
+        </StyledLink>
+      </NavListElement>
+    );
+  });
 
   return (
     <LinksWrapper>
-      <NavList>{links}</NavList>
+      <NavList>
+        {links} <ResumeButton url="/resume.pdf" />
+      </NavList>
     </LinksWrapper>
   );
 };

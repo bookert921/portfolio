@@ -12,8 +12,6 @@ declare module "@mui/material/styles" {
   }
 }
 
-type ToggleValue<T> = T | boolean;
-
 type ToggleOptions<T> = {
   initialValue?: T;
   alternateValue?: T;
@@ -55,4 +53,11 @@ interface FormState {
   name: string;
   email: string;
   message: string;
+}
+
+interface SEOProps {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: string;
 }

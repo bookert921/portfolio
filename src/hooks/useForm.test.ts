@@ -12,6 +12,7 @@ interface TestData {
 }
 
 const onSubmit = jest.fn();
+jest.mock("@emailjs/browser");
 // Creates a fake change event that takes in values to be passed as "target"
 // The function returns a preventDefault mock, and the target
 const getFakeTestEvent = (name: any = "", value: any = "") =>
@@ -277,23 +278,15 @@ describe("useForm", () => {
               },
             },
           },
-          onSubmit,
+          onSubmit: () => {
+            act(() => result.current.setMessageSent(true));
+          },
         })
       );
       act(() =>
         result.current.handleChange(getFakeTestEvent("name", "Booker T"))
       );
       await act(() => result.current.handleSubmit(getFakeTestEvent()));
-      // on success
-      expect(onSubmit).toHaveBeenCalledTimes(1);
-      act(() => result.current.setMessageSent(true));
-      expect(result.current.messageSent).toBeTruthy();
-
-      onSubmit.mockReset();
-
-      act(() => result.current.handleChange(getFakeTestEvent("name")));
-      await act(() => result.current.handleSubmit(getFakeTestEvent()));
-      expect(onSubmit).toHaveBeenCalledTimes(0);
       expect(result.current.messageSent).toBeTruthy();
     });
   });

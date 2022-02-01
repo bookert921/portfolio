@@ -7,7 +7,7 @@ import { PaletteMode } from "@mui/material";
 
 const initialState: {
   mode: PaletteMode;
-  toggleTheme: () => void;
+  toggleTheme: (specificValue?: PaletteMode | undefined) => void;
 } = {
   mode: "light",
   toggleTheme: () => {},
@@ -19,7 +19,9 @@ const DarkModeContextProvider: React.FC = ({ children }) => {
   const { mode, toggleTheme } = useDarkMode();
   return (
     <DarkModeContext.Provider value={{ mode, toggleTheme }}>
-      <ThemeProvider theme={theme(mode)}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme(mode as PaletteMode)}>
+        {children}
+      </ThemeProvider>
     </DarkModeContext.Provider>
   );
 };

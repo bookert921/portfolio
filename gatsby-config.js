@@ -2,12 +2,15 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+// TODO: Add keywords
 module.exports = {
   siteMetadata: {
     title: "Booker T Showers III",
-    siteUrl: "https://booker-showers.dev",
+    url: "https://booker-showers.dev",
+    image: "/dark-mode-desktop.jpg",
     github: "https://github.com/bookert921",
     linkedin: "https://linkedin.com/in/bookert921",
+    twitterUsername: "@BookerT921",
     description:
       "Software Engineer specialized in building mobile-first, elegant, performant, scalable, and secure software solutions with TypeScript",
   },

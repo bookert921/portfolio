@@ -3,6 +3,8 @@ import workHistory from "@assets/documents/data/work-history.json";
 import WorkCard from "@components/Card/WorkCard";
 import WorkText from "./WorkText";
 import { WorkList, WorkSection } from "./WorkElements";
+import SEO from "@components/SEO";
+import React from "react";
 
 const Work: React.FC = () => {
   const workCards = workHistory.map((job, index) => {

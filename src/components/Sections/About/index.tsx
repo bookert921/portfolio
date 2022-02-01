@@ -1,4 +1,4 @@
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import OptimizationSVG from "@components/Hexagon/OptimizationSVG";
 import MobileSVG from "@components/Hexagon/MobileSVG";
@@ -6,6 +6,7 @@ import PerformanceSVG from "@components/Hexagon/PerformanceSVG";
 import SecureSVG from "@components/Hexagon/SecureSVG";
 import FeatureCard from "@components/Card/Feature";
 import { AboutSection } from "./AboutElements";
+import { StaticImage } from "gatsby-plugin-image";
 
 const AboutPage = () => {
   const theme = useTheme();
@@ -16,16 +17,21 @@ const AboutPage = () => {
           item
           sm={12}
           component="article"
-          sx={{ marginTop: theme.spacing(5) }}
+          sx={{
+            marginTop: theme.spacing(5),
+            display: "flex",
+            gap: "0.5em",
+            flexDirection: "column",
+          }}
         >
           <Typography>
-            I'm baby marfa kogi cred taxidermy banjo,
-            sriracha cliche heirloom snackwave unicorn tacos
-            iPhone +1 squid. Try-hard pork belly migas af
-            actually bitters. Copper mug etsy semiotics
-            coloring book shoreditch tilde. Sustainable
-            unicorn keytar hella authentic sriracha
-            wayfarers pitchfork celiac tilde flexitarian.
+            I am a Software Engineer (SWE) with experience in both Frontend and
+            Backend development.
+          </Typography>
+          <Typography>
+            I come from a software testing background and my approach is always
+            Mobile-First and Test Driven. This ensures quality, responsive
+            designs across most devices and a reliable user experience.
           </Typography>
         </Grid>
       </Grid>
@@ -39,7 +45,7 @@ const AboutPage = () => {
         <Grid item sx={{ minWidth: "150px" }} md={6} lg={3}>
           <FeatureCard
             title="Optimize"
-            text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
+            text="Continually enhanced web products through research, testing, and strategic design"
           >
             <OptimizationSVG />
           </FeatureCard>
@@ -47,7 +53,7 @@ const AboutPage = () => {
         <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
           <FeatureCard
             title="Secure"
-            text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
+            text="Trust that your data is secure from attackers and fault tolerant against natural disasters"
           >
             <SecureSVG />
           </FeatureCard>
@@ -55,7 +61,7 @@ const AboutPage = () => {
         <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
           <FeatureCard
             title="Perform"
-            text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
+            text="Blazing fast performance utilizing the latest and greatest technologies like GatsbyJS for SSG/SSR to push your product forward and make sure you never get left behind"
           >
             <PerformanceSVG />
           </FeatureCard>
@@ -63,7 +69,7 @@ const AboutPage = () => {
         <Grid item sx={{ minWidth: "150px" }} sm={6} lg={3}>
           <FeatureCard
             title="Reach"
-            text="Secure marfa kogi cred taxidermy banjo, sriracha cliche."
+            text="High availability through cloud-based architecture and resources like Google Cloud Platform or Amazon Web Services"
           >
             <MobileSVG />
           </FeatureCard>

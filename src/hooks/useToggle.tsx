@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { ToggleOptions, ToggleValue } from "index";
+import { ToggleOptions } from "index";
 
 /**
  * Toggles a boolean value by default if no initial/alternate value is given
  */
 function useToggle<T>(options?: ToggleOptions<T>) {
-  const [value, setValue] = useState<ToggleValue<T>>(() => {
+  const [value, setValue] = useState<T | boolean>(() => {
     if (options) {
       const { initialValue } = options;
       if (initialValue != undefined) return initialValue;
@@ -14,7 +14,7 @@ function useToggle<T>(options?: ToggleOptions<T>) {
   });
 
   const toggleValue = (specificValue?: T) => {
-    setValue((prevValue: ToggleValue<T>) => {
+    setValue((prevValue: T | boolean) => {
       /**
        *  If we want to return a specific value, we don't care about anything else.
        * Just return the specific value.

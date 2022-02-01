@@ -18,15 +18,18 @@ const useDarkMode = () => {
 
   // Use to listen for each update of mode
   useEffect(() => {
-    updateStorage(mode);
+    updateStorage(mode as PaletteMode);
   }, [mode]);
 
   // Pulls value from local storage when user accesses site
   useEffect(() => {
-    value && toggleTheme(value);
+    value != undefined && toggleTheme(value as PaletteMode);
   }, []);
 
-  return { mode, toggleTheme };
+  return { mode, toggleTheme } as {
+    mode: PaletteMode;
+    toggleTheme: (specificValue?: PaletteMode | undefined) => void;
+  };
 };
 
 export default useDarkMode;
