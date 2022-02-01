@@ -15,10 +15,12 @@ module.exports = {
       "Software Engineer specialized in building mobile-first, elegant, performant, scalable, and secure software solutions with TypeScript",
   },
   plugins: [
+    "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "gatsby-plugin-offline",
     "gatsby-plugin-styled-components",
     {
       resolve: "gatsby-plugin-alias-imports",
