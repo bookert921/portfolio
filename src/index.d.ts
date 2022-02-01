@@ -12,23 +12,47 @@ declare module "@mui/material/styles" {
   }
 }
 
-type ToggleValue = boolean | string;
+type ToggleValue<T> = T | boolean;
 
-// type ToggleOptions<T> = {
-//   initialValue?: ToggleValue | T;
-//   alternateValue?: ToggleValue | T;
-// };
+type ToggleOptions<T> = {
+  initialValue?: T;
+  alternateValue?: T;
+};
 
-// interface ToggleReturn<T> {
-//   value: ToggleValue | T;
-//   toggleValue: (specificValue?: ToggleValue | T | undefined) => void;
-// }
-interface ToggleReturn<T> {
-  value: T;
-  toggleValue: (specificValue?: T | undefined) => void;
+interface StorageProps<T> {
+  key: string;
+  item: T;
+  storageObject: Storage;
 }
 
-interface DarkModeReturn {
-  mode: PaletteMode;
-  toggleTheme: (specificValue?: PaletteMode | undefined) => void;
+interface Validation {
+  required?: {
+    value: boolean;
+    message: string;
+  };
+  pattern?: {
+    value: string;
+    message: string;
+  };
+  custom?: {
+    isValid: (value: string) => boolean;
+    message: string;
+  };
+}
+
+// Partial used to make all properties optional for more flexible usage
+type ErrorRecord<T> = Partial<Record<keyof T, string>>;
+
+type Validations<T extends {}> = Partial<Record<keyof T, Validation>>;
+
+interface FormOptions<T> {
+  validations?: Validations<T>;
+  initialValues?: Partial<T>;
+  onSubmit?: () => void;
+}
+
+interface FormState {
+  name: string;
+  email: string;
+  message: string;
 }

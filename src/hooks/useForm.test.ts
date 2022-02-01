@@ -11,19 +11,51 @@ interface TestData {
   num: number;
 }
 
-describe("useForm", () => {
-  // Creates a fake change event that takes in values to be passed as "target"
-  // The function returns a preventDefault mock, and the target
-  const getFakeTestEvent = (name: any = "", value: any = "") =>
-    ({
-      preventDefault: jest.fn(),
-      target: { name, value },
-    } as unknown as ChangeEvent<any>);
+const onSubmit = jest.fn();
+// Creates a fake change event that takes in values to be passed as "target"
+// The function returns a preventDefault mock, and the target
+const getFakeTestEvent = (name: any = "", value: any = "") =>
+  ({
+    preventDefault: jest.fn(),
+    target: { name, value },
+  } as unknown as ChangeEvent<any>);
 
-  describe("smoke test", () => {
+describe("useForm", () => {
+  describe("sanity check", () => {
     it("should be a function", () => {
       expect(typeof useForm).toBe("function");
     });
+    it("should return a 4 update function, 2 objects, and a boolean", () => {
+      const { result } = renderHook(() => useForm());
+
+      expect(result.current.messageSent).toBe(false);
+      expect(typeof result.current.errors).toBe("object");
+      expect(typeof result.current.data).toBe("object");
+      expect(typeof result.current.handleChange).toBe("function");
+      expect(typeof result.current.handleSubmit).toBe("function");
+      expect(typeof result.current.setData).toBe("function");
+      expect(typeof result.current.setMessageSent).toBe("function");
+    });
+  });
+
+  describe("initialization", () => {
+    it("should initialize data", () => {
+      const { result } = renderHook(() =>
+        useForm<TestData>({
+          initialValues: {
+            name: "John",
+          },
+        })
+      );
+
+      expect(result.current.data.name).toBe("John");
+      expect(result.current.data.bool).toBeUndefined();
+      expect(result.current.data.num).toBeUndefined();
+    });
+  });
+
+  beforeEach(() => {
+    onSubmit.mockReset();
   });
 
   describe("data can be updated", () => {
@@ -40,232 +72,229 @@ describe("useForm", () => {
       expect(result.current.data.bool).toBeUndefined();
       expect(result.current.data.num).toBeUndefined();
     });
+  });
 
-    it("should initialize data", () => {
+  describe("validation", () => {
+    it("should call the onSubmit callback when there are no errors", () => {
       const { result } = renderHook(() =>
         useForm<TestData>({
-          initialValues: {
-            name: "John",
+          onSubmit,
+        })
+      );
+      act(() => {
+        result.current.handleSubmit(getFakeTestEvent());
+      });
+
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+    });
+
+    it("should validate required values", () => {
+      const requiredMessage = "This field is required";
+      const { result } = renderHook(() =>
+        useForm<TestData>({
+          validations: {
+            name: {
+              required: {
+                value: true,
+                message: requiredMessage,
+              },
+            },
           },
+          onSubmit,
         })
       );
 
-      expect(result.current.data.name).toBe("John");
-      expect(result.current.data.bool).toBeUndefined();
-      expect(result.current.data.num).toBeUndefined();
+      act(() => {
+        result.current.handleSubmit(getFakeTestEvent());
+      });
+
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(result.current.errors.name).toBe(requiredMessage);
+    });
+
+    it("should validate patterns", () => {
+      const validationMessage = "This field isn't formatted correctly.";
+
+      const { result } = renderHook(() =>
+        useForm<TestData>({
+          validations: {
+            name: {
+              pattern: {
+                value: "/[A-Za-z]*/",
+                message: validationMessage,
+              },
+            },
+          },
+          onSubmit,
+        })
+      );
+
+      act(() => {
+        result.current.handleChange(getFakeTestEvent("name", "Felix123"));
+      });
+
+      act(() => {
+        result.current.handleSubmit(getFakeTestEvent());
+      });
+
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(result.current.errors.name).toBe(validationMessage);
+    });
+
+    it("should validate custom validations", () => {
+      const validationMessage = "The minimum length is 7 characters.";
+      const { result } = renderHook(() =>
+        useForm<TestData>({
+          validations: {
+            name: {
+              custom: {
+                isValid: (value) => value?.length > 6,
+                message: validationMessage,
+              },
+            },
+          },
+          onSubmit,
+        })
+      );
+
+      // Name is long enough
+      act(() => {
+        result.current.handleChange(
+          getFakeTestEvent("name", "Michael Jackson")
+        );
+      });
+
+      act(() => {
+        result.current.handleSubmit(getFakeTestEvent());
+      });
+
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(result.current.errors.name).toBeUndefined();
+
+      // Name is too short
+      onSubmit.mockReset();
+      act(() => {
+        result.current.handleChange(getFakeTestEvent("name", "rob"));
+      });
+
+      act(() => {
+        result.current.handleSubmit(getFakeTestEvent());
+      });
+
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(result.current.errors.name).toBe(validationMessage);
+    });
+
+    it("should validate multiple validations", () => {
+      const validationMessage = "This field isn't formatted correctly.";
+      const { result } = renderHook(() =>
+        useForm<TestData>({
+          validations: {
+            name: {
+              pattern: {
+                value: "/[A-Za-z]*/",
+                message: validationMessage,
+              },
+              custom: {
+                isValid: (value) => value?.length > 6,
+                message: validationMessage,
+              },
+            },
+          },
+          onSubmit,
+        })
+      );
+
+      // Name is too short and contains numbers
+      act(() => {
+        result.current.handleChange(getFakeTestEvent("name", "123"));
+      });
+
+      act(() => {
+        result.current.handleSubmit(getFakeTestEvent());
+      });
+
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+    });
+
+    it("should reset errors on submit", () => {
+      const validationMessage = "The minimum length is 7 characters.";
+      const { result } = renderHook(() =>
+        useForm<TestData>({
+          validations: {
+            name: {
+              custom: {
+                isValid: (value) => value?.length > 6,
+                message: validationMessage,
+              },
+            },
+          },
+          onSubmit,
+        })
+      );
+
+      // Name is too short
+      onSubmit.mockReset();
+      act(() => {
+        result.current.handleChange(getFakeTestEvent("name", "123"));
+      });
+
+      act(() => {
+        result.current.handleSubmit(getFakeTestEvent());
+      });
+
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(result.current.errors.name).toBe(validationMessage);
+
+      // Name is long enough
+      act(() => {
+        result.current.handleChange(getFakeTestEvent("name", "Felix Fex"));
+      });
+
+      act(() => {
+        result.current.handleSubmit(getFakeTestEvent());
+      });
+
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(result.current.errors.name).toBeUndefined();
     });
   });
 
-  // describe("validation", () => {
-  //   it("should call the onSubmit callback when there are no errors", () => {
-  //     const onSubmit = jest.fn();
-  //     const { result } = renderHook(() =>
-  //       useForm<TestData>({
-  //         onSubmit,
-  //       })
-  //     );
-  //     act(() => {
-  //       result.current.handleSubmit(getFakeTestEvent());
-  //     });
+  describe("success", () => {
+    it("should alert user of success", async () => {
+      const { result } = renderHook(() =>
+        useForm({
+          validations: {
+            name: {
+              pattern: {
+                value: "^([A-Z][a-z]+([ ]?[a-z]?['-]?[A-Z]+|[a-z]+)*)$",
+                message:
+                  "A name can include up to 40 uppercase or lowercase character and special characters common to names.",
+              },
+              required: {
+                value: true,
+                message: "Name is required to submit form.",
+              },
+            },
+          },
+          onSubmit,
+        })
+      );
+      act(() =>
+        result.current.handleChange(getFakeTestEvent("name", "Booker T"))
+      );
+      await act(() => result.current.handleSubmit(getFakeTestEvent()));
+      // on success
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      act(() => result.current.setMessageSent(true));
+      expect(result.current.messageSent).toBeTruthy();
 
-  //     expect(onSubmit).toHaveBeenCalledTimes(1);
-  //   });
+      onSubmit.mockReset();
 
-  //   it("should validate required values", () => {
-  //     const requiredMessage = "This field is required";
-  //     const onSubmit = jest.fn();
-  //     const { result } = renderHook(() =>
-  //       useForm<TestData>({
-  //         validations: {
-  //           name: {
-  //             required: {
-  //               value: true,
-  //               message: requiredMessage,
-  //             },
-  //           },
-  //         },
-  //         onSubmit,
-  //       })
-  //     );
-
-  //     act(() => {
-  //       result.current.handleSubmit(getFakeTestEvent());
-  //     });
-
-  //     expect(onSubmit).toHaveBeenCalledTimes(0);
-  //     expect(result.current.errors.name).toBe(
-  //       requiredMessage
-  //     );
-  //   });
-
-  //   it("should validate patterns", () => {
-  //     const validationMessage =
-  //       "This field isn't formatted correctly.";
-  //     const onSubmit = jest.fn();
-  //     const { result } = renderHook(() =>
-  //       useForm<TestData>({
-  //         validations: {
-  //           name: {
-  //             pattern: {
-  //               value: "/[A-Za-z]*/",
-  //               message: validationMessage,
-  //             },
-  //           },
-  //         },
-  //         onSubmit,
-  //       })
-  //     );
-
-  //     act(() => {
-  //       result.current.handleChange(
-  //         getFakeTestEvent("Felix123")
-  //       );
-  //     });
-
-  //     act(() => {
-  //       result.current.handleSubmit(getFakeTestEvent());
-  //     });
-
-  //     expect(onSubmit).toHaveBeenCalledTimes(0);
-  //     expect(result.current.errors.name).toBe(
-  //       validationMessage
-  //     );
-  //   });
-
-  //   it("should validate custom validations", () => {
-  //     const validationMessage =
-  //       "The minimum length is 7 characters.";
-  //     const onSubmit = jest.fn();
-  //     const { result } = renderHook(() =>
-  //       useForm<TestData>({
-  //         validations: {
-  //           name: {
-  //             custom: {
-  //               isValid: (value) => value?.length > 6,
-  //               message: validationMessage,
-  //             },
-  //           },
-  //         },
-  //         onSubmit,
-  //       })
-  //     );
-
-  //     // Name is long enough
-  //     act(() => {
-  //       result.current.handleChange(
-  //         getFakeTestEvent("Felix123")
-  //       );
-  //     });
-
-  //     act(() => {
-  //       result.current.handleSubmit(getFakeTestEvent());
-  //     });
-
-  //     expect(onSubmit).toHaveBeenCalledTimes(1);
-  //     expect(result.current.errors.name).toBeUndefined();
-
-  //     // Name is too short
-  //     onSubmit.mockReset();
-  //     act(() => {
-  //       result.current.handleChange(
-  //         getFakeTestEvent("123")
-  //       );
-  //     });
-
-  //     act(() => {
-  //       result.current.handleSubmit(getFakeTestEvent());
-  //     });
-
-  //     expect(onSubmit).toHaveBeenCalledTimes(0);
-  //     expect(result.current.errors.name).toBe(
-  //       validationMessage
-  //     );
-  //   });
-
-  //   it("should validate multiple validations", () => {
-  //     const validationMessage =
-  //       "This field isn't formatted correctly.";
-  //     const onSubmit = jest.fn();
-  //     const { result } = renderHook(() =>
-  //       useForm<TestData>({
-  //         validations: {
-  //           name: {
-  //             pattern: {
-  //               value: "/[A-Za-z]*/",
-  //               message: validationMessage,
-  //             },
-  //             custom: {
-  //               isValid: (value) => value?.length > 6,
-  //               message: validationMessage,
-  //             },
-  //           },
-  //         },
-  //         onSubmit,
-  //       })
-  //     );
-
-  //     // Name is too short and contains numbers
-  //     act(() => {
-  //       result.current.handleChange(
-  //         getFakeTestEvent("123")
-  //       );
-  //     });
-
-  //     act(() => {
-  //       result.current.handleSubmit(getFakeTestEvent());
-  //     });
-
-  //     expect(onSubmit).toHaveBeenCalledTimes(0);
-  //   });
-
-  //   it("should reset errors on submit", () => {
-  //     const validationMessage =
-  //       "The minimum length is 7 characters.";
-  //     const onSubmit = jest.fn();
-  //     const { result } = renderHook(() =>
-  //       useForm<TestData>({
-  //         validations: {
-  //           name: {
-  //             custom: {
-  //               isValid: (value) => value?.length > 6,
-  //               message: validationMessage,
-  //             },
-  //           },
-  //         },
-  //         onSubmit,
-  //       })
-  //     );
-
-  //     // Name is too short
-  //     onSubmit.mockReset();
-  //     act(() => {
-  //       result.current.handleChange(
-  //         getFakeTestEvent("123")
-  //       );
-  //     });
-
-  //     act(() => {
-  //       result.current.handleSubmit(getFakeTestEvent());
-  //     });
-
-  //     expect(onSubmit).toHaveBeenCalledTimes(0);
-  //     expect(result.current.errors.name).toBe(
-  //       validationMessage
-  //     );
-
-  //     // Name is long enough
-  //     act(() => {
-  //       result.current.handleChange(
-  //         getFakeTestEvent("Felix123")
-  //       );
-  //     });
-
-  //     act(() => {
-  //       result.current.handleSubmit(getFakeTestEvent());
-  //     });
-
-  //     expect(onSubmit).toHaveBeenCalledTimes(1);
-  //     expect(result.current.errors.name).toBeUndefined();
-  //   });
-  // });
+      act(() => result.current.handleChange(getFakeTestEvent("name")));
+      await act(() => result.current.handleSubmit(getFakeTestEvent()));
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(result.current.messageSent).toBeTruthy();
+    });
+  });
 });

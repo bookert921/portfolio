@@ -1,73 +1,48 @@
-import { ToggleReturn, ToggleValue } from "index";
 import { useState } from "react";
+import { ToggleOptions, ToggleValue } from "index";
 
-const useToggle = (options?: {
-  initialValue?: ToggleValue;
-  alternateValue?: ToggleValue;
-}) => {
-  const [value, setValue] = useState<ToggleValue>(() => {
+/**
+ * Toggles a boolean value by default if no initial/alternate value is given
+ */
+function useToggle<T>(options?: ToggleOptions<T>) {
+  const [value, setValue] = useState<ToggleValue<T>>(() => {
     if (options) {
       const { initialValue } = options;
-      if (typeof initialValue === "string") {
-        return initialValue;
-      }
-      if (typeof initialValue === "boolean") {
-        return initialValue;
-      }
+      if (initialValue != undefined) return initialValue;
     }
     return false;
   });
 
-  const toggleValue = (specificValue?: ToggleValue) => {
-    setValue((prevValue: ToggleValue) => {
-      // If we want to return a specific value, we don't care about anything else.
-      // Just return the specific value.
+  const toggleValue = (specificValue?: T) => {
+    setValue((prevValue: ToggleValue<T>) => {
+      /**
+       *  If we want to return a specific value, we don't care about anything else.
+       * Just return the specific value.
+       */
       if (specificValue != undefined) return specificValue;
 
+      /**
+       * If options are passed we need to consider if just the initial was passed or both
+       * If only the initial was passed, it must be a boolean because there is no alternate
+       */
       if (options) {
         const { initialValue, alternateValue } = options;
-        const isBoolean = typeof initialValue === "boolean";
-        if (initialValue && !isBoolean && !alternateValue) {
+        const initialIsBoolean = typeof initialValue === "boolean";
+        if (initialValue && !initialIsBoolean && !alternateValue) {
           throw new Error(
             "An alternate value must be provided to toggle non-boolean values"
           );
-        } else if (initialValue != undefined && alternateValue != undefined) {
-          if (
-            typeof prevValue === "string" &&
-            typeof initialValue === "string" &&
-            typeof alternateValue === "string"
-          ) {
-            return prevValue === initialValue ? alternateValue : initialValue;
-          }
+        } else if (initialValue && alternateValue) {
           return prevValue === initialValue ? alternateValue : initialValue;
         }
       }
 
-      // Otherwise, the default behavior toggles a boolean
+      // If no options or specific passed, just toggle the default boolean
       return !prevValue as boolean;
     });
   };
 
-  return { value, toggleValue } as ToggleReturn<ToggleValue>;
-};
-
-export default useToggle;
-
-/* 
-const useToggle = (initialState: boolean = false) => {
-  const [value, setValue] = useState(initialState);
-
-  const toggleValue = (specificValue?: boolean) => {
-    setValue((prevValue: boolean) => {
-      return specificValue != undefined &&
-        typeof specificValue === "boolean"
-        ? specificValue
-        : !prevValue;
-    });
-  };
-
   return { value, toggleValue };
-};
+}
 
 export default useToggle;
-*/

@@ -1,7 +1,7 @@
-// Modified from https://github.com/fgerschau/react-custom-form-validation-example/blob/master/src/useForm.ts
+import { ErrorRecord, FormOptions } from "index";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { ErrorRecord, FormOptions } from "types/interfaces";
 
+// https://github.com/fgerschau/react-custom-form-validation-example/blob/master/src/useForm.ts
 /**
  * Usage:
  * const {data, handleChange, handleSubmit, errors, ...otherValues} = useForm({
@@ -21,9 +21,7 @@ import { ErrorRecord, FormOptions } from "types/interfaces";
 const useForm = <T extends Record<keyof T, any> = {}>(
   options?: FormOptions<T>
 ) => {
-  const [data, setData] = useState<T>(
-    (options?.initialValues || {}) as T
-  );
+  const [data, setData] = useState<T>((options?.initialValues || {}) as T);
   const [errors, setErrors] = useState<ErrorRecord<T>>({});
   const [messageSent, setMessageSent] = useState(false);
 
@@ -53,9 +51,7 @@ const useForm = <T extends Record<keyof T, any> = {}>(
     });
   };
 
-  const handleSubmit = async (
-    e: FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validations = options?.validations;
     if (validations) {
@@ -70,10 +66,7 @@ const useForm = <T extends Record<keyof T, any> = {}>(
         }
 
         const pattern = validation?.pattern;
-        if (
-          pattern?.value &&
-          !RegExp(pattern.value).test(value)
-        ) {
+        if (pattern?.value && !RegExp(pattern.value).test(value)) {
           valid = false;
           newErrors[key] = pattern.message;
         }

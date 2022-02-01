@@ -1,22 +1,17 @@
-import { StorageReturn } from "@types";
 import { useCallback, useEffect, useState } from "react";
-import { StorageProps } from "types/interfaces";
+import { StorageProps } from "index";
 
 // https://github.com/WebDevSimplified/useful-custom-react-hooks/blob/main/src/8-useStorage/useStorage.js
 
-const getStoredValue = ({ key, item, storageObject }: StorageProps) => {
-  // Pulls stored value from local storage if it exists
-  // Otherwise uses the default value passed in which is item
-  const storedValue = storageObject.getItem(key);
-  if (storedValue) return JSON.parse(storedValue);
-  if (typeof item === "function") return item();
-  return item;
-};
-
-const useStorage = ({ key, item, storageObject }: StorageProps) => {
-  const [value, setValue] = useState(
-    getStoredValue({ key, item, storageObject })
-  );
+function useStorage<T>({ key, item, storageObject }: StorageProps<T>) {
+  const [value, setValue] = useState<T | undefined>(() => {
+    // Pulls stored value from local storage if it exists
+    // Otherwise uses the default value passed in which is item
+    const storedValue = storageObject.getItem(key);
+    if (storedValue) return JSON.parse(storedValue);
+    if (typeof item === "function") return item();
+    return item;
+  });
 
   useEffect(() => {
     // Used when remove is called or local storage is empty
@@ -31,28 +26,28 @@ const useStorage = ({ key, item, storageObject }: StorageProps) => {
   }, []);
 
   return { value, setValue, remove };
-};
+}
 
 /**
  * LOCAL STORAGE
  */
 
-export const useLocalStorage = (key: string, item?: any) => {
+export function useLocalStorage<T>(key: string, item?: T) {
   return useStorage({
     key,
     item,
     storageObject: window.localStorage,
   });
-};
+}
 
 /**
  * SESSION STORAGE
  */
 
-export const useSessionStorage = (key: string, item?: any) => {
+export function useSessionStorage<T>(key: string, item?: T) {
   return useStorage({
     key,
     item,
     storageObject: window.sessionStorage,
   });
-};
+}

@@ -30,6 +30,12 @@ describe("useToggle", () => {
     });
   });
 
+  /* Reset to default before each */
+  beforeEach(() => {
+    const { result } = renderHook(() => useToggle());
+    act(() => result.current.toggleValue(false));
+  });
+
   describe("toggling", () => {
     it("should toggle to opposite value if not argument passed to toggle function", () => {
       const { result } = renderHook(() => useToggle());
@@ -43,39 +49,16 @@ describe("useToggle", () => {
       expect(result.current.value).toBe("Ice Cream");
     });
 
-    it("should toggle between values passed", () => {
-      const { result, rerender } = renderHook(
-        ({ initialValue, alternateValue }) =>
-          useToggle({
-            initialValue,
-            alternateValue,
-          }),
-        {
-          initialProps: {
-            initialValue: "light",
-            alternateValue: "dark",
-          },
-        }
+    it("should toggle between values passed as options", () => {
+      const { result } = renderHook(() =>
+        useToggle({
+          initialValue: "light",
+          alternateValue: "dark",
+        })
       );
-
       expect(result.current.value).toBe("light");
       act(() => result.current.toggleValue());
-      expect(result.current.value).toBe("dark");
-      act(() => result.current.toggleValue());
-      expect(result.current.value).toBe("light");
-
-      rerender({
-        initialValue: "0",
-        alternateValue: "dark",
-      });
-      expect(result.current.value).toBe("light");
-
-      act(() => result.current.toggleValue());
-      expect(result.current.value).toBe("0");
-      act(() => result.current.toggleValue());
-      expect(result.current.value).toBe("dark");
-      act(() => result.current.toggleValue());
-      expect(result.current.value).toBe("0");
+      expect(result.current.value).not.toBe("light");
     });
   });
 

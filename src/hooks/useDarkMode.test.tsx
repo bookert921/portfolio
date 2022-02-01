@@ -28,6 +28,12 @@ describe("useDarkMode", () => {
     });
   });
 
+  /* Reset to default before each toggle */
+  beforeEach(() => {
+    const { result } = renderHook(() => useDarkMode());
+    act(() => result.current.toggleTheme("light"));
+  });
+
   describe("toggling", () => {
     it("should toggle mode against last value", () => {
       const { result } = renderHook(() => useDarkMode());
@@ -39,7 +45,6 @@ describe("useDarkMode", () => {
 
     it("should have ability to toggle mode to specific value", () => {
       const { result } = renderHook(() => useDarkMode());
-      act(() => result.current.toggleTheme("light"));
       expect(result.current.mode).toBe("light");
       act(() => result.current.toggleTheme("dark"));
       expect(result.current.mode).not.toBe("light");

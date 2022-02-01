@@ -1,26 +1,11 @@
 import React from "react";
-import {
-  Button,
-  useTheme,
-  Snackbar,
-  IconButton,
-} from "@mui/material";
-import {
-  ContactSection,
-  FormWrapper,
-  Input,
-} from "./ContactElements";
+import { Button, useTheme, Snackbar, IconButton } from "@mui/material";
+import { ContactSection, FormWrapper, Input } from "./ContactElements";
 import ContactText from "./ContactText";
 import { useForm } from "@hooks";
 import { Close as CloseIcon } from "@mui/icons-material";
 import emailjs from "@emailjs/browser";
-import { Validations } from "types/interfaces";
-
-interface FormState {
-  name: string;
-  email: string;
-  message: string;
-}
+import { FormState, Validations } from "index";
 
 const initialState: FormState = {
   name: "",
@@ -31,8 +16,7 @@ const initialState: FormState = {
 const validation: Validations<FormState> = {
   name: {
     pattern: {
-      value:
-        "^([A-Z][a-z]+([ ]?[a-z]?['-]?[A-Z]+|[a-z]+)*)$",
+      value: "^([A-Z][a-z]+([ ]?[a-z]?['-]?[A-Z]+|[a-z]+)*)$",
       message:
         "A name can include up to 40 uppercase or lowercase character and special characters common to names.",
     },
@@ -93,7 +77,6 @@ const Contact = () => {
         if (error instanceof Error) {
           errMsg = error.message;
         }
-        console.log(errMsg);
         return {
           message: "There was an error",
           error: errMsg,
