@@ -61,3 +61,16 @@ interface SEOProps {
   image?: string;
   article?: string;
 }
+
+interface EmailData {
+  service_id: string | undefined;
+  template_id: string | undefined;
+  user_id: string | undefined;
+  accessToken: string | undefined;
+  template_params: {
+    name: string;
+    message: string;
+    email: string;
+    subject: string;
+  };
+}

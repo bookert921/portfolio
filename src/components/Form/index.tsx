@@ -3,9 +3,9 @@ import { useForm } from "@hooks";
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import axios from "axios";
-import { FormState } from "index";
+import { EmailData, FormState } from "index";
 import validation from "./helpers/validation";
+import { useEffect, useState } from "react";
 
 const initialState: FormState = {
   name: "",
@@ -49,6 +49,7 @@ const Form: React.FC<{ setMessageSent: (status: boolean) => void }> = ({
   setMessageSent,
 }) => {
   const theme = useTheme();
+  const [submitted, setSubmitted] = useState(false);
 
   const {
     data: { name, email, message },
@@ -59,9 +60,16 @@ const Form: React.FC<{ setMessageSent: (status: boolean) => void }> = ({
   } = useForm<FormState>({
     validations: validation,
     initialValues: initialState,
-    onSubmit: async () => {
+    onSubmit: () => {
+      setSubmitted(true);
+    },
+  });
+
+  useEffect(() => {
+    if (submitted === false) return;
+    const sendEmail = async () => {
       const url = "https://api.emailjs.com/api/v1.0/email/send";
-      const data = {
+      const data: EmailData = {
         service_id: process.env.EMAILJS_SERVICE,
         template_id: process.env.EMAILJS_TEMPLATE,
         user_id: process.env.EMAILJS_ID,
@@ -73,11 +81,13 @@ const Form: React.FC<{ setMessageSent: (status: boolean) => void }> = ({
           subject: message,
         },
       };
-
       try {
-        await axios(url, {
+        await fetch(url, {
           method: "POST",
-          data: data,
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }).then((res) => {
           console.log(res.status);
           if (res.status === 200) {
@@ -92,8 +102,9 @@ const Form: React.FC<{ setMessageSent: (status: boolean) => void }> = ({
       } catch (error) {
         console.log(error);
       }
-    },
-  });
+    };
+    submitted && sendEmail();
+  }, [submitted]);
 
   return (
     <FormContent
