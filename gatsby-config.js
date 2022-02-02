@@ -4,6 +4,9 @@ require("dotenv").config({
 
 // TODO: Add keywords
 module.exports = {
+  flags: {
+    FUNCTIONS: true,
+  },
   siteMetadata: {
     title: "Booker T Showers III",
     url: "https://booker-showers.dev",

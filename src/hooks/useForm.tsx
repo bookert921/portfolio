@@ -51,7 +51,7 @@ const useForm = <T extends Record<keyof T, any> = {}>(
     });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLDivElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validations = options?.validations;
     if (validations) {

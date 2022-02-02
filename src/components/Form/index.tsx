@@ -3,9 +3,8 @@ import { useForm } from "@hooks";
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { EmailData, FormState } from "index";
+import { FormState } from "index";
 import validation from "./helpers/validation";
-import { useEffect, useState } from "react";
 
 const initialState: FormState = {
   name: "",
@@ -49,66 +48,43 @@ const Form: React.FC<{ setMessageSent: (status: boolean) => void }> = ({
   setMessageSent,
 }) => {
   const theme = useTheme();
-  const [submitted, setSubmitted] = useState(false);
 
-  const {
-    data: { name, email, message },
-    errors,
-    handleChange,
-    handleSubmit,
-    setData,
-  } = useForm<FormState>({
-    validations: validation,
-    initialValues: initialState,
-    onSubmit: () => {
-      setSubmitted(true);
-    },
-  });
-
-  useEffect(() => {
-    if (submitted === false) return;
-    const sendEmail = async () => {
-      const url = "https://api.emailjs.com/api/v1.0/email/send";
-      const data: EmailData = {
-        service_id: process.env.EMAILJS_SERVICE,
-        template_id: process.env.EMAILJS_TEMPLATE,
-        user_id: process.env.EMAILJS_ID,
-        accessToken: process.env.EMAILJS_TOKEN,
-        template_params: {
-          name: name,
-          message: message,
-          email: email,
-          subject: message,
-        },
-      };
-      try {
-        await fetch(url, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }).then((res) => {
-          console.log(res.status);
-          if (res.status === 200) {
-            setData({
-              email: "",
-              message: "",
-              name: "",
-            });
-            setMessageSent(true);
+  const { data, errors, handleChange, handleSubmit, setData } =
+    useForm<FormState>({
+      validations: validation,
+      initialValues: initialState,
+      onSubmit: async () => {
+        try {
+          if (typeof window !== "undefined") {
+            await window
+              .fetch(`https://formspree.io/f/mgedaypw`, {
+                method: `POST`,
+                body: JSON.stringify(data),
+                headers: {
+                  Accept: "application/json",
+                },
+              })
+              .then((res) => {
+                setData({
+                  email: "",
+                  message: "",
+                  name: "",
+                });
+                console.log(res.body);
+                if (res.status === 200) {
+                  setMessageSent(true);
+                }
+              });
           }
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    submitted && sendEmail();
-  }, [submitted]);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    });
 
+  const { email, message, name } = data;
   return (
-    <FormContent
-      component="form"
+    <form
       style={{
         backgroundColor: theme.palette.primary.main,
         display: "flex",
@@ -120,6 +96,7 @@ const Form: React.FC<{ setMessageSent: (status: boolean) => void }> = ({
         minWidth: "300px",
         width: "100%",
       }}
+      action=""
       onSubmit={handleSubmit}
     >
       <Input
@@ -151,7 +128,7 @@ const Form: React.FC<{ setMessageSent: (status: boolean) => void }> = ({
       <Button type="submit" variant="contained">
         Submit
       </Button>
-    </FormContent>
+    </form>
   );
 };
 
