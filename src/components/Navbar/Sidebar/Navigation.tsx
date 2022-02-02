@@ -13,14 +13,7 @@ const Navigation: React.FC<{
   show: boolean;
   fixedNav: boolean;
   setSideOpen: OpenSide;
-}> = ({
-  links,
-  mobile,
-  fixedNav,
-  setSideOpen,
-  show,
-  sideOpen,
-}) => {
+}> = ({ links, mobile, fixedNav, setSideOpen, show, sideOpen }) => {
   switch (mobile) {
     case true:
       return (
@@ -29,10 +22,7 @@ const Navigation: React.FC<{
             <body className={sideOpen ? "blur" : ""} />
           </Helmet>
 
-          <NavMenu
-            sideOpen={sideOpen}
-            setSideOpen={setSideOpen}
-          />
+          <NavMenu sideOpen={sideOpen} setSideOpen={setSideOpen} />
           <Sidebar
             show={show}
             sideOpen={sideOpen}

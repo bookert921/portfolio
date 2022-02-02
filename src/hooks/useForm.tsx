@@ -23,11 +23,11 @@ const useForm = <T extends Record<keyof T, any> = {}>(
 ) => {
   const [data, setData] = useState<T>((options?.initialValues || {}) as T);
   const [errors, setErrors] = useState<ErrorRecord<T>>({});
-  const [messageSent, setMessageSent] = useState(false);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    e.preventDefault();
     const { name, value } = e.target;
     let properName: string = "";
 
@@ -51,7 +51,7 @@ const useForm = <T extends Record<keyof T, any> = {}>(
     });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     const validations = options?.validations;
     if (validations) {
@@ -83,10 +83,10 @@ const useForm = <T extends Record<keyof T, any> = {}>(
         return;
       }
     }
+    setErrors({});
 
     if (options?.onSubmit) {
-      options.onSubmit();
-      setErrors({});
+      return options.onSubmit();
     }
   };
 
@@ -95,8 +95,6 @@ const useForm = <T extends Record<keyof T, any> = {}>(
     handleChange,
     handleSubmit,
     setData,
-    setMessageSent,
-    messageSent,
     errors,
   };
 };

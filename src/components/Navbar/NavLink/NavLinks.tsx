@@ -1,11 +1,42 @@
 import { NavLink } from "types/interfaces";
 import ResumeButton from "../ResumeButton";
-import {
-  LinksWrapper,
-  NavList,
-  NavListElement,
-  StyledLink,
-} from "./NavLinkElements";
+import { styled } from "@mui/material/styles";
+import { Link } from "gatsby";
+
+const LinksWrapper = styled("div")`
+  width: 100%;
+`;
+
+const NavList = styled("ul")(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  justifyContent: "space-around",
+  flexDirection: "column",
+  alignItems: "center",
+  margin: 0,
+  padding: 0,
+  [theme.breakpoints.up("tablet")]: {
+    flexDirection: "row",
+  },
+}));
+
+const NavListElement = styled("li")`
+  list-style: none;
+`;
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  color: "white",
+  fontSize: `${theme.typography.h6.fontSize}`,
+  textDecoration: "none",
+  "&.active": {
+    color: `${theme.palette.secondary.main}`,
+    textShadow: `0 2px 2px ${
+      theme.palette.mode === "dark"
+        ? theme.palette.secondary.dark
+        : theme.palette.secondary.dark
+    }`,
+  },
+}));
 
 const NavLinks: React.FC<{
   onClickCloseSide?: () => void;

@@ -8,7 +8,7 @@ const theme = (mode: PaletteMode): Theme =>
       ...(mode === "light"
         ? {
             primary: {
-              main: "#051622",
+              main: "#32373b",
             },
             secondary: {
               main: "#1BA098",

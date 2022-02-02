@@ -1,24 +1,34 @@
 import { Typography, Grid, Box } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { useTheme, styled } from "@mui/material/styles";
 import OptimizationSVG from "@components/Hexagon/OptimizationSVG";
 import MobileSVG from "@components/Hexagon/MobileSVG";
 import PerformanceSVG from "@components/Hexagon/PerformanceSVG";
 import SecureSVG from "@components/Hexagon/SecureSVG";
 import FeatureCard from "@components/Card/Feature";
-import { AboutSection } from "./AboutElements";
-import { StaticImage } from "gatsby-plugin-image";
+import AboutHeader from "@components/Header/AboutHeader";
+
+const AboutSection = styled(Box, {
+  name: "AboutSection",
+})(({ theme }) => ({
+  width: "90%",
+  margin: "0 auto",
+  display: "flex",
+  paddingTop: theme.spacing(5),
+  paddingBottom: theme.spacing(5),
+  flexDirection: "column",
+}));
 
 const AboutPage = () => {
   const theme = useTheme();
   return (
     <AboutSection id="about" component="section">
+      <AboutHeader />
       <Grid container spacing={2} justifyContent="center">
         <Grid
           item
           sm={12}
           component="article"
           sx={{
-            marginTop: theme.spacing(5),
             display: "flex",
             gap: "0.5em",
             flexDirection: "column",

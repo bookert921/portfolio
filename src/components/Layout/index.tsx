@@ -1,12 +1,12 @@
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Container } from "@mui/material";
 import Navbar from "@components/Navbar";
 import { NavLink } from "types/interfaces";
 import { RefContextProvider } from "@contexts";
 import Footer from "@components/Footer";
 import { DarkModeContextProvider } from "@contexts";
-import { StyledMainWrapper } from "./LayoutElements";
 import React from "react";
 import SEO from "@components/SEO";
+import { styled } from "@mui/material/styles";
 
 const siteMenu: NavLink[] = [
   { url: "/", name: "home" },
@@ -15,6 +15,13 @@ const siteMenu: NavLink[] = [
   // { url: "#projects", name: "projects" },
   { url: "#contact", name: "contact" },
 ];
+
+const StyledMainWrapper = styled(Container, {
+  name: "MainWrapper",
+})(() => ({
+  minHeight: "100vh",
+  width: "100%",
+}));
 
 const Layout: React.FC = ({ children }) => {
   return (
