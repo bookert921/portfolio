@@ -1,8 +1,6 @@
 const path = require("path");
 
-module.exports = function onCreateWebpackConfig({
-  actions,
-}) {
+module.exports = function onCreateWebpackConfig({ actions }) {
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -10,6 +8,7 @@ module.exports = function onCreateWebpackConfig({
           __dirname,
           "node_modules/@mui/styled-engine-sc"
         ),
+        axios: path.resolve(__dirname, "node_modules/axios"),
       },
     },
   });
