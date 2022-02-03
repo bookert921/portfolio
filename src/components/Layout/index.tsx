@@ -26,7 +26,7 @@ const StyledMainWrapper = styled(Container, {
 const Layout: React.FC = ({ children }) => {
   return (
     <React.Fragment>
-      <SEO title="Portfolio" />
+      <SEO />
       <DarkModeContextProvider>
         <CssBaseline />
         <RefContextProvider>

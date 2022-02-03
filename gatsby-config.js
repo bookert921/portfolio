@@ -4,9 +4,6 @@ require("dotenv").config({
 
 // TODO: Add keywords
 module.exports = {
-  flags: {
-    FUNCTIONS: true,
-  },
   siteMetadata: {
     title: "Booker T Showers III",
     url: "https://booker-showers.dev",
@@ -20,6 +17,8 @@ module.exports = {
   plugins: [
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-react-helmet",
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-robots-txt",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",

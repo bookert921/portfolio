@@ -70,7 +70,6 @@ const Form: React.FC<{ setMessageSent: (status: boolean) => void }> = ({
                   message: "",
                   name: "",
                 });
-                console.log(res.body);
                 if (res.status === 200) {
                   setMessageSent(true);
                 }
