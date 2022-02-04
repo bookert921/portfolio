@@ -21,6 +21,7 @@ const StyledMainWrapper = styled(Container, {
 })(() => ({
   minHeight: "100vh",
   width: "100%",
+  position: "relative",
 }));
 
 const Layout: React.FC = ({ children }) => {

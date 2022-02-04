@@ -6,7 +6,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "Booker T Showers III",
-    url: "https://booker-showers.dev",
+    siteUrl: "https://booker-showers.dev",
     image: "/dark-mode-desktop.jpg",
     github: "https://github.com/bookert921",
     linkedin: "https://linkedin.com/in/bookert921",
@@ -17,7 +17,12 @@ module.exports = {
   plugins: [
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        createLinkInHead: true,
+      },
+    },
     "gatsby-plugin-robots-txt",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",

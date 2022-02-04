@@ -1,10 +1,5 @@
 import SocialMedia from "@components/SocialMedia";
-import {
-  AppBar,
-  styled,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, styled, Toolbar, Typography } from "@mui/material";
 
 const StyledToolbar = styled(Toolbar, {
   name: "Footer",
@@ -23,17 +18,14 @@ const Footer = () => {
     <AppBar
       position="static"
       sx={{
-        height: "max-content",
+        height: "104px",
         width: "100%",
       }}
     >
       <StyledToolbar>
         <SocialMedia />
 
-        <Typography
-          variant="subtitle1"
-          color="secondary.main"
-        >
+        <Typography variant="subtitle1" color="secondary.main">
           &copy; {year} Booker T. Showers III
         </Typography>
       </StyledToolbar>
