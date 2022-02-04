@@ -8,7 +8,6 @@ module.exports = function onCreateWebpackConfig({ actions }) {
           __dirname,
           "node_modules/@mui/styled-engine-sc"
         ),
-        axios: path.resolve(__dirname, "node_modules/axios"),
       },
     },
   });

@@ -41,7 +41,10 @@ const SEO = ({ title, description, image }: SEOProps) => {
       <html lang="en" />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
-
+      <meta
+        name="google-site-verification"
+        content="VdHiuJog3KPOGV7THxR0ARvpc-IA9b2JD_o5Co97nw0"
+      />
       {seo.url && <meta property="og:url" content={seo.url} />}
 
       {seo.title && <meta property="og:title" content={seo.title} />}
