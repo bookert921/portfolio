@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ToggleOptions } from "index";
+import { ToggleOptions } from "@types";
 
 /**
  * Toggles a boolean value by default if no initial/alternate value is given
@@ -38,7 +38,7 @@ function useToggle<T>(options?: ToggleOptions<T>) {
       }
 
       // If no options or specific passed, just toggle the default boolean
-      return !prevValue as boolean;
+      return !prevValue;
     });
   };
 

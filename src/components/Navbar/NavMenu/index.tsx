@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import { useTheme, styled } from "@mui/material/styles";
 import React from "react";
-import { NavMenuProps } from "types/interfaces";
+import { NavMenuProps } from "@types";
 
 const MenuWrapper = styled("div")`
   width: 1.5rem;

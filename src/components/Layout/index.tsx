@@ -1,6 +1,6 @@
 import { CssBaseline, Container } from "@mui/material";
 import Navbar from "@components/Navbar";
-import { NavLink } from "types/interfaces";
+import { NavLink } from "@types";
 import { RefContextProvider } from "@contexts";
 import Footer from "@components/Footer";
 import { DarkModeContextProvider } from "@contexts";

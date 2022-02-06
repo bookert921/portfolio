@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { StorageProps } from "index";
+import { StorageProps } from "@types";
 
 // https://github.com/WebDevSimplified/useful-custom-react-hooks/blob/main/src/8-useStorage/useStorage.js
 

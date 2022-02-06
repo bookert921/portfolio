@@ -8,22 +8,24 @@ const useDarkMode = () => {
     initialValue: "light",
     alternateValue: "dark",
   });
-
   // Takes initial key and value to set in storage from toggle
-  const { value, setValue } = useLocalStorage("theme", mode);
+  const { value, setValue } = useLocalStorage<PaletteMode>(
+    "theme",
+    mode as PaletteMode
+  );
 
   const updateStorage = (theme: PaletteMode) => {
     setValue(theme);
   };
 
-  // Use to listen for each update of mode
+  // Used to listen for each update of mode
   useEffect(() => {
     updateStorage(mode as PaletteMode);
   }, [mode]);
 
   // Pulls value from local storage when user accesses site
   useEffect(() => {
-    value != undefined && toggleTheme(value as PaletteMode);
+    value != undefined && toggleTheme(value);
   }, []);
 
   return { mode, toggleTheme } as {

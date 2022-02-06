@@ -1,6 +1,6 @@
 import NavLinks from "../NavLink/NavLinks";
 
-import { SidebarProps } from "types/interfaces";
+import { SidebarProps } from "@types";
 import { Box, styled } from "@mui/material";
 
 const SidebarWrapper = styled(Box, {

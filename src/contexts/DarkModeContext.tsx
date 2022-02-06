@@ -1,7 +1,6 @@
 import { createContext } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@styles";
-
 import { useDarkMode } from "@hooks";
 import { PaletteMode } from "@mui/material";
 

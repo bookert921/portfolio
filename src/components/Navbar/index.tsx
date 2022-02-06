@@ -1,15 +1,10 @@
 import React, { useContext } from "react";
-import {
-  AppBar,
-  Toolbar,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { AppBar, Toolbar, useMediaQuery, useTheme } from "@mui/material";
 
 import DarkMode from "@components/Navbar/DarkMode";
-import Navigation from "./Sidebar/Navigation";
+import Navigation from "./Navigation";
 
-import { NavbarProps } from "types/interfaces";
+import { NavbarProps } from "@types";
 import { RefContext } from "@contexts";
 import { useFixedNav, useSidebarOpen } from "@hooks";
 
@@ -18,9 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
   const fixedNav = useFixedNav(refs);
   const sidebarOpen = useSidebarOpen(refs);
   const theme = useTheme();
-  const mobile = useMediaQuery(
-    theme.breakpoints.down("tablet")
-  );
+  const mobile = useMediaQuery(theme.breakpoints.down("tablet"));
 
   return (
     <AppBar

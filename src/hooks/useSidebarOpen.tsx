@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { DOMRef } from "types/interfaces";
+import { DOMRef } from "@types";
 import useOnClickOutside from "./useOnClickOutside";
 import useOnWidthResize from "./useOnWidthResize";
 import useToggle from "./useToggle";
 
 const useSidebarOpen = (refs: DOMRef<any>) => {
-  const { value: sideOpen, toggleValue: setSideOpen } = useToggle();
+  const { value: sideOpen, toggleValue: setSideOpen } = useToggle<boolean>();
   const [show, setShow] = useState(false);
 
   useEffect(() => {

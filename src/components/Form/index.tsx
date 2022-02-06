@@ -3,7 +3,7 @@ import { useForm } from "@hooks";
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { FormState } from "index";
+import { FormState } from "@types";
 import validation from "./helpers/validation";
 
 const initialState: FormState = {

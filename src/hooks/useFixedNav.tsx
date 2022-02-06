@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { DOMRef } from "types/interfaces";
+import { DOMRef } from "@types";
 
 const useFixedNav = ({ navbarEl, landingEl }: DOMRef<HTMLElement>) => {
   const [fixedNav, setFixedNav] = useState(false);

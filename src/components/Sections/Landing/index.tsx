@@ -1,8 +1,8 @@
 import { RefContext } from "@contexts";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useContext } from "react";
-import DesktopLanding from "./Desktop/DesktopLanding";
-import MobileLanding from "./Mobile/MobileLanding";
+import DesktopLanding from "./Desktop";
+import MobileLanding from "./Mobile";
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 

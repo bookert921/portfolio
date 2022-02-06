@@ -1,4 +1,4 @@
-import { FormState, Validations } from "index";
+import { FormState, Validations } from "@types";
 
 const validation: Validations<FormState> = {
   name: {

@@ -1,5 +1,5 @@
 import { useDOMRef } from "@hooks";
-import { RefContextProps } from "types/interfaces";
+import { RefContextProps } from "@types";
 import React, { createContext } from "react";
 
 const initialContext: RefContextProps = {
@@ -7,11 +7,10 @@ const initialContext: RefContextProps = {
   refs: {},
 };
 
-export const RefContext =
-  createContext<RefContextProps>(initialContext);
+export const RefContext = createContext<RefContextProps>(initialContext);
 
 const RefContextProvider: React.FC = ({ children }) => {
-  const [refs, setRef] = useDOMRef();
+  const { DOMRef: refs, setRef } = useDOMRef();
 
   return (
     <RefContext.Provider

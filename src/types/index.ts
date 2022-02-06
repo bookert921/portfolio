@@ -1,21 +1,93 @@
-import { PaletteMode } from "@mui/material";
-import { ChangeEvent } from "react";
-import { DOMRef } from "./interfaces";
+export interface DOMRef<T extends HTMLElement> {
+  [key: string]: T;
+}
 
-export type ChangeTheme = (mode?: PaletteMode) => void;
+export interface EmailData {
+  service_id: string | undefined;
+  template_id: string | undefined;
+  user_id: string | undefined;
+  accessToken: string | undefined;
+  template_params: {
+    name: string;
+    message: string;
+    email: string;
+    subject: string;
+  };
+}
 
-export type DarkModeReturn = [PaletteMode, ChangeTheme];
+export type ErrorRecord<T> = Partial<Record<keyof T, string>>;
 
-export type SetRef = (node?: any) => void;
+export interface FormOptions<T> {
+  validations?: Validations<T>;
+  initialValues?: Partial<T>;
+  onSubmit?: () => void;
+}
 
-export type DOMRefReturn = [DOMRef<any>, SetRef];
+export interface FormState {
+  name: string;
+  email: string;
+  message: string;
+}
 
-export type OpenSide = (specificValue?: boolean) => void;
+export interface NavbarProps {
+  links: NavLink[];
+}
 
-export type HandleChangeEvent = ChangeEvent<
-  HTMLInputElement | HTMLTextAreaElement
->;
+export type NavLink = {
+  name: string;
+  url: string;
+};
 
-export type StorageReturn = [any, React.Dispatch<any>, () => void];
+export type NavMenuProps = {
+  sideOpen: boolean;
+  setSideOpen: (openSide: boolean) => void;
+};
 
-// -------------------------------------------------------------------------------
+export interface NavigationProps extends SidebarProps {
+  mobile: boolean;
+}
+
+export type RefContextProps = {
+  refs: DOMRef<any>;
+  setRef: (node: any) => void;
+};
+
+export interface SEOProps {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: string;
+}
+
+export interface SidebarProps extends NavMenuProps, NavbarProps {
+  show: boolean;
+  fixedNav: boolean;
+}
+
+export type StorageProps<T> = {
+  key: string;
+  item: T;
+  storageObject: Storage;
+};
+
+export type ToggleOptions<T> = {
+  initialValue: T;
+  alternateValue?: T;
+};
+
+export type Validations<T extends {}> = Partial<Record<keyof T, Validation>>;
+
+export interface Validation {
+  required?: {
+    value: boolean;
+    message: string;
+  };
+  pattern?: {
+    value: string;
+    message: string;
+  };
+  custom?: {
+    isValid: (value: string) => boolean;
+    message: string;
+  };
+}

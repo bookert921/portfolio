@@ -1,4 +1,4 @@
-import { NavLink } from "types/interfaces";
+import { NavLink } from "@types";
 import ResumeButton from "../ResumeButton";
 import { styled } from "@mui/material/styles";
 import { Link } from "gatsby";

@@ -1,5 +1,5 @@
-import { ErrorRecord, FormOptions } from "index";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { ErrorRecord, FormOptions } from "@types";
 
 // https://github.com/fgerschau/react-custom-form-validation-example/blob/master/src/useForm.ts
 /**

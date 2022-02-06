@@ -1,19 +1,18 @@
-import { OpenSide } from "@types";
 import React from "react";
 import { Helmet } from "react-helmet";
-import { NavLink } from "types/interfaces";
-import Sidebar from ".";
-import NavLinks from "../NavLink/NavLinks";
-import NavMenu from "../NavMenu";
+import { NavigationProps } from "@types";
+import Sidebar from "./Sidebar";
+import NavLinks from "./NavLink/NavLinks";
+import NavMenu from "./NavMenu";
 
-const Navigation: React.FC<{
-  links: NavLink[];
-  mobile: boolean;
-  sideOpen: boolean;
-  show: boolean;
-  fixedNav: boolean;
-  setSideOpen: OpenSide;
-}> = ({ links, mobile, fixedNav, setSideOpen, show, sideOpen }) => {
+const Navigation: React.FC<NavigationProps> = ({
+  links,
+  mobile,
+  fixedNav,
+  setSideOpen,
+  show,
+  sideOpen,
+}) => {
   switch (mobile) {
     case true:
       return (
