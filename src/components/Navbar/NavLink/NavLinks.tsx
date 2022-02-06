@@ -2,6 +2,8 @@ import { NavLink } from "@types";
 import ResumeButton from "../ResumeButton";
 import { styled } from "@mui/material/styles";
 import { Link } from "gatsby";
+import { Link as LinkS } from "react-scroll";
+import { StaticImage } from "gatsby-plugin-image";
 
 const LinksWrapper = styled("div")`
   width: 100%;
@@ -10,6 +12,7 @@ const LinksWrapper = styled("div")`
 const NavList = styled("ul")(({ theme }) => ({
   display: "flex",
   width: "100%",
+  height: "100%",
   justifyContent: "space-around",
   flexDirection: "column",
   alignItems: "center",
@@ -24,7 +27,8 @@ const NavListElement = styled("li")`
   list-style: none;
 `;
 
-const StyledLink = styled(Link)(({ theme }) => ({
+const StyledLink = styled(LinkS)(({ theme }) => ({
+  cursor: "pointer",
   color: "white",
   fontSize: `${theme.typography.h6.fontSize}`,
   textDecoration: "none",
@@ -38,29 +42,26 @@ const StyledLink = styled(Link)(({ theme }) => ({
   },
 }));
 
+const HomeLink = styled(Link)(() => ({
+  cursor: "pointer",
+  textDecoration: "none",
+}));
+
 const NavLinks: React.FC<{
   onClickCloseSide?: () => void;
 }> = ({ children, onClickCloseSide }) => {
-  const isBrowser = typeof window !== "undefined";
-  const showActive = (url: string) => {
-    if (url === location.hash) {
-      return "active";
-    }
-
-    if (!location.hash && url === location.pathname) {
-      return "active";
-    }
-
-    return "";
-  };
-
   const links = (children as NavLink[]).map((link, index) => {
     const { url, name } = link;
     return (
       <NavListElement key={index}>
         <StyledLink
           to={url}
-          className={isBrowser ? showActive(url) : ""}
+          activeClass="active"
+          smooth={true}
+          duration={300}
+          spy={true}
+          hashSpy={true}
+          offset={-64}
           onClick={onClickCloseSide}
         >
           {name.slice(0, 1).toUpperCase() + name.slice(1)}
@@ -72,7 +73,19 @@ const NavLinks: React.FC<{
   return (
     <LinksWrapper>
       <NavList>
-        {links} <ResumeButton url="/resume.pdf" />
+        <NavListElement>
+          <HomeLink to="/">
+            <StaticImage
+              src="../../../assets/svg/Logo.svg"
+              alt="Logo"
+              width={80}
+              placeholder="blurred"
+              layout="fixed"
+            />
+          </HomeLink>
+        </NavListElement>
+        {links}
+        <ResumeButton url="/resume.pdf" />
       </NavList>
     </LinksWrapper>
   );

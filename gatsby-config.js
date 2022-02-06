@@ -40,6 +40,7 @@ module.exports = {
           "@styles": "src/styles",
           "@types": "src/types",
           "@contexts": "src/contexts",
+          "@configs": "src/configs",
         },
         extensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
       },
@@ -54,8 +55,8 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "documents",
-        path: `${__dirname}/src/assets/documents`,
+        name: "articles",
+        path: `${__dirname}/src/assets/articles`,
       },
     },
     {

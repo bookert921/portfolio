@@ -25,15 +25,13 @@ const useSidebarOpen = (refs: DOMRef<any>) => {
   useEffect(() => {
     if (sideOpen) {
       const el = document.getElementById("about");
-      if (
-        el &&
+      if (window.scrollY <= window.innerHeight * 0.5) {
+        document.documentElement.scrollTo({ top: 0 });
+      } else if (
         window.scrollY > window.innerHeight * 0.5 &&
-        window.scrollY < window.innerHeight * 2 * 0.1
+        window.scrollY < window.innerHeight * 1.1
       ) {
-        el.scrollIntoView();
-      } else if (window.scrollY <= window.innerHeight * 0.5) {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        el && el.scrollIntoView();
       }
     }
   }, [sideOpen]);

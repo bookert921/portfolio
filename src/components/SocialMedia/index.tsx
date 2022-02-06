@@ -1,45 +1,44 @@
 import { Box, IconButton } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import { GitHub, LinkedIn } from "@mui/icons-material";
+import { useTheme, styled } from "@mui/material/styles";
+
+import { siteData } from "@configs";
+
+const StyledLink = styled("a")`
+  text-decoration: unset;
+  color: unset;
+`;
 
 const SocialMedia = () => {
+  const { socialMedia } = siteData;
   const theme = useTheme();
   const styles = {
     color: theme.palette.secondary.main,
     fontSize: "1.25em",
   };
+
+  const renderSocial = socialMedia.map(({ url, name, icon }) => {
+    const Icon = icon;
+    return (
+      <IconButton key={name}>
+        <StyledLink
+          key={name}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon sx={styles} />
+        </StyledLink>
+      </IconButton>
+    );
+  });
+
   return (
     <Box
       sx={{
         display: "flex",
       }}
     >
-      <IconButton>
-        <a
-          style={{
-            textDecoration: "unset",
-            color: "unset",
-          }}
-          href="https://github.com/bookert921"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GitHub sx={styles} />
-        </a>
-      </IconButton>
-      <IconButton>
-        <a
-          style={{
-            textDecoration: "unset",
-            color: "unset",
-          }}
-          href="https://linkedin.com/in/bookert921"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <LinkedIn sx={styles} />
-        </a>
-      </IconButton>
+      {renderSocial}
     </Box>
   );
 };

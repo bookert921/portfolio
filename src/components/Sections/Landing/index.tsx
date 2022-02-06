@@ -33,7 +33,12 @@ const LandingPage: React.FC = () => {
     : components["desktop"];
 
   return (
-    <LandingWrapper component="section" ref={setRef} data-refkey="landingEl">
+    <LandingWrapper
+      id="landing"
+      component="section"
+      ref={setRef}
+      data-refkey="landingEl"
+    >
       <LandingComponent />
     </LandingWrapper>
   );

@@ -14,7 +14,6 @@ const useFixedNav = ({ navbarEl, landingEl }: DOMRef<HTMLElement>) => {
 
   useEffect(() => {
     const main = document.querySelector("main");
-    console.log(main);
     const mainHeight = main != null && main.offsetHeight;
     if (mainHeight <= window.innerHeight) {
       setFixedNav(true);

@@ -1,9 +1,9 @@
-import workHistory from "@assets/documents/data/work-history.json";
 import WorkCard from "@components/Card/WorkCard";
 import WorkHeader from "@components/Header/WorkHeader";
 import React from "react";
 import { Grid, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { siteData } from "@configs";
 
 const WorkSection = styled(Box, {
   name: "WorkSection",
@@ -25,6 +25,7 @@ const WorkList = styled(Grid, {
 }));
 
 const Work: React.FC = () => {
+  const { workHistory } = siteData;
   const workCards = workHistory.map((job, index) => {
     return (
       <Grid

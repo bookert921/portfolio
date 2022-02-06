@@ -7,24 +7,11 @@ import {
   Typography,
 } from "@mui/material";
 import { Launch } from "@mui/icons-material";
+import { WorkCardProps } from "@types";
 
-export interface WorkDetails {
-  company: string;
-  subtitle: string;
-  description: string;
-  url?: string;
-}
-
-export interface WorkCardProps {
-  workHistory: WorkDetails;
-}
-
-const WorkCard: React.FC<WorkCardProps> = ({
-  workHistory,
-}) => {
+const WorkCard: React.FC<WorkCardProps> = ({ workHistory }) => {
   const theme = useTheme();
-  const { company, description, subtitle, url } =
-    workHistory;
+  const { company, description, subtitle, url } = workHistory;
   return (
     <Card
       variant="elevation"
@@ -36,18 +23,10 @@ const WorkCard: React.FC<WorkCardProps> = ({
       }}
     >
       <CardContent>
-        <Typography
-          variant="h6"
-          color="white"
-          fontWeight="bold"
-        >
+        <Typography variant="h6" fontWeight="bold" color="white">
           {company}
         </Typography>
-        <Typography
-          variant="subtitle1"
-          fontSize="14px"
-          color="ActiveCaption"
-        >
+        <Typography variant="subtitle1" fontSize="14px" color="ActiveCaption">
           {subtitle}
         </Typography>
         <Typography variant="body1" color="white">

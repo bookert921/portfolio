@@ -11,3 +11,8 @@ declare module "@mui/material/styles" {
     FourK: true;
   }
 }
+
+declare module "*.png" {
+  const value: string;
+  export default value;
+}

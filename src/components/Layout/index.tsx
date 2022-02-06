@@ -1,20 +1,11 @@
 import { CssBaseline, Container } from "@mui/material";
 import Navbar from "@components/Navbar";
-import { NavLink } from "@types";
 import { RefContextProvider } from "@contexts";
 import Footer from "@components/Footer";
 import { DarkModeContextProvider } from "@contexts";
 import React from "react";
 import SEO from "@components/SEO";
 import { styled } from "@mui/material/styles";
-
-const siteMenu: NavLink[] = [
-  { url: "/", name: "home" },
-  { url: "#about", name: "about" },
-  { url: "#work", name: "work" },
-  // { url: "#projects", name: "projects" },
-  { url: "#contact", name: "contact" },
-];
 
 const StyledMainWrapper = styled(Container, {
   name: "MainWrapper",
@@ -31,9 +22,9 @@ const Layout: React.FC = ({ children }) => {
       <DarkModeContextProvider>
         <CssBaseline />
         <RefContextProvider>
-          <Navbar links={siteMenu} />
+          <Navbar />
 
-          <StyledMainWrapper as="main">
+          <StyledMainWrapper as="main" id="main">
             {children}
             <Footer />
           </StyledMainWrapper>

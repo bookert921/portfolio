@@ -1,37 +1,38 @@
+import { PaletteMode, SvgIconTypeMap } from "@mui/material";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
+
+export type DarkModeContextProps = {
+  mode: PaletteMode;
+  toggleTheme: (specificValue?: PaletteMode) => void;
+};
+
 export interface DOMRef<T extends HTMLElement> {
   [key: string]: T;
 }
 
-export interface EmailData {
-  service_id: string | undefined;
-  template_id: string | undefined;
-  user_id: string | undefined;
-  accessToken: string | undefined;
-  template_params: {
-    name: string;
-    message: string;
-    email: string;
-    subject: string;
-  };
-}
-
 export type ErrorRecord<T> = Partial<Record<keyof T, string>>;
 
-export interface FormOptions<T> {
+export type Feature = {
+  title: string;
+  text: string;
+  icon: () => JSX.Element;
+};
+
+export type FormOptions<T> = {
   validations?: Validations<T>;
   initialValues?: Partial<T>;
   onSubmit?: () => void;
-}
+};
 
-export interface FormState {
+export type FormState = {
   name: string;
   email: string;
   message: string;
-}
+};
 
-export interface NavbarProps {
+export type NavbarProps = {
   links: NavLink[];
-}
+};
 
 export type NavLink = {
   name: string;
@@ -52,16 +53,29 @@ export type RefContextProps = {
   setRef: (node: any) => void;
 };
 
-export interface SEOProps {
+export type SEOProps = {
   title?: string;
   description?: string;
   image?: string;
   article?: string;
-}
+};
 
 export interface SidebarProps extends NavMenuProps, NavbarProps {
   show: boolean;
   fixedNav: boolean;
+}
+
+export type SiteConfig = {
+  pageLinks: NavLink[];
+  workHistory: WorkHistory[];
+  socialMedia: SocialMedia[];
+  features: Feature[];
+};
+
+export interface SocialMedia extends NavLink {
+  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+    muiName: string;
+  };
 }
 
 export type StorageProps<T> = {
@@ -75,19 +89,32 @@ export type ToggleOptions<T> = {
   alternateValue?: T;
 };
 
-export type Validations<T extends {}> = Partial<Record<keyof T, Validation>>;
-
-export interface Validation {
-  required?: {
+export type Validation = {
+  required: {
     value: boolean;
     message: string;
   };
-  pattern?: {
+  pattern: {
     value: string;
     message: string;
   };
-  custom?: {
+  custom: {
     isValid: (value: string) => boolean;
     message: string;
   };
+};
+
+export type Validations<T extends {}> = Partial<
+  Record<keyof T, Partial<Validation>>
+>;
+
+export interface WorkCardProps {
+  workHistory: WorkHistory;
 }
+
+export type WorkHistory = {
+  company: string;
+  subtitle: string;
+  description: string;
+  url: string;
+};

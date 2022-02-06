@@ -3,12 +3,12 @@ import { AppBar, Toolbar, useMediaQuery, useTheme } from "@mui/material";
 
 import DarkMode from "@components/Navbar/DarkMode";
 import Navigation from "./Navigation";
-
-import { NavbarProps } from "@types";
+import { siteData } from "@configs";
 import { RefContext } from "@contexts";
 import { useFixedNav, useSidebarOpen } from "@hooks";
 
-const Navbar: React.FC<NavbarProps> = ({ links }) => {
+const Navbar: React.FC = () => {
+  const { pageLinks } = siteData;
   const { refs, setRef } = useContext(RefContext);
   const fixedNav = useFixedNav(refs);
   const sidebarOpen = useSidebarOpen(refs);
@@ -37,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
       >
         <Navigation
           mobile={mobile}
-          links={links}
+          links={pageLinks}
           fixedNav={fixedNav}
           {...sidebarOpen}
         />
