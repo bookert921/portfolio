@@ -1,15 +1,20 @@
 import React, { SVGProps, useCallback, useEffect, useState } from "react";
 import { useTheme, Theme } from "@mui/material/styles";
 import { useDOMRef } from "@hooks";
-import { animated, config, useSpring, useSprings } from "react-spring";
+import {
+  useSpring,
+  animated,
+  config,
+  SpringValue,
+  useSprings,
+} from "react-spring";
+import { DOMRef } from "@types";
+import { Button } from "@mui/material";
 
 const A: React.FC<{
-  key: string;
   theme: Theme;
   setRef: (node: any) => void;
   length: number;
-  strokeDasharray: number;
-  strokeDashoffset: number;
 }> = ({ theme, length, setRef, ...props }) => {
   return (
     <path
@@ -24,12 +29,9 @@ const A: React.FC<{
 };
 
 const B: React.FC<{
-  key: string;
   theme: Theme;
   setRef: (node: any) => void;
   length: number;
-  strokeDasharray: number;
-  strokeDashoffset: number;
 }> = ({ theme, length, setRef, ...props }) => {
   return (
     <path
@@ -44,12 +46,9 @@ const B: React.FC<{
 };
 
 const O: React.FC<{
-  key: string;
   theme: Theme;
   setRef: (node: any) => void;
   length: number;
-  strokeDasharray: number;
-  strokeDashoffset: number;
 }> = ({ theme, length, setRef, ...props }) => {
   return (
     <path
@@ -64,12 +63,9 @@ const O: React.FC<{
 };
 
 const U: React.FC<{
-  key: string;
   theme: Theme;
   setRef: (node: any) => void;
   length: number;
-  strokeDasharray: number;
-  strokeDashoffset: number;
 }> = ({ theme, length, setRef, ...props }) => {
   return (
     <path
@@ -84,12 +80,9 @@ const U: React.FC<{
 };
 
 const T: React.FC<{
-  key: string;
   theme: Theme;
   setRef: (node: any) => void;
   length: number;
-  strokeDasharray: number;
-  strokeDashoffset: number;
 }> = ({ theme, length, setRef, ...props }) => {
   return (
     <path
@@ -134,7 +127,7 @@ const T: React.FC<{
 //   return { length, strokeDashoffset, setRef };
 // };
 
-const AboutHeader = () => {
+const AboutHeader = (props: SVGProps<SVGSVGElement>) => {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
   const { DOMRef, setRef } = useDOMRef();
@@ -154,33 +147,38 @@ const AboutHeader = () => {
   useEffect(() => {
     if (!DOMRef) return;
     getLengths();
+    console.log(length);
   }, [DOMRef, length[l[0]]]);
 
-  const letters = [A, B, O, U, T];
+  const letters = [
+    <A key="A" theme={theme} setRef={setRef} length={length["A"]} />,
+    <B key="B" theme={theme} setRef={setRef} length={length["B"]} />,
+    <O key="O" theme={theme} setRef={setRef} length={length["O"]} />,
+    <U key="U" theme={theme} setRef={setRef} length={length["U"]} />,
+    <T key="T" theme={theme} setRef={setRef} length={length["T"]} />,
+  ];
 
   const springs = useSprings(
     letters.length,
     letters.map((_, i) => {
       return {
-        from: { strokeDashoffset: length[l[i]] },
-        to: { strokeDashoffset: 0 },
+        reset: true,
+        reverse: flip,
+        from: { strokeDashoffset: 0 },
+        to: { strokeDashoffset: length[l[i]] },
         strokeDashoffset: 1,
         config: config.molasses,
-        delay: i * 300,
+        delay: 200,
+        onRest: () => setFlip(!flip),
       };
     })
   );
 
   const animatedLetters = springs.map((animatedStyle, index) => {
-    const Letter = letters[index];
-    const AnimatedLetter = animated(Letter);
     return (
-      <AnimatedLetter
-        key={l[index]}
+      <animated.path
+        key={index}
         style={animatedStyle}
-        theme={theme}
-        setRef={setRef}
-        length={length[l[index]]}
         strokeDasharray={length[l[index]]}
         strokeDashoffset={animatedStyle.strokeDashoffset.to(
           (strokeDashoffset) => {
@@ -188,28 +186,31 @@ const AboutHeader = () => {
             return strokeDashoffset * length[l[index]];
           }
         )}
-      />
+      >
+        {letters[index]}
+      </animated.path>
     );
   });
 
-  const styles = useSpring({
-    from: { fill: "transparent" },
-    to: { fill: theme.palette.primary.main },
-    config: config.molasses,
-    delay: 3000,
-  });
-
+  const handleClick = () => {
+    setOpen(!open);
+  };
   return (
-    <animated.svg
-      width="200"
-      height="100"
-      viewBox="0 0 275 80"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      style={styles}
-    >
-      {animatedLetters}
-    </animated.svg>
+    <React.Fragment>
+      <Button variant="contained" onClick={handleClick}>
+        Toggle
+      </Button>
+      <svg
+        width="200"
+        height="100"
+        viewBox="0 0 275 80"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        {animatedLetters}
+      </svg>
+    </React.Fragment>
   );
 };
 
