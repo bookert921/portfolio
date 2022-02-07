@@ -6,7 +6,7 @@ export type DarkModeContextProps = {
   toggleTheme: (specificValue?: PaletteMode) => void;
 };
 
-export interface DOMRef<T extends HTMLElement> {
+export interface DOMRef<T> {
   [key: string]: T;
 }
 

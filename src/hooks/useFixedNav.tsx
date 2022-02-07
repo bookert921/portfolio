@@ -1,17 +1,24 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { DOMRef } from "@types";
+import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
 
 const useFixedNav = ({ navbarEl, landingEl }: DOMRef<HTMLElement>) => {
   const [fixedNav, setFixedNav] = useState(false);
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("tablet"));
   const fixItem = () => {
-    const offset = landingEl.offsetHeight - navbarEl.offsetHeight;
-    if (window.scrollY > offset) {
+    let offset = landingEl.offsetHeight - navbarEl.offsetHeight;
+    if (mobile) offset = offset - 32;
+
+    if (window.scrollY >= offset) {
       setFixedNav(true);
     } else {
       setFixedNav(false);
     }
   };
 
+  /* For pages that have no scroll */
   useEffect(() => {
     const main = document.querySelector("main");
     const mainHeight = main != null && main.offsetHeight;
