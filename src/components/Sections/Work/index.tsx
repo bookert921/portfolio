@@ -1,9 +1,9 @@
 import WorkCard from "@components/Card/WorkCard";
-import WorkHeader from "@components/Header/WorkHeader";
 import React from "react";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { siteData } from "@configs";
+import { siteData, textAnimationData } from "@configs";
+import AnimatedSVGHeader from "@components/Header/AnimatedSVGHeader";
 
 const WorkSection = styled(Box, {
   name: "WorkSection",
@@ -26,6 +26,7 @@ const WorkList = styled(Grid, {
 
 const Work: React.FC = () => {
   const { workHistory } = siteData;
+  const theme = useTheme();
   const workCards = workHistory.map((job, index) => {
     return (
       <Grid
@@ -43,7 +44,11 @@ const Work: React.FC = () => {
 
   return (
     <WorkSection id="work" component="section">
-      <WorkHeader />
+      <AnimatedSVGHeader
+        paths={textAnimationData.work}
+        containerFill={theme.palette.primary.main}
+        pathFill={theme.palette.secondary.main}
+      />
       <WorkList container spacing={2}>
         {workCards}
       </WorkList>

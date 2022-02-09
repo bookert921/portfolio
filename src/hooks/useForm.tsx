@@ -38,11 +38,11 @@ const useForm = <T extends Record<keyof T, any> = {}>(
         container.push(v);
       });
 
-      const upperFirstLetter = container.map((i) => {
+      const upperFirstlabel = container.map((i) => {
         return i.charAt(0).toUpperCase() + i.slice(1);
       });
 
-      properName = upperFirstLetter.join(" ");
+      properName = upperFirstlabel.join(" ");
     }
 
     setData({

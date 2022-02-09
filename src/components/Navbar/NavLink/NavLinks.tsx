@@ -3,7 +3,7 @@ import ResumeButton from "../ResumeButton";
 import { styled } from "@mui/material/styles";
 import { Link } from "gatsby";
 import { Link as LinkS } from "react-scroll";
-import { StaticImage } from "gatsby-plugin-image";
+import Logo from "../Logo";
 
 const LinksWrapper = styled("div")`
   width: 100%;
@@ -75,13 +75,7 @@ const NavLinks: React.FC<{
       <NavList>
         <NavListElement>
           <HomeLink to="/">
-            <StaticImage
-              src="../../../assets/svg/Logo.svg"
-              alt="Logo"
-              width={80}
-              placeholder="blurred"
-              layout="fixed"
-            />
+            <Logo />
           </HomeLink>
         </NavListElement>
         {links}

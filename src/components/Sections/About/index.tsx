@@ -2,8 +2,8 @@ import { Typography, Grid, Box } from "@mui/material";
 import { useTheme, styled } from "@mui/material/styles";
 
 import FeatureCard from "@components/Card/Feature";
-import AboutHeader from "@components/Header/AboutHeader";
-import { siteData } from "@configs";
+import { siteData, textAnimationData } from "@configs";
+import AnimatedSVGHeader from "@components/Header/AnimatedSVGHeader";
 
 const AboutSection = styled(Box, {
   name: "AboutSection",
@@ -33,7 +33,11 @@ const AboutPage = () => {
   });
   return (
     <AboutSection id="about" component="section">
-      <AboutHeader />
+      <AnimatedSVGHeader
+        paths={textAnimationData.about}
+        containerFill={theme.palette.primary.main}
+        pathFill={theme.palette.secondary.main}
+      />
       <Grid container spacing={2} justifyContent="center">
         <Grid
           item

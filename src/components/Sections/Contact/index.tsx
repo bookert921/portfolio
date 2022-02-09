@@ -1,9 +1,10 @@
 import Form from "@components/Form";
 import MessageSent from "@components/Form/MessageSentSnackbar";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
-import ContactHeader from "@components/Header/ContactHeader";
+import { textAnimationData } from "@configs";
+import AnimatedSVGHeader from "@components/Header/AnimatedSVGHeader";
 
 const ContactSection = styled(Box, {
   name: "ContactSection",
@@ -28,10 +29,15 @@ const FormWrapper = styled(Box, {
 
 const Contact = () => {
   const [messageSent, setMessageSent] = useState(false);
+  const theme = useTheme();
 
   return (
     <ContactSection id="contact">
-      <ContactHeader />
+      <AnimatedSVGHeader
+        paths={textAnimationData.contact}
+        containerFill={theme.palette.primary.main}
+        pathFill={theme.palette.secondary.main}
+      />
       <FormWrapper>
         <Form setMessageSent={setMessageSent} />
       </FormWrapper>

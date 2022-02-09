@@ -84,6 +84,11 @@ export type StorageProps<T> = {
   storageObject: Storage;
 };
 
+export type SVGPathProps = {
+  label: string;
+  d: string;
+};
+
 export type ToggleOptions<T> = {
   initialValue: T;
   alternateValue?: T;
