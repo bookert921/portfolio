@@ -17,19 +17,20 @@ export const AnimatedSVGPaths: React.FC<{
   // Is an object, function, or array
   const to = { strokeDashoffset: 0 };
 
-  const getLengths = useCallback(() => {
+  const getLengths = () => {
     for (const key in DOMRef) {
       setLength((prevState) => ({
         ...prevState,
         [key]: DOMRef[key].getTotalLength(),
       }));
     }
-  }, [DOMRef]);
+  };
 
   useEffect(() => {
     if (!DOMRef) return;
+    console.log("DOMRefs: ", DOMRef);
     getLengths();
-  }, [DOMRef]);
+  }, [Object.keys(DOMRef).length]);
 
   const springs = useSprings(
     paths.length,

@@ -1,9 +1,10 @@
 import { NavLink } from "@types";
 import ResumeButton from "../ResumeButton";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { Link } from "gatsby";
 import { Link as LinkS } from "react-scroll";
 import Logo from "../Logo";
+import { useMediaQuery } from "@mui/material";
 
 const LinksWrapper = styled("div")`
   width: 100%;
@@ -50,6 +51,8 @@ const HomeLink = styled(Link)(() => ({
 const NavLinks: React.FC<{
   onClickCloseSide?: () => void;
 }> = ({ children, onClickCloseSide }) => {
+  const theme = useTheme();
+  const smallScreen = useMediaQuery(theme.breakpoints.down("tablet"));
   const links = (children as NavLink[]).map((link, index) => {
     const { url, name } = link;
     return (
@@ -74,7 +77,7 @@ const NavLinks: React.FC<{
     <LinksWrapper>
       <NavList>
         <NavListElement>
-          <HomeLink to="/">
+          <HomeLink to="/" onClick={smallScreen ? onClickCloseSide : () => {}}>
             <Logo />
           </HomeLink>
         </NavListElement>
